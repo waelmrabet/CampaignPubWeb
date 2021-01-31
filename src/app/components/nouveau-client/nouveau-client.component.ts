@@ -1,0 +1,94 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Address } from 'src/app/models/Address';
+import { Customer } from 'src/app/models/customer';
+import { ClientService } from 'src/app/services/client.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-nouveau-client',
+  templateUrl: './nouveau-client.component.html',
+  styleUrls: ['./nouveau-client.component.scss']
+})
+export class NouveauClientComponent implements OnInit {
+
+  constructor(private clientService: ClientService, private router: Router) { }
+
+  public customersList: any;
+
+  ngOnInit(): void {
+    this.getCustomersList();
+  }
+
+  getCustomersList() {
+    this.clientService.getAllClient()
+      .subscribe(response => {
+        this.customersList = response;
+      });
+  }
+
+  buildCustomerModel(formValue: any) {
+
+    let address: Address = new Address();
+
+    address.street = formValue.street != undefined ? formValue.street : '';
+    address.townName = formValue.townName != undefined ? formValue.townName : '';
+    address.countryName = formValue.countryName != undefined ? formValue.countryName : '';
+
+    let customer: Customer = new Customer();
+
+    customer.name = formValue.name;
+    customer.taxIdNumber = formValue.taxIdNumber;
+    customer.mail = formValue.mail;
+    customer.telNumber = formValue.telNumber;
+
+    customer.address = address;
+    return customer;
+  }
+
+  ajouterClient(f: NgForm) {
+
+    if (f.valid) {
+
+      Swal.fire({
+        title: 'êtes-vous sûr de vouloir continuer?',
+        text: 'Ajout nouveau client!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Oui, ajouter!',
+        cancelButtonText: 'Non, Annuler'
+      }).then((result) => {
+        if (result.value) {
+
+          let customer = this.buildCustomerModel(f.value);
+          this.clientService.addClient(customer)
+            .subscribe(response => {
+              Swal.fire(
+                'Ajouté!',
+                'Le nouveau client a été ajouté avec succès.',
+                'success'
+              ).then(() => {
+                this.router.navigateByUrl('Lst_Client');
+              });
+
+            }, error => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Erreur serveur!'
+              });
+            });
+        }
+      })
+
+
+
+
+
+
+    }
+
+  }
+
+}

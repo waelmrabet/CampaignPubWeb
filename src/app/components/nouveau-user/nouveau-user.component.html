@@ -1,0 +1,206 @@
+<div class="row">
+    <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bgBreadCrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Gestion Utilisateur</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nouveau Utilisateur</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!--Nouveau Utilisateur-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4 CompagneCard">
+            <div class="card-header">
+                <i class="fas fa-chart-area mr-1"></i>
+                Nouveau Utilisateur
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+
+                        <form #userForm="ngForm" (ngSubmit)="ajouterUtilisateur(userForm)" novalidate autocomplete="off">
+
+                            <!-- Données Client  -->
+                            <fieldset class="form-group">
+
+                                <div class="row">
+                                    <legend class="col-md-2 col-form-label pt-0 legendStyle">Données Utilisateur
+                                    </legend>
+                                    <div class="col-md-10">
+
+                                        <div class="form-row ">
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" class="control-label required"
+                                                    for="lastName">Nom</label>
+                                                <input type="text" class="form-control username" ngModel id="lastName"
+                                                    placeholder="Nom" name="lastName" required>
+                                            </div>
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" class="control-label required"
+                                                    for="name">Prenom</label>
+                                                <input type="text" class="form-control username" ngModel id="firstName"
+                                                    placeholder="Prénom" name="firstName" required>
+                                            </div>
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" class="control-label required"
+                                                    for="matricule">Matricule</label>
+                                                <input type="text" class="form-control username" ngModel id="matricule"
+                                                    placeholder="Matricule" name="matricule" required>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row ">
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" for="mail">Email:</label>
+                                                <input type="email" class="form-control email" ngModel id="mail"
+                                                    placeholder="Email" name="mail" required email>
+                                            </div>
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" for="telNumber">Numéro de
+                                                    téléphone</label>
+                                                <input type="text" class="form-control username" ngModel id="telNumber"
+                                                    placeholder="Numéro de téléphone" name="telNumber" required>
+                                            </div>
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required">Role</label>
+                                                <ng-select [items]="roles" bindLabel="desc" bindValue="roleId" [multiple]="false"
+                                                    placeholder="Select role utilisateur" [(ngModel)]="selectedRoleId" name="roleUser">
+                                                </ng-select>                                               
+                                            </div>   
+                                        </div>
+
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" for="mail">Mot de passe</label>
+                                                <input type="password" class="form-control email" ngModel id="password"
+                                                    placeholder="Mot de passe" name="password" required password>
+                                            </div>
+
+                                            <div class="form-group col-md">
+                                                <label class="control-label required" for="mail">Mot de passe
+                                                    (confirme)</label>
+                                                <input type="password" class="form-control email" ngModel
+                                                    id="confirmePassword" placeholder="Mot de passe"
+                                                    name="confirmePassword" required password>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row" *ngIf="selectedRoleId ===2">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label required">Client</label>
+                                                <ng-select [items]="customersList" bindLabel="name" bindValue="id" [multiple]="false"
+                                                    placeholder="Select Client" [(ngModel)]="selectedCustomerId" name="clientId" required>
+                                                </ng-select>                                               
+                                            </div>
+                                        </div>   
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <div class="row">
+                                <!--style="text-align: right;"-->
+                                <div class="col-md-12 BtnsCol">
+
+                                    <button type="reset" class="btn resetBtn" style="margin-right: 10px;">
+                                        Anuuler
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary submitBtn">
+                                        <i class="fas fa-save"></i> Valider
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- List Users-->
+<div class="card mb-4 CompagneCard">
+
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Utilisateurs
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>Nom Complet</th>
+                        <th>Matricule</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngIf="!showusersList">
+                        <td colspan="6" style="text-align: center;">
+                            <div class="spinner-grow" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div>
+                                <p>Chargement en cours...</p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngFor="let user of usersList">
+                        <td>{{ user.lastName }} {{ user.firstName }}</td>
+                        <td>{{ user.matricule }}</td>
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.telNumber }}</td>
+                        <td>
+                            {{ user.role == 1 ? 'admin' : 'client'}}                                                      
+                        </td>
+
+                        <td class="linkBtn" style="cursor: pointer;" (click)='gotToDetails(user)'>
+                            <i class="fas fa-edit"></i>
+                            <!--<i class="fas fa-info-circle "></i>-->
+                        </td>
+
+
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
