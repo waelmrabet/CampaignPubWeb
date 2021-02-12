@@ -23,6 +23,7 @@ import { DetailsCompagnComponent } from './components/details-compagn/details-co
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NouveauProductTypeComponent } from './components/nouveau-product-type/nouveau-product-type.component';
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ListProductTypesComponent } from './components/list-product-types/list-
     
   ],
   providers: [
+    DatePipe,
     AuthenticationService,
     ClientService
   ],

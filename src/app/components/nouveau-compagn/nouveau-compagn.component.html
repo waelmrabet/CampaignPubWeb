@@ -34,15 +34,15 @@
                                     <div class="form-row ">
 
                                         <div class="form-group col-md">
-                                            <label class="control-label required" for="name">Titre</label>
-                                            <input type="text" class="form-control username" ngModel id="titre"
-                                                placeholder="titre de Compagne" name="titre" required>
+                                            <label class="control-label required" for="title">Titre</label>
+                                            <input type="text" class="form-control username" ngModel id="title"
+                                                placeholder="titre de Compagne" name="title" required>
                                         </div>
 
                                         <div class="form-group col-md">
-                                            <label class="control-label required" for="name">Objectif</label>
-                                            <input type="text" class="form-control username" ngModel id="objectif"
-                                                placeholder="Objectif de la Compagne" name="objectif" required>
+                                            <label class="control-label required" for="goal">Objectif</label>
+                                            <input type="text" class="form-control username" ngModel id="goal"
+                                                placeholder="Objectif de la Compagne" name="goal" required>
                                         </div>
 
 
@@ -61,9 +61,9 @@
                                         </div>
 
                                         <div class="form-group col-md">
-                                            <label class="control-label required" for="name">Budget prévisionnel</label>
-                                            <input type="number" class="form-control username" ngModel id="budget"
-                                                placeholder="Budget prévisionnel" name="budget" required>
+                                            <label class="control-label required" for="forecastBudget">Budget prévisionnel</label>
+                                            <input type="number" class="form-control username" ngModel id="forecastBudget"
+                                                placeholder="Budget prévisionnel" name="forecastBudget" required>
                                         </div>
 
                                     </div>
@@ -90,7 +90,7 @@
 
                                         <div class="form-group col-md">
                                             <label class="control-label required">business Type</label>
-                                            <ng-select [items]="businessTypeList" bindLabel="code" bindValue="MapCode"
+                                            <ng-select [items]="businessTypeList" bindLabel="code" bindValue="mapCode"
                                                 [multiple]="true"
                                                 placeholder="Choisir la ou les types de business cible(s)"
                                                 [(ngModel)]="selectedBusnissTypes" name="businessTypeIds">
@@ -105,15 +105,21 @@
                                             <label class="control-label required">Type de produit</label>
                                             <ng-select [items]="productTypeList" bindLabel="name" bindValue="id"
                                                 [multiple]="false" placeholder="Choisir un produit"
-                                                [(ngModel)]="selectedProductTypeId" name="productTypeId">
+                                                [(ngModel)]="selectedProductTypeIds" name="productTypeId">
                                             </ng-select>
                                         </div>
 
-                                        <div class="form-group col-md">
-                                            <label class="control-label required" for="name">Taux de Pénetration</label>
+                                        <!--<div class="form-group col-md">
+                                            <label class="control-label required" for="penetrationRate">Taux de Pénetration</label>
                                             <input type="number" class="form-control username" ngModel
-                                                id="TauxPenetration" placeholder="Taux de pénétration par type commerce"
-                                                name="TauxPenetration" required>
+                                                id="penetrationRate" placeholder="Taux de pénétration par type commerce"
+                                                name="penetrationRate" required>
+                                        </div>-->
+
+
+                                        <div class="form-group col-md">
+                                            <label class="contorl-label required">Date d'exécution</label>
+                                            <input type="date" class="form-control username" [(ngModel)]="dateExecution" name="dateExecution" id="dateExecution">
                                         </div>
 
                                     </div>
