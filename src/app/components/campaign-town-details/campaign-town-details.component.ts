@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
+
 
 @Component({
   selector: 'app-campaign-town-details',
@@ -7,13 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CampaignTownDetailsComponent implements OnInit {
 
+  @Input() center: any[];
+  @Input() palcesList:any;
 
-  @Input() townMap:any;
+  public zoom:any;
+  
   constructor() { }
 
   ngOnInit(): void {
-
-    console.log(this.townMap);
+    this.zoom = 8;  
   }
+
+  
+
+
+  
 
 }
