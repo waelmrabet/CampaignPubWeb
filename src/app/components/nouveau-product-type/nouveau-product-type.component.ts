@@ -21,11 +21,34 @@ export class NouveauProductTypeComponent implements OnInit {
   public hasSize : boolean = true;
   public colorValue = '#000000';
 
+  public productTypesList : any;
+  public showList = false;
+
   ngOnInit(): void {
+    this.getAllProductTypes();
   }
 
- 
+  public getAllProductTypes(){
 
+    this.showList = false;
+    this.productTypeService.getAllProductTypes()
+    
+    .subscribe(
+      response=>{
+        this.productTypesList = response;
+        this.showList =true;
+    }, error=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Erreur serveur!'
+      });
+    }
+    
+    
+    )
+  }
+ 
   buildProductType(formValue){
     let productTypeDto = new ProductType();
     
@@ -34,6 +57,7 @@ export class NouveauProductTypeComponent implements OnInit {
     productTypeDto.description = formValue.description;
     
     productTypeDto.color = formValue.colorValue != undefined ? formValue.colorValue : "";
+    productTypeDto.defaultNbrProductPerBusiness = formValue.defaultPenetrationRate;
    
     if(this.hasSize){
 
@@ -65,6 +89,11 @@ export class NouveauProductTypeComponent implements OnInit {
       valid = false;
     }
 
+    if(isNaN(form.value.defaultPenetrationRate)){
+      message = 'Taux de pénetration par défaut !';
+      valid = false;
+    }
+
     if (!valid)
       Swal.fire('Erreur', message, 'error');
 
@@ -80,7 +109,7 @@ export class NouveauProductTypeComponent implements OnInit {
     if(valid){
       Swal.fire({
         title: 'êtes-vous sûr de vouloir continuer?',
-        text: 'Ajout nouveau utilisateur!',
+        text: 'Ajout nouveau Type de produit!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Oui, ajouter!',
@@ -93,10 +122,10 @@ export class NouveauProductTypeComponent implements OnInit {
             .subscribe(response => {
               Swal.fire(
                 'Ajouté!',
-                'Le nouveau utilisateur a été ajouté avec succès.',
+                'Le nouveau Type de produit a été ajouté avec succès.',
                 'success'
               ).then(() => {
-                this.router.navigateByUrl('Lst_Utilisateur');
+                this.router.navigateByUrl('Lst_Types_Produits');
               });
   
             }, error => {

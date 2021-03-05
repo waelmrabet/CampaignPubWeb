@@ -1,7 +1,7 @@
 export class CompaignCreateDto {
     title: string;
     goal: string;
-    clientId? : number;
+    customerId? : number;
     forecastBudget: number;
     regionId?: number;
     townsIds: any[];

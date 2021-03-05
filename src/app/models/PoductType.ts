@@ -7,4 +7,5 @@ export class ProductType {
     color?: string;
     description?: string;
     unit: number;
+    defaultNbrProductPerBusiness: number;
 }

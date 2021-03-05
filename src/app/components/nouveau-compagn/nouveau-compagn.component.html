@@ -89,7 +89,7 @@
                                         </div>
 
                                         <div class="form-group col-md">
-                                            <label class="control-label required">business Type</label>
+                                            <label class="control-label required">Type de business</label>
                                             <ng-select [items]="businessTypeList" bindLabel="code" bindValue="mapCode"
                                                 [multiple]="true"
                                                 placeholder="Choisir la ou les types de business cible(s)"
@@ -104,7 +104,7 @@
                                         <div class="form-group col-md">
                                             <label class="control-label required">Type de produit</label>
                                             <ng-select [items]="productTypeList" bindLabel="name" bindValue="id"
-                                                [multiple]="false" placeholder="Choisir un produit"
+                                                [multiple]="true" placeholder="Choisir un produit"
                                                 [(ngModel)]="selectedProductTypeIds" name="productTypeId">
                                             </ng-select>
                                         </div>

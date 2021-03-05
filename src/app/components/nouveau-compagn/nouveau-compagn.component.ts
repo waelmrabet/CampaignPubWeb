@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CompaignCreateDto } from 'src/app/models/CompaignCreateDto';
 import { BusinessTypeService } from 'src/app/services/business-type.service';
 import { ClientService } from 'src/app/services/client.service';
-import { CompaignService } from 'src/app/services/compaign.service';
+import { CampaignService as CampaignService } from 'src/app/services/campaign.service';
 import { ProductTypeService } from 'src/app/services/product-type.service';
 import { RegionService } from 'src/app/services/region.service';
 import { TownService } from 'src/app/services/town.service';
@@ -46,7 +46,7 @@ export class NouveauCompagnComponent implements OnInit {
     private regionService: RegionService,
     private townService: TownService,
     private businessTypeService: BusinessTypeService,
-    private compaignService: CompaignService,
+    private campaignService: CampaignService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -103,7 +103,7 @@ export class NouveauCompagnComponent implements OnInit {
     compaignDto.title = value.title;
     compaignDto.goal = value.goal;
 
-    compaignDto.clientId = this.selectedClientId;
+    compaignDto.customerId = this.selectedClientId;
     compaignDto.forecastBudget = value.forecastBudget;
 
     compaignDto.regionId = this.selectedRegionId;
@@ -112,7 +112,7 @@ export class NouveauCompagnComponent implements OnInit {
     compaignDto.businessTypesIds = this.selectedBusnissTypes;
     compaignDto.productTypeIds = this.selectedProductTypeIds;
 
-    compaignDto.executionDate = value.dateExecution;
+    compaignDto.executionDate = value.dateExecution;    
     compaignDto.description = value.description;
 
     return compaignDto;
@@ -205,7 +205,7 @@ export class NouveauCompagnComponent implements OnInit {
           // model to send
           console.log(compaignCreateDto);
 
-          this.compaignService.addCompaign(compaignCreateDto)
+          this.campaignService.addCompaign(compaignCreateDto)
             .subscribe(response => {
               Swal.fire(
                 'Ajouté!',

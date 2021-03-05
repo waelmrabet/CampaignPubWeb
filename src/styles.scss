@@ -22,7 +22,10 @@ form label.required:after
     text-align: center;
 }
 
-
+.deleteIcon {
+    color: #f01414;
+    text-align: center;
+}
 
 .CompagneCard {
     margin: 10px auto !important;
@@ -39,7 +42,6 @@ form label.required:after
     text-align: right;
 }
 
-
 .submitBtn {   
     background-color: #2185d0;
     color: #ffffff;        
@@ -54,3 +56,10 @@ form label.required:after
     background-color: rgb(224, 225, 226) ;
     color:rgba(0, 0, 0, 0.6); 
 }
+
+
+/*Badges color classes*/
+.bg-deep-orange, .bg-deep-orange th , .bg-deep-orange td, .bg-deep-orange span{
+    background-color: #FF5722 !important;
+    color: #fff !important; }
+

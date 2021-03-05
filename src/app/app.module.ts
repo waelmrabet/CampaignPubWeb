@@ -24,7 +24,16 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { NouveauProductTypeComponent } from './components/nouveau-product-type/nouveau-product-type.component';
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
 import { DatePipe } from '@angular/common';
+import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.component';
+import { EditCampaignProductsComponent } from './components/edit-campaign-products/edit-campaign-products.component';
+import { EditCampaignTownsComponent } from './components/edit-campaign-towns/edit-campaign-towns.component';
+import { EditCampaignBusinessTypesComponent } from './components/edit-campaign-business-types/edit-campaign-business-types.component';
+import { EditCampaignGlobalParamsComponent } from './components/edit-campaign-global-params/edit-campaign-global-params.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { CampaignTownDetailsComponent } from './components/campaign-town-details/campaign-town-details.component';
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -42,7 +51,7 @@ import { DatePipe } from '@angular/common';
     DetailsCompagnComponent, 
 
   
-    NouveauProductTypeComponent, ListProductTypesComponent
+    NouveauProductTypeComponent, ListProductTypesComponent, EditCampaignComponent, EditCampaignProductsComponent, EditCampaignTownsComponent, EditCampaignBusinessTypesComponent, EditCampaignGlobalParamsComponent, CampaignTownDetailsComponent
        
   ],
   imports: [
@@ -62,7 +71,12 @@ import { DatePipe } from '@angular/common';
   providers: [
     DatePipe,
     AuthenticationService,
-    ClientService
+    ClientService,
+    {
+      provide: localeFr,
+      useValue: 'fr' // 'de' for Germany, 'fr' for France ...
+     }
+   
   ],
   bootstrap: [AppComponent]
 })
