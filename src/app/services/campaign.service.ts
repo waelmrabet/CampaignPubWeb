@@ -23,6 +23,8 @@ export class CampaignService {
     return this.httpClient.get(url);
   }
 
+  /* ---------- Towns Management*/
+
   getDetailedCampaignTownsList(campaignId){
     
     let url = this.apiUrl + '/Campaign/getCampaignTownMap/';
@@ -31,6 +33,28 @@ export class CampaignService {
 
   }
 
+  deleteCampaignTown(campaignId, townId){
+    
+    let url = this.apiUrl + '/Campaign/deleteCampaignTown/';
+    url += campaignId;
+    url += "/"+ townId;
+
+    return this.httpClient.delete(url);
+  }
+
+  addCampaignTown(campaignId, townId){
+    
+    let url = this.apiUrl + '/Campaign/addCampaignTown/';
+    url += campaignId;
+    url += "/"+ townId;
+
+    return this.httpClient.get(url);
+  }
+
+  getAllCampaignsList(){
+    let url = this.apiUrl + '/Campaign/GetAllCampaigns';   
+    return this.httpClient.get(url);
+  }
 
 
   /*------------------------------------------- Begin Campaign Products Services -------------------------------------------------*/

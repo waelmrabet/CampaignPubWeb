@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb bgBreadCrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
+        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Client']">Compagne</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Compagnes</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- List Client-->
+<div class="card mb-4 CompagneCard">
+
+  <div class="card-header">
+    <i class="fas fa-table mr-1"></i>
+    Compagnes publicitaire
+  </div>
+
+  <div class="card-body">
+
+    <div class="table-responsive">
+      <table class="table table-bordered" width="100%" cellspacing="0">
+
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Client</th>
+            <th>Objectif</th>
+            <th>Région</th>
+            <th>Coût total</th>
+            <th>Etat</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="true">
+
+          <tr *ngIf="!showList">
+            <td colspan="7" style="text-align: center;">
+              <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div>
+                <p>Loading...</p>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngFor="let campaign of campaignsList">
+            <td>{{ campaign.title }}</td>
+            <td>{{ campaign.customer.name }}</td>
+            <td>{{ campaign.goal }}</td>
+            <td>{{ campaign.region.name }}</td>
+            <td> {{ campaign.totalCost }}</td>
+            <td> 
+
+              <span style="text-align: center; font-size: 15px;"
+               
+              [ngClass]="{ 'badge': true, 'badge-pill': true,
+                'badge-secondary': campaign.campaignState ===1,
+                'badge-warning': campaign.campaignState === 2,
+                'badge-success': campaign.campaignState === 3,
+                'badge-danger': campaign.campaignState === 4 }"> 
+                
+                {{ getCampaignStateDescription(campaign.campaignState) }}
+              
+              </span>
+              
+              </td>
+
+            <td class="linkBtn" style="cursor: pointer;" (click)='gotToDetails(campaign.id)'>
+              <i class="fas fa-share"></i>             
+            </td>
+
+
+
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>

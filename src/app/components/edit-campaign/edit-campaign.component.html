@@ -4,7 +4,7 @@
             <ol class="breadcrumb bgBreadCrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
                 <li class="breadcrumb-item"><a href="#" [routerLink]="['/']">Compagne</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit compagne</li>
+                <li class="breadcrumb-item active" aria-current="page">Détails Compagne</li>
             </ol>
         </nav>
     </div>
@@ -15,15 +15,14 @@
     <div class="card-header">
         <div class="row">
             
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <i class="fas fa-table mr-1"></i>Détails Compagne
             </div>   
 
-            <div class="col-md-3" style="text-align: right;">
-
+            <div class="col-md-3" ><!--style="text-align: right;"-->
                 Etat: 
                 <span *ngIf="displayData"
-                style="margin-left: 2px;"                
+                style="margin-left: 2px; font-size: 15px;"                
                 [ngClass]="{ 'badge': true, 'badge-pill': true,
                 'badge-secondary': campaignState.stateId ===1,
                 'badge-warning': campaignState.stateId === 2,
@@ -32,10 +31,18 @@
                 >{{ campaignState.stateDescription }}  </span>
             </div>
 
+
+            <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
+                Mon Budget: 
+                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{ campaign.forecastBudget | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
+            </div>
+
             <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
                 Coût total: 
-                <span class="badge badge-pill badge-light" style="margin-left: 2px;">{{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
+                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
             </div>
+
+            
 
         </div>
     </div>
@@ -120,7 +127,10 @@
                         <div class="row">
                             <div class="col-md">
                                 <app-edit-campaign-towns
-                                    [detailedCampaignTownsList]="detailedCampaignTownsList">
+                                    [detailedCampaignTownsList]="detailedCampaignTownsList"
+                                    [CampaignRegion]= "campaign.region"
+                                    (deleteCampaignTownEmmiter)="deleteCampaignTown($event)"
+                                    (addCampaignTownEmmiter)="addCampaigntown($event)">
                                 </app-edit-campaign-towns>
                             </div>
                         </div>

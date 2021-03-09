@@ -33,6 +33,7 @@ import { EditCampaignGlobalParamsComponent } from './components/edit-campaign-gl
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { CampaignTownDetailsComponent } from './components/campaign-town-details/campaign-town-details.component';
+import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -51,7 +52,7 @@ registerLocaleData(localeFr, 'fr');
     DetailsCompagnComponent, 
 
   
-    NouveauProductTypeComponent, ListProductTypesComponent, EditCampaignComponent, EditCampaignProductsComponent, EditCampaignTownsComponent, EditCampaignBusinessTypesComponent, EditCampaignGlobalParamsComponent, CampaignTownDetailsComponent
+    NouveauProductTypeComponent, ListProductTypesComponent, EditCampaignComponent, EditCampaignProductsComponent, EditCampaignTownsComponent, EditCampaignBusinessTypesComponent, EditCampaignGlobalParamsComponent, CampaignTownDetailsComponent, ListCampaignComponent
        
   ],
   imports: [

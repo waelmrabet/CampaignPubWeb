@@ -59,17 +59,109 @@ export class EditCampaignComponent implements OnInit {
 
   //#region -------------------------------------------Begin Campaign Towns Management
 
+  deleteCampaignTown(townId) {
+    let campaignId = this.campaign.id;
+
+    Swal.fire({
+      icon: "warning",
+      title: 'La ville sera supprimé difinitivement!!',
+      text: 'Êtes-vous sûre de vouloir continuer?',
+      showCancelButton: true,
+      confirmButtonText: `Continuer`,
+      confirmButtonColor: '#d9534f',
+      cancelButtonText: 'Annuler'
+
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        this.campaignService.deleteCampaignTown(campaignId, townId)
+          .subscribe(response => {
+            this.campaign = response;
+
+            // get campaignTown Map
+            this.getDetailedTownsList();
+
+            Swal.fire({
+              icon: 'success',
+              title: 'succes',
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+          }, error => {
+            Swal.fire({
+
+              icon: 'error',
+              title: 'Problème de suppression ville',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          });
+      }
+
+    });
+
+
+  }
+
+  addCampaigntown(townId) {
+    let campaignId = this.campaign.id;
+
+    Swal.fire({
+      icon: "warning",
+      title: 'La ville sera affectée',
+      text: 'Êtes-vous sûre de vouloir continuer?',
+      showCancelButton: true,
+      confirmButtonText: `Continuer`,
+      confirmButtonColor: '#d9534f',
+      cancelButtonText: 'Annuler'
+
+    }).then((result) => {
+
+      if (result.isConfirmed){
+        this.campaignService.addCampaignTown(campaignId, townId)
+        .subscribe(response => {
+          this.campaign = response;
+  
+          // get campaignTown Map
+          this.getDetailedTownsList();
+  
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            showConfirmButton: false,
+            timer: 1500
+          })
+  
+        }, error => {
+          Swal.fire({
+  
+            icon: 'error',
+            title: "Problème d'ajout ville",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        });
+
+      }
+
+    });
+
+  
+
+  }
+
   getDetailedTownsList() {
-    
+
     if (this.campaign != undefined) {
       let campaignId = this.campaign.id;
 
       this.campaignService.getDetailedCampaignTownsList(campaignId)
-      .subscribe(response => {
-        this.detailedCampaignTownsList = response;
-      }, error => {
-        console.log(error);
-      });
+        .subscribe(response => {
+          this.detailedCampaignTownsList = response;
+        }, error => {
+          console.log(error);
+        });
     }
   }
 
@@ -85,7 +177,7 @@ export class EditCampaignComponent implements OnInit {
     Swal.fire({
       icon: "warning",
       title: 'Le produit sera supprimé difinitivement!!',
-      text: 'Êtes-vous sure de vouloir continuer?',
+      text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
       confirmButtonColor: '#d9534f',
@@ -127,7 +219,7 @@ export class EditCampaignComponent implements OnInit {
     Swal.fire({
       icon: "warning",
       title: 'Le produit sera modifié !',
-      text: 'Êtes-vous sure de vouloir continuer?',
+      text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
       confirmButtonColor: '#007bff',
@@ -165,26 +257,44 @@ export class EditCampaignComponent implements OnInit {
   addNewCampaignProduct(productTypeId) {
 
     let campaignId = this.campaign.id;
-    this.campaignService.addCampaignProduct(campaignId, productTypeId)
-      .subscribe(response => {
-        this.campaign = response;
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Succès',
-          showConfirmButton: false,
-          timer: 1500
-        })
+    Swal.fire({
+      icon: "warning",
+      title: 'Le produit sera affecté',
+      text: 'Êtes-vous sûre de vouloir continuer?',
+      showCancelButton: true,
+      confirmButtonText: `Continuer`,
+      confirmButtonColor: '#d9534f',
+      cancelButtonText: 'Annuler'
 
-      }, error => {
-        Swal.fire({
+    }).then((result) => {
 
-          icon: 'error',
-          title: "Problème d'ajout produit",
-          showConfirmButton: false,
-          timer: 1500
-        })
-      });
+      if (result.isConfirmed){
+        this.campaignService.addCampaignProduct(campaignId, productTypeId)
+        .subscribe(response => {
+          this.campaign = response;
+  
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            showConfirmButton: false,
+            timer: 1500
+          })
+  
+        }, error => {
+          Swal.fire({  
+            icon: 'error',
+            title: "Problème d'affectation produit",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        });
+
+      }
+    });
+
+
+    
   }
 
   //#endregion
@@ -194,26 +304,43 @@ export class EditCampaignComponent implements OnInit {
   addNewCampaignBusinessType(businessTypeMapCode) {
 
     let campaignId = this.campaign.id;
-    this.campaignService.addCampaignBusinessType(campaignId, businessTypeMapCode)
-      .subscribe(response => {
-        this.campaign = response;
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Succès',
-          showConfirmButton: false,
-          timer: 1500
-        })
+    Swal.fire({
+      icon: "warning",
+      title: 'Le produit sera affecté',
+      text: 'Êtes-vous sûre de vouloir continuer?',
+      showCancelButton: true,
+      confirmButtonText: `Continuer`,
+      confirmButtonColor: '#d9534f',
+      cancelButtonText: 'Annuler'
 
-      }, error => {
-        Swal.fire({
+    }).then((result) => {
 
-          icon: 'error',
-          title: "Problème d'ajout type de business",
-          showConfirmButton: false,
-          timer: 1500
-        })
-      });
+      if (result.isConfirmed){
+
+        this.campaignService.addCampaignBusinessType(campaignId, businessTypeMapCode)
+        .subscribe(response => {
+          this.campaign = response;
+  
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            showConfirmButton: false,
+            timer: 1500
+          })
+  
+        }, error => {
+          Swal.fire({
+  
+            icon: 'error',
+            title: "Problème d'ajout type de business",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        });
+
+
+      }});
   }
 
   deleteCampaignBusinessTypeByMapCode(mapCode) {
@@ -223,7 +350,7 @@ export class EditCampaignComponent implements OnInit {
     Swal.fire({
       icon: "warning",
       title: 'Le Type de business sera supprimé difinitivement!!',
-      text: 'Êtes-vous sure de vouloir continuer?',
+      text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
       confirmButtonColor: '#d9534f',
@@ -265,8 +392,8 @@ export class EditCampaignComponent implements OnInit {
 
     Swal.fire({
       icon: "warning",
-      title: 'Les paramétre globale de la compagne serent modifié!',
-      text: 'Êtes-vous sure de vouloir continuer?',
+      title: 'Les paramétre globale de la compagne seront modifié!',
+      text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
       confirmButtonColor: '#d9534f',

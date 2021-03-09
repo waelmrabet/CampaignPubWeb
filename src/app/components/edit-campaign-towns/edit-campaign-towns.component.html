@@ -1,3 +1,26 @@
+<div class="row" style="margin-top: 20px;">
+  <div class="col-md">
+    <div class="form-row" *ngIf="displaytownsToAdd">
+
+      <div class="form-group col-md-4">
+        <label class="control-label required">Ville</label>
+        <ng-select [items]="townsList" bindLabel="townWording" bindValue="id" [multiple]="false"
+          placeholder="Choisir la ou les villes cible(s)" [(ngModel)]="selectedTownId" name="townIds">
+        </ng-select>
+      </div>
+
+      <div class="form-group col-md">
+        <button type="button" class="btn btn-primary submitBtn" style="margin-top: 30px;" (click)="addCampaignTowns()" [disabled]="selectedTownId == undefined">
+          <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
 <div class="row">
   <div class="col">
 
@@ -22,7 +45,7 @@
           <td>{{ detailedTown.nbrBusinesses }}</td>
           <td>{{ detailedTown.townCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
 
-          <td class="deleteIcon" style="cursor: pointer;" (click)='deleteBusinessType(businessType.mapCode)'>
+          <td class="deleteIcon" style="cursor: pointer;" (click)='deleteCampaigntown(detailedTown.town)'>
             <i class="fa fa-trash" aria-hidden="true"></i>
           </td>
 
@@ -54,37 +77,37 @@
       <!--Body-->
       <div class="modal-body" *ngIf="selectedTown != undefined">
 
-        
-          <div class="row">
 
-            <div class="col-md-3">
-              <label>Nombre de business:</label>
-            </div>
-  
-            <div class="col-md-3">
-              <p>{{ selectedTown.nbrBusinesses }}</p>
-            </div>
-  
+        <div class="row">
+
+          <div class="col-md-3">
+            <label>Nombre de business:</label>
           </div>
-  
-          <div class="row">
-  
-            <div class="col-md-3">
-              <label>Coût:</label>
-            </div>
-  
-            <div class="col-md-3">
-              <p>{{ selectedTown.townCost }}</p>
-            </div>
-  
+
+          <div class="col-md-3">
+            <p>{{ selectedTown.nbrBusinesses }}</p>
           </div>
-  
-          <!-- Display town in map-->
-          <div class="row">
-            <app-campaign-town-details [center]="centerMapPosition" [palcesList]="placesList">  
-            </app-campaign-town-details>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-3">
+            <label>Coût:</label>
           </div>
-       
+
+          <div class="col-md-3">
+            <p>{{ selectedTown.townCost }}</p>
+          </div>
+
+        </div>
+
+        <!-- Display town in map-->
+        <div class="row">
+          <app-campaign-town-details [center]="centerMapPosition" [palcesList]="placesList">
+          </app-campaign-town-details>
+        </div>
+
       </div>
       <!--Footer-->
       <div class="modal-footer">

@@ -10,19 +10,11 @@ import { SelectMultipleControlValueAccessor } from '@angular/forms';
 export class CampaignTownDetailsComponent implements OnInit {
 
   @Input() center: any[];
-  @Input() palcesList:any;
+  @Input() palcesList: any;
 
-  public zoom:any;
-  
+  public zoom: any;
   constructor() { }
 
-  ngOnInit(): void {
-    this.zoom = 8;  
-  }
-
+  ngOnInit(): void {}
   
-
-
-  
-
 }

@@ -15,6 +15,7 @@ import { NouveauCompagnComponent } from './components/nouveau-compagn/nouveau-co
 import { NouveauProductTypeComponent } from './components/nouveau-product-type/nouveau-product-type.component';
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
 import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.component';
+import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
 
 
 
@@ -32,8 +33,8 @@ const routes: Routes = [
   { path: 'editUser/:UserId', component: EditUserComponent},
 
   { path: 'Nve_Compagne', component : NouveauCompagnComponent},
-  { path: 'Lst_Compagne', component : ListUserComponent},
-  { path: 'Edit_Compagne', component : EditCampaignComponent},
+  { path: 'Lst_Compagne', component : ListCampaignComponent},
+  { path: 'Details_Compagne/:CampaignId', component : EditCampaignComponent},
 
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},
