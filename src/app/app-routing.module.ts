@@ -16,9 +16,8 @@ import { NouveauProductTypeComponent } from './components/nouveau-product-type/n
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
 import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.component';
 import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
-
-
-
+import { ListDevisComponent } from './components/list-devis/list-devis.component';
+import { DetailsCompagnComponent } from './components/details-compagn/details-compagn.component';
 
 const routes: Routes = [
   { path : 'login', component : LoginComponent },  
@@ -34,7 +33,10 @@ const routes: Routes = [
 
   { path: 'Nve_Compagne', component : NouveauCompagnComponent},
   { path: 'Lst_Compagne', component : ListCampaignComponent},
-  { path: 'Details_Compagne/:CampaignId', component : EditCampaignComponent},
+  { path: 'Edit_Compagne/:CampaignId', component : EditCampaignComponent},
+  { path: 'Details_File_Compagne/:CampaignId', component : DetailsCompagnComponent},
+
+  {path:'Lst_Devis_Compagnes', component: ListDevisComponent},
 
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},

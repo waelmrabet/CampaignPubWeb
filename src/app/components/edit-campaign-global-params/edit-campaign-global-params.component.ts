@@ -13,6 +13,7 @@ export class EditCampaignGlobalParamsComponent implements OnInit {
 
   @Input() campaignGlobalParams: any;
   @Output() updateCampaignGlobalParmsEmmiter = new EventEmitter<any>();
+  @Output() goToDetailsEmmitter = new EventEmitter<any>();
 
   constructor(private datePipe: DatePipe) { }
 
@@ -21,12 +22,7 @@ export class EditCampaignGlobalParamsComponent implements OnInit {
     this.campaignGlobalParams.executionDate = this.datePipe.transform(this.campaignGlobalParams.executionDate, 'yyyy-MM-dd');
   }
 
-  ngOnInit(): void {
-    /*
-    this.campaignGlobalParams.executionDate = this.datePipe.transform(this.campaignGlobalParams.executionDate, 'yyyy-MM-dd');
-    let test = this.campaignGlobalParams.executionDate;
-    */
-  }
+  ngOnInit(): void { }
 
   // verif all global params are good
   verifGlobalParams() {
@@ -87,5 +83,10 @@ export class EditCampaignGlobalParamsComponent implements OnInit {
     }
 
   }
+
+  gotToDetailsPage(){
+    this.goToDetailsEmmitter.emit(undefined);
+  }
+  
 
 }

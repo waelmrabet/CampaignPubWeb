@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CampaignService } from 'src/app/services/campaign.service';
 import Swal from 'sweetalert2';
 
@@ -24,18 +25,20 @@ export class EditCampaignComponent implements OnInit {
 
   public campaignState: any;
 
-  constructor(private campaignService: CampaignService, private datePipe: DatePipe) { }
+  constructor(private campaignService: CampaignService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.getCampaignById(3);
+    this.getCampaignById();
   }
 
-  getCampaignById(id: number) {
+  getCampaignById() {
 
     this.displayData = false;
 
-    this.campaignService.getCampaignById(id)
+    let campaignId = +this.activatedRoute.snapshot.paramMap.get("CampaignId");
+
+    this.campaignService.getCampaignById(campaignId)
       .subscribe(response => {
 
         this.campaign = response;
@@ -426,8 +429,10 @@ export class EditCampaignComponent implements OnInit {
 
     });
 
+  }
 
-
+  goToDetailsCampaignPage(param){
+    this.router.navigateByUrl("Details_File_Compagne/"+ this.campaign.id);
   }
 
   //#endregion

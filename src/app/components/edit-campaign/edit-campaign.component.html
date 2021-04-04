@@ -16,7 +16,7 @@
         <div class="row">
             
             <div class="col-md-3">
-                <i class="fas fa-table mr-1"></i>Détails Compagne
+                <i class="fas fa-table mr-1"></i>Edit Compagne
             </div>   
 
             <div class="col-md-3" ><!--style="text-align: right;"-->
@@ -99,7 +99,8 @@
                             <div class="col-md">
                                 <app-edit-campaign-global-params 
                                 [campaignGlobalParams]="campaign"
-                                (updateCampaignGlobalParmsEmmiter)="updateCampaignGlobalParams($event)">
+                                (updateCampaignGlobalParmsEmmiter)="updateCampaignGlobalParams($event)"
+                                (goToDetailsEmmitter)="goToDetailsCampaignPage()">
                                 </app-edit-campaign-global-params>
                             </div>
                         </div>
@@ -159,6 +160,6 @@
             </div>
         </div>
 
-    </div>
-    
+    </div>    
 </div>
+

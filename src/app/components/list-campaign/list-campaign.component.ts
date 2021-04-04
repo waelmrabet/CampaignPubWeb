@@ -23,7 +23,6 @@ export class ListCampaignComponent implements OnInit {
   constructor(private campaignService: CampaignService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.getListCampaigns();
   }
 
@@ -49,9 +48,12 @@ export class ListCampaignComponent implements OnInit {
 
   }
 
-  gotToDetails(campaignId){
-    this.router.navigateByUrl('Details_Compagne/'+ campaignId)
-  }
 
+  gotToDetails(campaign){
+    
+    let pageUrl = campaign.campaignState === 1 ? "Edit_Compagne/" : "Details_File_Compagne/";
+    this.router.navigateByUrl(pageUrl+ campaign.id);
+
+  }
 
 }

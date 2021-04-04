@@ -1,1 +1,274 @@
-<p>details-compagn works!</p>
+<div class="row">
+    <div class="col">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb bgBreadCrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
+                <li class="breadcrumb-item"><a href="#" [routerLink]="['/']">Compagnes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Détails Compagne</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="card mb-4 CompagneCard">
+
+    <div class="card-header">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <i class="fas fa-table mr-1"></i> Détails Compagne
+            </div>
+
+            <div class="col-md-3">Etat:
+                <span *ngIf="displayDetails" style="margin-left: 2px; font-size: 15px;" [ngClass]="{ 'badge': true, 'badge-pill': true,
+            'badge-secondary': campaignState.stateId ===1,
+            'badge-warning': campaignState.stateId === 2,
+            'badge-success': campaignState.stateId === 3,
+            'badge-danger': campaignState.stateId === 4 }">{{ campaignState.stateDescription }} </span>
+            </div>
+
+
+            <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
+                Mon Budget:
+                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{
+                    campaign.forecastBudget | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
+            </div>
+
+            <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
+                Coût total:
+                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{
+                    campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-body" *ngIf="!displayDetails">
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <div class="spinner-border" role="status" style="color: gray;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div style="color: gray;">
+                    Chargement en cours ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body" *ngIf="displayDetails">
+
+        <!-- Line 1 -->
+        <div class="row">
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Titre
+                </label>
+            </div>
+
+            <div class="col-md-3 float-right">
+                <p style="font-size: 15;">{{ campaign.title }}</p>
+            </div>
+
+            <div class="col-md float-left">
+                <label>
+                    Date d'execution
+                </label>
+            </div>
+
+            <div class="col-md float-right">
+                <p style="font-size: 15;">{{ campaign.executionDate | date: 'dd/MM/yyyy'}}</p>
+            </div>
+
+        </div>
+
+        <!-- Line 2 -->
+        <div class="row" style="margin-top: 10px;">
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Region
+                </label>
+            </div>
+
+            <div class="col-md-3 float-right">
+                <p style="font-size: 15;">{{ campaign.region.name }}</p>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Taux de pénétration
+                </label>
+            </div>
+
+            <div class="col-md-3 float-right">
+                <p style="font-size: 15;">{{ campaign.penetraionRate }}%</p>
+            </div>
+
+        </div>
+
+        <!-- Line 3 -->
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-3 float-left">
+                <label>
+                    Ville:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <span class="badge badge-light" style="font-size: 14px;"
+                    *ngFor="let detailedTown of detailedTowns | slice:0:3; let i=index">
+                    {{ detailedTown.town.city }}
+                </span>
+            </div>
+
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Nombre Villes:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <p style="font-size: 15;"> {{ detailedTowns.length }} </p>
+            </div>
+
+        </div>
+
+        <!-- Line 4 -->
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-3 float-left">
+                <label>
+                    Type de business:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <span class="badge badge-light" style="font-size: 14px;"
+                    *ngFor="let business of campaign.campaignBusinessTypes | slice:0:3; let i=index">
+                    {{ business.code }}
+                </span>
+            </div>
+
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Nombre Type de business:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <p style="font-size: 15;"> {{ campaign.campaignBusinessTypes.length }} </p>
+            </div>
+
+        </div>
+
+        <!-- Line 5 -->
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-3 float-left">
+                <label>
+                    Type de produit:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <span class="badge badge-light" style="font-size: 14px;"
+                    *ngFor="let produit of campaign.campaignProducts | slice:0:3; let i=index">
+                    {{ produit.productType.name }}
+                </span>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Nombre de produit:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <p style="font-size: 15;"> {{ campaign.campaignProducts.length }} </p>
+            </div>
+
+        </div>
+
+        <!-- Line 6 -->
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-3 float-left">
+                <label>
+                    Coût total:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <span class="badge badge-light" style="font-size: 14px;">
+                    <td>{{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
+                </span>
+            </div>
+
+            <div class="col-md-3 float-left">
+                <label>
+                    Coût de business:
+                </label>
+            </div>
+
+            <div class="col-md-3 float-left">  
+                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">
+                    {{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr'}}
+                </span>              
+                
+            </div>
+
+        </div>
+
+        <!-- Line 7 -->
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-6 float-left">
+                <label>Objectif</label>
+            </div>            
+            <div class="col-md-6 float-left">
+                <label>Description</label>                
+            </div>           
+        </div>
+
+        <!-- Line 8 -->
+        <div class="row">
+            <div class="col-md-6 float-left">
+                <textarea class="form-control" style="background-color: #FFFF !important;" readonly [ngModel]="campaign.goal" rows="4"> </textarea>
+            </div>
+
+            <div class="col-md-6 float-left">
+                <textarea class="form-control" style="background-color: #FFFF !important;" readonly [ngModel]="campaign.description" rows="4"> </textarea>
+            </div>
+
+        </div>
+
+        <!--Line 9 -->
+        <div class="row" style="text-align: right; margin-top: 10px;">
+
+            <div class="col-md-8"></div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-sm btn-block" (click)="ValiderDevis()">                   
+                    <i class="fas fa-check" style="text-align: left;"></i> Valider
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-sm resetBtn btn-block">                    
+                    Annuler
+                </button>
+            </div>
+
+
+            <div class="col-md-12" style="text-align: right; margin-top: 10px;" *ngIf="false">
+
+                
+
+                 
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
