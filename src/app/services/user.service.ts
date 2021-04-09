@@ -12,6 +12,19 @@ export class UserService {
   private apiUrl = environment.apiUrl;
   constructor(private httpClient : HttpClient) { }
 
+
+  login(userName, password){
+    
+    let url = this.apiUrl+'/User/Login';  
+    let identity: any = {
+      userName: userName,
+      password: password
+    };
+
+    return this.httpClient.post(url, identity);
+
+  }
+
   addUser(user : User) : Observable<any> {
     let url = this.apiUrl +'/User';
     return this.httpClient.post<any>(url, user);    

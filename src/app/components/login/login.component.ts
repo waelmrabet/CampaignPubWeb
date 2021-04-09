@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,21 +11,31 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService : AuthenticationService, private router :Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
-  public authStatus; 
+  public currentUser: any;
 
   ngOnInit(): void {
-    this.authStatus = this.authService.isAuthenticated;
   }
 
-  public login(){
-    this.authStatus= this.authService.SignIn();  
-    this.router.navigateByUrl('tableauDeBord');     //('tableauDeBord')  
-  }
+  public login(loginForm) {
+    
+    let userName = loginForm.value.userName;
+    let password = loginForm.value.password;
+    
+    this.userService.login(userName, password)
+      .subscribe(response => {        
+        this.currentUser = response;
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        let test = JSON.parse(localStorage.getItem('currentUser'));
 
-  public logout(){
-    this.authStatus= this.authService.SignOut();    
-  }
+        console.log("show current user from local storage");
+        console.log(test);
 
+        this.router.navigateByUrl('Dashbord');
+
+      }, error => {
+        console.log(error);
+      });          
+  }
 }

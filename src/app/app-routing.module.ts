@@ -18,6 +18,8 @@ import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.
 import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
 import { ListDevisComponent } from './components/list-devis/list-devis.component';
 import { DetailsCompagnComponent } from './components/details-compagn/details-compagn.component';
+import { AuthGuard } from './_helpers/auth.guard';
+
 
 const routes: Routes = [
   { path : 'login', component : LoginComponent },  
@@ -35,13 +37,26 @@ const routes: Routes = [
   { path: 'Lst_Compagne', component : ListCampaignComponent},
   { path: 'Edit_Compagne/:CampaignId', component : EditCampaignComponent},
   { path: 'Details_File_Compagne/:CampaignId', component : DetailsCompagnComponent},
-
   {path:'Lst_Devis_Compagnes', component: ListDevisComponent},
 
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},
+
+
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
     
-  { path : '', component : DashboardComponent } 
+  /*
+  { path : 'Dashbord', component : DashboardComponent },
+ 
+  { path : '', component : LoginComponent }, 
+  { path : 'Login', component : LoginComponent }, 
+  { path: '**', redirectTo: 'Login' }
+  */
+
 ];
 
 @NgModule({

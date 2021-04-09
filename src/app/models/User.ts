@@ -7,6 +7,6 @@ export class User{
     telNumber : string;
     role : number;
     password : string;
-    clientId? : number ;
-    
+    clientId? : number;
+    createdAt?: Date  
 }

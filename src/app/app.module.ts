@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthenticationService } from './services/authentication.service';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { NouveauUserComponent } from './components/nouveau-user/nouveau-user.component';
 import { ClientService } from './services/client.service';
@@ -23,7 +22,7 @@ import { DetailsCompagnComponent } from './components/details-compagn/details-co
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NouveauProductTypeComponent } from './components/nouveau-product-type/nouveau-product-type.component';
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.component';
 import { EditCampaignProductsComponent } from './components/edit-campaign-products/edit-campaign-products.component';
 import { EditCampaignTownsComponent } from './components/edit-campaign-towns/edit-campaign-towns.component';
@@ -35,6 +34,11 @@ import localeFr from '@angular/common/locales/fr';
 import { CampaignTownDetailsComponent } from './components/campaign-town-details/campaign-town-details.component';
 import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
 import { ListDevisComponent } from './components/list-devis/list-devis.component';
+import { from } from 'rxjs';
+import { NgxLocalStorageModule } from 'ngx-localstorage';
+import { AuthGuard } from './_helpers/auth.guard';
+
+
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -42,7 +46,7 @@ registerLocaleData(localeFr, 'fr');
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    HomeComponent,   
+    HomeComponent,
     ListUserComponent,
     NouveauUserComponent,
     NouveauClientComponent,
@@ -50,38 +54,48 @@ registerLocaleData(localeFr, 'fr');
     DetailsClientComponent,
     EditUserComponent,
     NouveauCompagnComponent,
-    DetailsCompagnComponent, 
-
-  
-    NouveauProductTypeComponent, ListProductTypesComponent, EditCampaignComponent, EditCampaignProductsComponent, EditCampaignTownsComponent, EditCampaignBusinessTypesComponent, EditCampaignGlobalParamsComponent, CampaignTownDetailsComponent, ListCampaignComponent, ListDevisComponent
-       
+    DetailsCompagnComponent,
+    NouveauProductTypeComponent,
+    ListProductTypesComponent,
+    EditCampaignComponent,
+    EditCampaignProductsComponent,
+    EditCampaignTownsComponent,
+    EditCampaignBusinessTypesComponent,
+    EditCampaignGlobalParamsComponent,
+    CampaignTownDetailsComponent,
+    ListCampaignComponent,
+    ListDevisComponent
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
     NgSelectModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgxLocalStorageModule.forRoot()
+     
+    
     /*,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBarLEdbGw8JnHOz6hRceCP8vyRRklFxr8',
       libraries: ['places']
     })*/
-    
+
   ],
-  providers: [
+  providers: [    
     DatePipe,
-    AuthenticationService,
     ClientService,
     {
       provide: localeFr,
-      useValue: 'fr' // 'de' for Germany, 'fr' for France ...
-     }
-   
+      useValue: 'fr'
+    },
+    AuthGuard,
+    UpperCasePipe  
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }

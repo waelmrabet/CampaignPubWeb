@@ -19,10 +19,8 @@ export class EditCampaignBusinessTypesComponent implements OnInit, OnChanges {
 
 
   constructor(private businessTypeService: BusinessTypeService) { }
-
-
+ 
   // stratigie à appliquer sur dans edit-type de poduit et edit-ville
-
   ngOnChanges(changes: SimpleChanges): void {    
 
      let first = changes["campaignBusinessTypes"].firstChange;
