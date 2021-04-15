@@ -37,6 +37,7 @@ import { ListDevisComponent } from './components/list-devis/list-devis.component
 import { from } from 'rxjs';
 import { NgxLocalStorageModule } from 'ngx-localstorage';
 import { AuthGuard } from './_helpers/auth.guard';
+import { MenusComponent } from './components/menus/menus.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -64,7 +65,8 @@ registerLocaleData(localeFr, 'fr');
     EditCampaignGlobalParamsComponent,
     CampaignTownDetailsComponent,
     ListCampaignComponent,
-    ListDevisComponent
+    ListDevisComponent,
+    MenusComponent
   ],
 
   imports: [

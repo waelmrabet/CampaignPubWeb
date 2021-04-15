@@ -1,6 +1,7 @@
 import { TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'CompagnWebApp';
-
-  public isConnected;
-
   public menusList: any;
   public currentUser: any;
 
-  constructor(private router: Router, private upperCasePipe: UpperCasePipe) { }
+  constructor(private router: Router, private upperCasePipe: UpperCasePipe, private userService: UserService) {
+    this.currentUser = this.userService.getCurrentConnectedUser();
+   }
 
   ngOnInit(): void { }
 
@@ -44,34 +44,32 @@ export class AppComponent implements OnInit {
 
   }
 
-  getListMenuesByProfile(user) {
-    let list = [1, 2, 3, 4];
-    this.menusList = list;
-  }
-
-
   // Do not touch this code please
   isHidden() {
-
+   
     let user = JSON.parse(localStorage.getItem("currentUser"));
 
-    if(this.currentUser == undefined || this.currentUser == null && user != null){
-      this.currentUser = user;
-      this.getListMenuesByProfile(user);
-    }
-
-    if (user)
-      return false;
-    else
+    if(user == null || user == undefined){
+      this.currentUser == undefined;
       return true;
+    }else{
+      
+      if(this.currentUser == undefined || this.currentUser == null)
+        this.currentUser = user;          
+      
+      if(this.menusList == null || this.menusList == undefined)
+        this.menusList = user.menus;   
 
+      return false;
+    }    
   }
 
   logout() {
-    localStorage.removeItem("currentUser");
+    this.userService.logout();
     this.currentUser = null;
     this.menusList = null;
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('login');    
+    
   }
 
 }

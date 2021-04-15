@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,38 +10,53 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   private apiUrl = environment.apiUrl;
-  constructor(private httpClient : HttpClient) { }
+  
+  public userSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
 
-  login(userName, password){
-    
-    let url = this.apiUrl+'/User/Login';  
+  constructor(private httpClient: HttpClient) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.userSubject.asObservable();
+  }
+
+  getCurrentConnectedUser(){
+    return this.userSubject.value;
+  }
+
+  login(userName, password) {
+
+    let url = this.apiUrl + '/User/Login';
     let identity: any = {
       userName: userName,
       password: password
     };
 
     return this.httpClient.post(url, identity);
-
   }
 
-  addUser(user : User) : Observable<any> {
-    let url = this.apiUrl +'/User';
-    return this.httpClient.post<any>(url, user);    
+  logout(){
+    localStorage.removeItem("currentUser");
+    this.userSubject.next(null);    
+  }
+
+  addUser(user: User): Observable<any> {
+    let url = this.apiUrl + '/User';
+    return this.httpClient.post<any>(url, user);
   }
 
   getAllUsers() {
-    let url = this.apiUrl +'/User';
+    let url = this.apiUrl + '/User';
     return this.httpClient.get(url);
   }
 
-  getUserById(userId : number){
-    let url = this.apiUrl +'/User/';
-    return this.httpClient.get(url+userId);
+  getUserById(userId: number) {
+    let url = this.apiUrl + '/User/';
+    return this.httpClient.get(url + userId);
   }
 
-  updateUser(id, editeduser){
-    let url = this.apiUrl+'/User/';
+  updateUser(id, editeduser) {
+    let url = this.apiUrl + '/User/';
     return this.httpClient.put(url + id, editeduser);
   }
 

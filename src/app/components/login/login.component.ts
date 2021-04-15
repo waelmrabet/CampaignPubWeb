@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  public currentUser: any;
+  // public currentUser: any;
 
   ngOnInit(): void {
   }
@@ -24,16 +24,12 @@ export class LoginComponent implements OnInit {
     let password = loginForm.value.password;
     
     this.userService.login(userName, password)
-      .subscribe(response => {        
-        this.currentUser = response;
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        let test = JSON.parse(localStorage.getItem('currentUser'));
-
-        console.log("show current user from local storage");
-        console.log(test);
-
+      .subscribe(response => {  
+        let user = response;
+        localStorage.setItem('currentUser', JSON.stringify(user));         
+        this.userService.userSubject.next(user);
+        //this.userService.currentUser = this.currentUser;        
         this.router.navigateByUrl('Dashbord');
-
       }, error => {
         console.log(error);
       });          
