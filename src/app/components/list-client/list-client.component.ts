@@ -28,7 +28,7 @@ export class ListClientComponent implements OnInit {
       });
   }
 
-  gotToDetails(customer){
+  goToDetails(customer){
     this.router.navigateByUrl('Details_Client/'+ customer.id)
   }
 

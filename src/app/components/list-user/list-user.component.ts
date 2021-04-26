@@ -40,7 +40,7 @@ export class ListUserComponent implements OnInit {
       )
   }
 
-  public gotToDetails(user) {
+  public goToDetails(user) {
     this.router.navigateByUrl('editUser/' + user.id);
   }
 

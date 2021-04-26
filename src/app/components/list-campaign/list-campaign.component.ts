@@ -50,7 +50,7 @@ export class ListCampaignComponent implements OnInit {
   }
 
 
-  gotToDetails(campaign){
+  goToDetails(campaign){
     
     let pageUrl = campaign.campaignState === 1 ? "Edit_Compagne/" : "Details_File_Compagne/";
     this.router.navigateByUrl(pageUrl+ campaign.id);

@@ -1,93 +1,167 @@
+import { verifyHostBindings } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClientService } from 'src/app/services/client.service';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent {
 
-  cities = [
-    { id: 1, name: 'Vilnius' },
-    { id: 2, name: 'Kaunas' },
-    { id: 3, name: 'Pavilnys', disabled: true },
-    { id: 4, name: 'Pabradė' },
-    { id: 5, name: 'Klaipėda' }
-  ];
+  public user;
+  public modalUser;
+  public displayDetails: boolean = false;
 
-  cities2 = [
-    { id: 1, name: 'Vilnius' },
-    { id: 2, name: 'Kaunas' },
-    { id: 3, name: 'Pavilnys', disabled: true },
-    { id: 4, name: 'Pabradė' },
-    { id: 5, name: 'Klaipėda' }
-  ];
+  public userRoles = [{ id: 1, roleDescription: "Administrateur" }, { id: 2, roleDescription: "Client" }, { id: 3, roleDescription: "Agent" }]
 
-  cities3 = [
-    { id: 1, name: 'Vilnius', avatar: '//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x' },
-    { id: 2, name: 'Kaunas', avatar: '//www.gravatar.com/avatar/ddac2aa63ce82315b513be9dc93336e5?d=retro&r=g&s=15' },
-    { id: 3, name: 'Pavilnys', avatar: '//www.gravatar.com/avatar/6acb7abf486516ab7fb0a6efa372042b?d=retro&r=g&s=15' }
-  ];
+  constructor(
+    private userService: UserService,
+    private clientService: ClientService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
-  cities4 = [];
-
-  users = [
-    { id: 'anjmao', name: 'Anjmao' },
-    { id: 'varnas', name: 'Tadeus Varnas' }
-  ];
-
-  selectedAccount = 'Adam'
-  accounts = [
-    { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
-    { name: 'Samantha', email: 'samantha@email.com', age: 30, country: 'United States' },
-    { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
-    { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
-    { name: 'Adrian', email: 'adrian@email.com', age: 21, country: 'Ecuador' },
-    { name: 'Wladimir', email: 'wladimir@email.com', age: 30, country: 'Ecuador' },
-    { name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
-    { name: 'Nicole', email: 'nicole@email.com', age: 43, country: 'Colombia' },
-    { name: 'Michael', email: 'michael@email.com', age: 15, country: 'Colombia' },
-    { name: 'Nicolás', email: 'nicole@email.com', age: 43, country: 'Colombia' }
-  ];
-
-  selectedCity: any;
-  selectedCityIds: string[];
-  selectedCityName = 'Vilnius';
-  selectedCityId: number;
-  selectedUserIds: number[];
-
-
-  constructor() { }
+  public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
+  public customersList: any;
 
   ngOnInit(): void {
-    this.create10kCities();
+    this.getUserById();
+    this.getAllClients();
   }
-  
-  addCustomUser = (term) => ({id: term, name: term});
-  
-  private create10kCities() {
-    this.cities4 = Array.from({length: 10000}, (value, key) => key)
-                        .map(val => ({
-                          id: val,
-                          name: `city ${val}`
-                        }));
-}
 
-}
+  getRoleDescription(roleId) {
 
-/**
- *
-    constructor() {
-        this.create10kCities();
+    let roleDesc = '';
+
+    if (roleId != undefined)
+      roleDesc = this.userRoles.find(x => x.id == roleId).roleDescription;
+
+    return roleDesc;
+  }
+
+  getAllClients() {
+    this.clientService.getAllClient()
+      .subscribe(response => {
+        this.customersList = response;
+      }, error => {
+        Swal.fire("Erreur", "Erreur de chargement list client", "error");
+      });
+  }
+
+  getUserById() {
+    let userId = this.activatedRoute.snapshot.params.UserId;
+    this.userService.getUserById(userId)
+      .subscribe(response => {
+        this.user = response;
+        this.displayDetails = true;
+      });
+  }
+
+  setModalUser() {
+    this.modalUser = this.user;
+  }
+
+  verifModifUser(user) {
+    let message = "Veuillez renseignez les champs obligatoires:";
+    let valid = true;
+
+    if (user.lastName == "" || user.lastName == undefined) {
+      message += "<br> Nom";
+      valid = false;
     }
 
-    addCustomUser = (term) => ({id: term, name: term});
-
-    private create10kCities() {
-        this.cities4 = Array.from({length: 10000}, (value, key) => key)
-                            .map(val => ({
-                              id: val,
-                              name: `city ${val}`
-                            }));
+    if (user.firstName == "" || user.firstName == undefined) {
+      message += "<br> Prénom";
+      valid = false;
     }
- */
+
+    if (user.email == "" || user.email == undefined) {
+      message += "<br> Email";
+      valid = false;
+    }
+
+    if (user.telNumber == "" || user.telNumber == undefined) {
+      message += "<br> Numéro téléphone";
+      valid = false;
+    }
+
+    if (user.password == "" || user.password == undefined) {
+      message += "<br> Mot de passe";
+      valid = false;
+    }
+
+    if (user.roleId == null || user.roleId == undefined) {
+      message += "<br> Role";
+      valid = false;
+    }
+
+    if (user.roleId == null && (user.clientId == null || user.clientId < 1)) {
+      message += "<br> Client";
+      valid = false;
+    }
+
+    if (!valid)
+      Swal.fire("Erreur", message, "error");
+
+    return valid;
+
+  }
+
+  updateUser(editedUser) {
+
+    let valid = this.verifModifUser(editedUser);
+
+    if (valid) {
+      Swal.fire({
+        icon: "warning",
+        title: 'modification utilisateur!',
+        text: 'Êtes-vous sûre de vouloir continuer?',
+        showCancelButton: true,
+        confirmButtonText: `Continuer`,
+        confirmButtonColor: '#d9534f',
+        cancelButtonText: 'Annuler'
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.userService.updateUser(editedUser.id, editedUser)
+              .subscribe(response => {
+                this.user = response;
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'succes',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+
+              }, error => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Problème de suppression ville',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              });
+          }
+
+        });
+    }
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+}
+

@@ -20,6 +20,7 @@ import { ListDevisComponent } from './components/list-devis/list-devis.component
 import { DetailsCompagnComponent } from './components/details-compagn/details-compagn.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { DetailedDevisCampaignComponent } from './components/detailed-devis-campaign/detailed-devis-campaign.component';
+import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
 
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},
+  {path: 'Details_ProductType/:ProductTypeId', component: DetailsProductTypeComponent},
 
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },

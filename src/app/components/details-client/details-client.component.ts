@@ -15,7 +15,6 @@ export class DetailsClientComponent implements OnInit {
   constructor(private clientService : ClientService, private activatedRoute : ActivatedRoute, private router : Router) { }
 
   ngOnInit(): void {
-
     this.getCustomerById();
   }
 
@@ -41,4 +40,5 @@ export class DetailsClientComponent implements OnInit {
       this.router.navigateByUrl('Lst_Client');
     });
   }
+  
 }

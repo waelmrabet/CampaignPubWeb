@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class NouveauUserComponent implements OnInit {
 
-  public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }];
+  public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
   public selectedRoleId: any;
   public customersList: any;
   public selectedCustomerId: any;

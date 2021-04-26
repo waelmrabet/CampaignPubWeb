@@ -26,7 +26,7 @@ export class ListDevisComponent implements OnInit {
     });
   }
 
-  gotToDetails(devisId){
+  goToDetails(devisId){
         
     console.log()
   }

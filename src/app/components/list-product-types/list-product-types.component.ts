@@ -1,5 +1,6 @@
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { until } from 'selenium-webdriver';
 import { ProductTypeService } from 'src/app/services/product-type.service';
 import Swal from 'sweetalert2';
@@ -16,7 +17,7 @@ export class ListProductTypesComponent implements OnInit {
 
   public dimensionUnits = [ {id: 1, unitDescription : 'mm'}, {id: 2, unitDescription : 'cm'}, {id: 3, unitDescription : 'mt'}];
 
-  constructor(private productTypesService : ProductTypeService) { }
+  constructor(private productTypesService : ProductTypeService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllProductTypes();
@@ -49,6 +50,10 @@ export class ListProductTypesComponent implements OnInit {
       unit = this.dimensionUnits.find(x=> x.id == unitId);
       if(unit != undefined)   return unit.unitDescription;
     }   
+  }
+
+  goToDetails(productType){
+    this.router.navigateByUrl('Details_ProductType/'+ productType.id);
   }
 
 }

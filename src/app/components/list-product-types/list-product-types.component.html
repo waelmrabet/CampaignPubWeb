@@ -33,7 +33,7 @@
                         <th>Largeur</th>
                         <th>Unité de mesure</th>
                         <th>Description</th>
-                        <!--<th></th>-->
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -77,6 +77,10 @@
                         </td>
 
                         <td>{{ productType.description}}</td>
+
+                        <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(productType)'>
+                            <i class="fas fa-share"></i>                           
+                          </td>
 
                     </tr>
 

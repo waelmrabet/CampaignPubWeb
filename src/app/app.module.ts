@@ -41,6 +41,10 @@ import { MenusComponent } from './components/menus/menus.component';
 import { DetailedDevisCampaignComponent } from './components/detailed-devis-campaign/detailed-devis-campaign.component';
 
 
+import { SelectComposExampleComponent } from './components/select-compos-example/select-compos-example.component';
+import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
+
+
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -68,7 +72,9 @@ registerLocaleData(localeFr, 'fr');
     ListCampaignComponent,
     ListDevisComponent,
     MenusComponent,
-    DetailedDevisCampaignComponent
+    DetailedDevisCampaignComponent,
+    SelectComposExampleComponent,
+    DetailsProductTypeComponent
   ],
 
   imports: [
