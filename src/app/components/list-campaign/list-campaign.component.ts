@@ -15,9 +15,10 @@ export class ListCampaignComponent implements OnInit {
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
-    { stateId: 2, stateDescription: 'En Cours' },
-    { stateId: 3, stateDescription: 'Fini' },
-    { stateId: 4, stateDescription: 'Annulée' }
+    { stateId: 2, stateDescription: 'Validé' },
+    { stateId: 3, stateDescription: 'En Cours' },
+    { stateId: 4, stateDescription: 'Fini' },
+    { stateId: 5, stateDescription: 'Annulée' }
   ];
 
   constructor(private campaignService: CampaignService, private router: Router) { }

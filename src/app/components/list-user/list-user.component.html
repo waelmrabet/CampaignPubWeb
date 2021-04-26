@@ -31,6 +31,7 @@
                         <th>Téléphone</th>
                         <th>Role</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -57,12 +58,13 @@
                         </td>
 
                         <td class="linkBtn" style="cursor: pointer;" (click)='gotToDetails(user)'>
-                            <i class="fas fa-share"></i>
-                            <!--<i class="fas fa-info-circle "></i>-->
+                            <i class="fas fa-share"></i>                           
                         </td>
 
-
-
+                        <td class="linkBtn" style="cursor: pointer; color: red;" (click)='desactivate(user)'>
+                            <i class="fa fa-trash" aria-hidden="true"></i>                 
+                        </td>
+                        
                     </tr>
 
                 </tbody>

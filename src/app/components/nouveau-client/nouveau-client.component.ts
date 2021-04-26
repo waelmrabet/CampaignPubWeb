@@ -47,20 +47,59 @@ export class NouveauClientComponent implements OnInit {
     return customer;
   }
 
+  buildErreurMessage(controls) {
+    let msg = "Veuillez remplir les champs suivant:";
+
+    if(controls.name.status == "INVALID"){
+      msg += "<br>" +"name";
+    }
+    
+    if(controls.taxIdNumber.status == "INVALID"){
+      msg += "<br>" +"Matricule fiscale";
+    }
+
+    if(controls.telNumber.status == "INVALID"){
+      msg += "<br>" +"Numéro de téléphone";
+    }
+
+    if(controls.mail.status == "INVALID"){
+      msg += "<br>" +"EMAIL";
+    }
+
+    if(controls.street.status == "INVALID"){
+      msg += "<br>" +"Rue";
+    }
+
+    if(controls.townName.status == "INVALID"){
+      msg += "<br>" +"Ville";
+    }
+
+    if(controls.countryName.status == "INVALID"){
+      msg += "<br>" +"Pays";
+    }    
+
+    Swal.fire('Erreur!',  msg, "error" );   
+
+  }
+
   ajouterClient(f: NgForm) {
+
+    if (!f.valid) {
+      this.buildErreurMessage(f.controls);
+    }
 
     if (f.valid) {
 
       Swal.fire({
-        title: 'êtes-vous sûr de vouloir continuer?',
-        text: 'Ajout nouveau client!',
+        title: 'Ajout nouveau client!',
+        text: 'êtes-vous sûr de vouloir continuer?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Oui, ajouter!',
         cancelButtonText: 'Non, Annuler'
-      }).then((result) => {
-        if (result.value) {
-
+      })
+      .then((result) => {
+        if (result.value) {   
           let customer = this.buildCustomerModel(f.value);
           this.clientService.addClient(customer)
             .subscribe(response => {

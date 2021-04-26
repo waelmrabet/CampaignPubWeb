@@ -18,9 +18,10 @@ export class EditCampaignComponent implements OnInit {
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
-    { stateId: 2, stateDescription: 'En Cours' },
-    { stateId: 3, stateDescription: 'Fini' },
-    { stateId: 4, stateDescription: 'Annulée' }
+    { stateId: 2, stateDescription: 'Validé' },
+    { stateId: 3, stateDescription: 'En Cours' },
+    { stateId: 4, stateDescription: 'Fini' },
+    { stateId: 5, stateDescription: 'Annulée' }   
   ];
 
   public campaignState: any;
@@ -432,7 +433,7 @@ export class EditCampaignComponent implements OnInit {
   }
 
   goToDetailsCampaignPage(param){
-    this.router.navigateByUrl("Details_File_Compagne/"+ this.campaign.id);
+    this.router.navigateByUrl(param + this.campaign.id);   
   }
 
   //#endregion

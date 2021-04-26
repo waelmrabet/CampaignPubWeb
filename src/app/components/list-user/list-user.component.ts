@@ -19,29 +19,72 @@ export class ListUserComponent implements OnInit {
     this.getAllUsers();
   }
 
-  public getAllUsers(){
+  public getAllUsers() {
 
     this.showusersList = false;
     this.userService.getAllUsers()
-    
-    .subscribe(
-      response=>{
-        this.usersList = response;
-        this.showusersList =true;
-    }, error=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Erreur serveur!'
-      });
-    }
-    
-    
-    )
+
+      .subscribe(
+        response => {
+          this.usersList = response;
+          this.showusersList = true;
+        }, error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Erreur serveur!'
+          });
+        }
+
+
+      )
   }
 
-  public gotToDetails(user){
-    this.router.navigateByUrl('editUser/'+user.id);
+  public gotToDetails(user) {
+    this.router.navigateByUrl('editUser/' + user.id);
   }
+
+
+  desactivateUser(user) {
+
+    Swal.fire({
+      title: 'Desactivation utilisateur!',
+      text: 'êtes-vous sûr de vouloir continuer?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, Désactiver!',
+      cancelButtonText: 'Non, Annuler'
+    })
+      .then((result) => {
+        Swal.close();
+        if (result.value) {
+          Swal.fire({
+            title: '',
+            html: 'Connexion en cours',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+              Swal.showLoading()
+            },
+          });
+
+          let userId = user.id;
+          this.userService.activerDesactivateUser(userId, false)
+            .subscribe(response => {
+              this.usersList = response;
+            }
+              , error => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Erreur serveur!'
+                })
+              });
+        }
+      });
+  }
+
+
+
 
 }

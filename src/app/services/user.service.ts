@@ -10,20 +10,17 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   private apiUrl = environment.apiUrl;
-  
-  public userSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
+
+  constructor(private httpClient: HttpClient) {  }
 
 
-  constructor(private httpClient: HttpClient) {
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.userSubject.asObservable();
+  activerDesactivateUser(userId, activer){
+    let url = this.apiUrl+ "/User/ActiverDesactivateUser/";
+    url += userId+'/';
+    url += activer;
+    return this.httpClient.delete(url);
   }
-
-  getCurrentConnectedUser(){
-    return this.userSubject.value;
-  }
-
+ 
   login(userName, password) {
 
     let url = this.apiUrl + '/User/Login';
@@ -36,8 +33,7 @@ export class UserService {
   }
 
   logout(){
-    localStorage.removeItem("currentUser");
-    this.userSubject.next(null);    
+    localStorage.removeItem("currentUser");    
   }
 
   addUser(user: User): Observable<any> {

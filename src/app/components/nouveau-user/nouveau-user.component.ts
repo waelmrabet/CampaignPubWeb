@@ -56,6 +56,64 @@ export class NouveauUserComponent implements OnInit {
   }
 
   verifUserForm(userForm) {
+
+    let valid = true;
+    let message = 'Veuillez renseigner tous les champs obligatoires !';
+
+    let formControls = userForm.controls;
+
+    if(formControls.lastName.status == "INVALID"){
+      valid = false,
+      message += "<br> Prénom";
+    }
+
+    if(formControls.firstName.status == "INVALID"){
+      valid = false,
+      message += "<br> Nom";
+    }
+
+    if(formControls.matricule.status == "INVALID"){
+      valid = false,
+      message += "<br> Matricule";
+    }
+
+    if(formControls.mail.status == "INVALID"){
+      valid = false,
+      message += "<br> Email";
+    }
+
+    if(formControls.telNumber.status == "INVALID"){
+      valid = false,
+      message += "<br> Numéro téléphone";
+    }
+
+    if(formControls.roleUser.status == "INVALID"){
+      valid = false,
+      message += "<br> Role";
+    }
+
+    if(formControls.password.status == "INVALID"){
+      valid = false,
+      message += "<br> Mot de passe";
+    }
+
+    if(formControls.confirmePassword.status == "INVALID" || formControls.password.value != formControls.confirmePassword.value ){
+      valid = false,
+      message += "<br> Confirme mot de passe";
+    }    
+
+    if(this.selectedRoleId === 2 && formControls.clientId.status == "INVALID"){
+      valid = false;
+      message += "<br> Client";
+    }
+   
+
+    if (!valid)
+      Swal.fire('Erreur', message, 'error');
+
+    return valid;
+
+    /*
     let valid = true;
     let message = '';
 
@@ -74,7 +132,9 @@ export class NouveauUserComponent implements OnInit {
 
     return valid;
 
+*/
 
+    
 
   }
 

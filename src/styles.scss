@@ -1,6 +1,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
+
 .CompagneAppBG{
     background-color: #f0f8fe !important;
 }
@@ -25,6 +26,21 @@ form label.required:after
 .deleteIcon {
     color: #f01414;
     text-align: center;
+}
+
+
+.BgColDetails {
+    background-color: #f8f8f8;
+}
+
+.detailsColLabel {
+    margin-left: 2%;
+    font-weight: bold;
+}
+
+.detailsColValue {
+    margin-right: 2%;
+   color: #707070; 
 }
 
 .CompagneCard {

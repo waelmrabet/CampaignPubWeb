@@ -54,24 +54,23 @@
             <td>{{ campaign.goal }}</td>
             <td>{{ campaign.region.name }}</td>
             <td> {{ campaign.totalCost }}</td>
-            <td> 
+            <td>
 
-              <span style="text-align: center; font-size: 15px;"
-               
-              [ngClass]="{ 'badge': true, 'badge-pill': true,
-                'badge-secondary': campaign.campaignState ===1,
-                'badge-warning': campaign.campaignState === 2,
-                'badge-success': campaign.campaignState === 3,
-                'badge-danger': campaign.campaignState === 4 }"> 
-                
-                {{ getCampaignStateDescription(campaign.campaignState) }}
-              
-              </span>
-              
-              </td>
+              <small>               
+                <span style="text-align: center; " [ngClass]="{ 'badge': true, 'badge-pill': true,
+                  'badge-secondary': campaign.campaignState ===1,
+                  'badge-info': campaign.campaignState === 2,
+                  'badge-warning': campaign.campaignState === 3,
+                  'badge-success': campaign.campaignState === 4,
+                  'badge-danger': campaign.campaignState === 5 }">
+                  {{ getCampaignStateDescription(campaign.campaignState) }}
+                </span>
+              </small>
+
+            </td>
 
             <td class="linkBtn" style="cursor: pointer;" (click)='gotToDetails(campaign)'>
-              <i class="fas fa-share"></i>             
+              <i class="fas fa-share"></i>
             </td>
 
 

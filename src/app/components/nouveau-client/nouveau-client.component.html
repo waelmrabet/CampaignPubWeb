@@ -35,16 +35,22 @@
                     <div class="form-row ">
 
                       <div class="form-group col-md-6">
-                        <label class="control-label required" class="control-label required" for="name">Nom
-                          Client</label>
-                        <input type="text" class="form-control username" ngModel id="name" placeholder="Nom Client"
-                          name="name" required>
+                        <label class="control-label required" class="control-label required" for="name">Nom Client</label>
+                        <input type="text" class="form-control username" ngModel id="name" placeholder="Nom Client"name="name" required
+                        [ngClass]="{
+                                    'is-valid': clientForm.submitted && clientForm.controls.name.valid ,
+                                    'is-invalid': clientForm.submitted && clientForm.controls.name.invalid
+                                  }" 
+                        >
                       </div>
 
                       <div class="form-group col-md-6">
                         <label class="control-label required" for="taxIdNumber">Matricule fiscal</label>
-                        <input type="text" class="form-control username" ngModel id="taxIdNumber"
-                          placeholder="Matricule fiscal" name="taxIdNumber" required>
+                        <input type="text" class="form-control username" ngModel id="taxIdNumber"  placeholder="Matricule fiscal" name="taxIdNumber" required
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.taxIdNumber.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.taxIdNumber.invalid
+                        }" >
                       </div>
 
                     </div>
@@ -53,14 +59,20 @@
 
                       <div class="form-group col-md-6">
                         <label class="control-label required" for="telNumber">Numéro de téléphone</label>
-                        <input type="text" class="form-control username" ngModel id="telNumber"
-                          placeholder="Numéro de téléphone" name="telNumber" required>
+                        <input type="text" class="form-control username" ngModel id="telNumber" placeholder="Numéro de téléphone" name="telNumber" required
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.telNumber.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.telNumber.invalid
+                        }">
                       </div>
 
                       <div class="form-group col-md-6">
                         <label class="control-label required" for="mail">Email:</label>
-                        <input type="email" class="form-control email" ngModel id="mail" placeholder="Email" name="mail"
-                          required email>
+                        <input type="email" class="form-control email" ngModel id="mail" placeholder="Email" name="mail" required email
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.mail.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.mail.invalid
+                        }">
                       </div>
 
                     </div>
@@ -81,20 +93,29 @@
 
                       <div class="form-group col-md-4">
                         <label class="control-label required" for="street">Rue</label>
-                        <input type="text" class="form-control username" ngModel id="street" placeholder="Rue"
-                          name="street" required>
+                        <input type="text" class="form-control username"  ngModel id="street" placeholder="Rue" name="street" required
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.street.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.street.invalid
+                        }">
                       </div>
 
                       <div class="form-group col-md-4">
                         <label class="control-label required" for="townName">Cité</label>
-                        <input type="text" class="form-control email" ngModel id="townName" placeholder="Cité"
-                          name="townName" required>
+                        <input type="text" class="form-control email" ngModel id="townName" placeholder="Cité" name="townName" required 
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.townName.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.townName.invalid
+                        }">
                       </div>
 
                       <div class="form-group col-md-4">
                         <label class="control-label required" for="countryName">Pays</label>
-                        <input type="text" class="form-control email" ngModel id="countryName" placeholder="Pays"
-                          name="countryName" required>
+                        <input type="text" class="form-control email" ngModel id="countryName" placeholder="Pays" name="countryName" required
+                        [ngClass]="{
+                          'is-valid': clientForm.submitted && clientForm.controls.countryName.valid ,
+                          'is-invalid': clientForm.submitted && clientForm.controls.countryName.invalid
+                        }">
                       </div>
 
                     </div>
@@ -123,9 +144,6 @@
           </div>
 
         </div>
-
-
-
 
       </div>
     </div>

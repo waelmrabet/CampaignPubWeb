@@ -84,8 +84,12 @@ export class EditCampaignGlobalParamsComponent implements OnInit {
 
   }
 
+  gotToDevisPage(){
+    this.goToDetailsEmmitter.emit("DetailedDevisCampaign/")
+  }
+
   gotToDetailsPage(){
-    this.goToDetailsEmmitter.emit(undefined);
+    this.goToDetailsEmmitter.emit("Details_File_Compagne/");
   }
   
 

@@ -1,9 +1,7 @@
 
-
-
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" [hidden]="isHidden()" style="background-color: #244777 !important;" >
-    <a class="navbar-brand" href="#">Compagne Pub</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+    <a class="navbar-brand" href="">PubCompaign</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="">
         <i class="fas fa-bars"></i>
     </button>
 
@@ -263,9 +261,9 @@
 
             </div>
 
-            <div class="sb-sidenav-footer" *ngIf="true">
-                <div class="small">Connecté en tant que:</div>
-                {{ getUserProfile() }}
+            <div class="sb-sidenav-footer">              
+                <div class="small">Espace :</div>
+                {{ getEspaceName() }}
             </div>
 
         </nav>

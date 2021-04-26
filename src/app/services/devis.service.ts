@@ -11,6 +11,14 @@ export class DevisService {
   
   constructor(private httpClient: HttpClient) { }
 
+
+  validateDevis(campaignId){
+    let url = this.apiUrl+"/Quote/GenerateCampaignQuote/";
+    url += campaignId
+    return this.httpClient.get(url);
+  }
+
+
   getAllDevis(){
     let url = this.apiUrl+'/Devis/';
     return this.httpClient.get(url);
@@ -24,9 +32,10 @@ export class DevisService {
   }
 
   generateDevis(campaignId){
-    let url = this.apiUrl+'/Devis/generateDevisCampaign/';    
-
-    return this.httpClient.post(url, campaignId);
+    
+    let url = this.apiUrl+'/Devis/generateDevisCampaign/'; 
+    return this.httpClient.post(url, campaignId );
+    
   }
 
   getDevisByCampaignId(campaignId){

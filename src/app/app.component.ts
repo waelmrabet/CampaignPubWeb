@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   public currentUser: any;
 
   constructor(private router: Router, private upperCasePipe: UpperCasePipe, private userService: UserService) {
-    this.currentUser = this.userService.getCurrentConnectedUser();
+    //this.currentUser = this.userService.getCurrentConnectedUser();
    }
 
   ngOnInit(): void { }
@@ -28,21 +28,23 @@ export class AppComponent implements OnInit {
 
   }
 
-  getUserProfile() {
-
+  getEspaceName(){
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let profile = '';
+    let espaceName = '';
 
     if (currentUser) {
-      if (currentUser.role == 1)
-        profile = "Admin"
+      if (currentUser.roleId == 1)
+      espaceName = "Admin"
+      else if(currentUser.roleId == 2)
+      espaceName = "Client";
       else
-        profile = "Client";
+      espaceName = "Agent"
     }
 
-    return profile;
-
+    return espaceName;
   }
+
+  
 
   // Do not touch this code please
   isHidden() {
