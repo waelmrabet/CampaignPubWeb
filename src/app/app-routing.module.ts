@@ -21,6 +21,7 @@ import { DetailsCompagnComponent } from './components/details-compagn/details-co
 import { AuthGuard } from './_helpers/auth.guard';
 import { DetailedDevisCampaignComponent } from './components/detailed-devis-campaign/detailed-devis-campaign.component';
 import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
+import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,9 @@ const routes: Routes = [
   { path: 'Edit_Compagne/:CampaignId', component : EditCampaignComponent},
   { path: 'Details_File_Compagne/:CampaignId', component : DetailsCompagnComponent},
   {path:'DetailedDevisCampaign/:CampaignId', component: DetailedDevisCampaignComponent},
-  {path:'Lst_Devis_Compagnes', component: ListDevisComponent},
+  
+  {path:'Lst_Devis_Compagnes', component: ListDevisComponent},  
+  {path:'Frm_devis_details/:DevisId', component: DevisDetailsComponent},
 
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},

@@ -9,4 +9,5 @@ export class CompaignCreateDto {
     productTypeIds: number;   
     executionDate: Date;
     description: string;
+    userId: number;
 }

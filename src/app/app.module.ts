@@ -43,6 +43,7 @@ import { DetailedDevisCampaignComponent } from './components/detailed-devis-camp
 
 import { SelectComposExampleComponent } from './components/select-compos-example/select-compos-example.component';
 import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
+import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -74,7 +75,8 @@ registerLocaleData(localeFr, 'fr');
     MenusComponent,
     DetailedDevisCampaignComponent,
     SelectComposExampleComponent,
-    DetailsProductTypeComponent
+    DetailsProductTypeComponent,
+    DevisDetailsComponent
   ],
 
   imports: [

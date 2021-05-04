@@ -9,9 +9,9 @@ import { CampaignService } from 'src/app/services/campaign.service';
 })
 export class ListCampaignComponent implements OnInit {
 
-
   public showList:any = false;
   public campaignsList:any;
+  public currentUser: any;
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
@@ -23,8 +23,13 @@ export class ListCampaignComponent implements OnInit {
 
   constructor(private campaignService: CampaignService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    this.setCurrentUser(); 
     this.getListCampaigns();
+  }
+  
+  setCurrentUser(){
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
   }
 
   getCampaignStateDescription(campaignStateId){
@@ -39,12 +44,23 @@ export class ListCampaignComponent implements OnInit {
 
   getListCampaigns(){
 
+    let roleId = this.currentUser.roleId;
+    let clientId = roleId === 2 ? this.currentUser.clientId : -1;
+
     this.showList = false;    
     
     this.campaignService.getAllCampaignsList()
-    .subscribe(response => {
-      this.campaignsList = response;
+    .subscribe(response => {   
+      
+      let list: any = response;      
+      
+      if(roleId === 2)
+        this.campaignsList = list.filter(x=> x.customerId == clientId);
+      else
+        this.campaignsList = list;
+       
       this.showList = true;
+    
     });
 
   }

@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bgBreadCrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Gestion Compagne</a></li>
+                <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Compagne']">Gestion Compagne</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Nouvelle Compagne</li>
             </ol>
         </nav>
@@ -56,11 +56,18 @@
                                     <!--Line 2-->
                                     <div class="form-row">
 
-                                        <div class="form-group col-md">
+                                        <div class="form-group col-md" *ngIf="currentUser.roleId == 2">
                                             <label class="control-label required">Client</label>
-                                            <ng-select [items]="clientList" bindLabel="name" bindValue="id"
+                                            <input type="text" class="form-control username" [ngModel]="userClientName" id="selectedClient"
+                                                placeholder="Client" name="selectedClient" readonly >
+                                        </div>
+                                        
+                                        <div class="form-group col-md" *ngIf="currentUser.roleId != 2">
+                                            <label class="control-label required">Client</label>
+                                            <ng-select
+                                                [items]="clientList" bindLabel="name" bindValue="id"
                                                 [multiple]="false" placeholder="Choisir un client"
-                                                [(ngModel)]="selectedClientId" id="clientId" name="clientId" required
+                                                [(ngModel)]="selectedClientId" id="clientId" name="clientId" required                                                
                                                 [ngClass]="{
                                                     'is-valid': form.submitted && form.controls.clientId.valid,
                                                     'is-invalid': form.submitted && form.controls.clientId.invalid

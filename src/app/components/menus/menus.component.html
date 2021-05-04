@@ -2,14 +2,15 @@
 <div class="nav">
     <div *ngFor="let menu of parentMenus">
 
-        <a class="nav-link" [routerLink]="menu.link" *ngIf="menu.parent.id===1">
-            <div class="sb-nav-link-icon">
-                <i class="fas fa-home"></i>
+        <!--[routerLink]="child.link"-->
+        <a class="nav-link" [routerLink]="menu.parent.link" *ngIf="menu.parent.id===1 || menu.parent.id === 29">
+            <div class="sb-nav-link-icon">               
+               <i [class]="menu.parent.iconLibelle"></i>
             </div>
             {{ menu.parent.menuCode}}
         </a>
 
-        <a *ngIf="menu.parent.id !== 1" class="nav-link collapsed" href="#" data-toggle="collapse"
+        <a *ngIf="menu.parent.id !== 1 && menu.parent.id !== 29" class="nav-link collapsed" href="#" data-toggle="collapse"
             [attr.data-target]="menu.parent.dataTarget" aria-expanded="false"
             attr.aria-controls="{{ menu.parent.ariaControls }}">
 
@@ -19,8 +20,6 @@
 
             {{ menu.parent.menuCode}}
             <div class="sb-sidenav-collapse-arrow">
-
-
                 <i class="fas fa-angle-down"></i>
             </div>
         </a>

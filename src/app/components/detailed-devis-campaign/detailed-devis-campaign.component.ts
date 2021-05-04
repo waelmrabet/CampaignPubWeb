@@ -83,6 +83,11 @@ export class DetailedDevisCampaignComponent implements OnInit {
 
   }
 
+  countBusinessTypeInCampaign(businessType){  
+    let list = this.campaign.campaignBusinesses.filter(x=> x.businessTypeId == businessType.id);
+    return list.length;
+  }
+
   getCurrentDate() {
     let date = new Date();
     return date;

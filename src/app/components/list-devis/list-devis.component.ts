@@ -9,26 +9,39 @@ import { DevisService } from 'src/app/services/devis.service';
 })
 export class ListDevisComponent implements OnInit {
 
+  public currentUser: any;
   public listDevis: any;
-  constructor(private devisService: DevisService, router: Router) { }
+  public showList:any;
+  constructor(private devisService: DevisService,private router: Router) { }
 
   ngOnInit(): void {
+
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    
+    if(this.currentUser != null && this.currentUser != undefined){
+      this.getAllDevis();
+    }     
+
   }
 
   getAllDevis(){
 
-    /**Fix this in backEnd First */
-    this.devisService.getAllDevis()
+    this.showList = false;
+
+    let userRole = this.currentUser.roleId;
+    let customerId = userRole == 2 ? this.currentUser.clientId : -1 ;
+  
+    this.devisService.getAllDevis(userRole, customerId)
     .subscribe(response=>{
       this.listDevis = response;
+      this.showList =true;
     }, error=>{ 
       console.log(error);
     });
   }
 
-  goToDetails(devisId){
-        
-    console.log()
+  goToDetails(devisId){        
+    this.router.navigateByUrl('DetailedDevisCampaign/'+ devisId);
   }
 
 }

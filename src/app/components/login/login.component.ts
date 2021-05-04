@@ -16,16 +16,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  // public currentUser: any;
-
+  
   ngOnInit(): void {
   }
 
   public login(loginForm) {
 
     Swal.fire({
-      title: 'Attendez un peu  !',
-      html: 'Connexion en cours',
+      title: '  Connexion en cours!',
+      html: 'Attendez un peu',
       showConfirmButton: false,
       allowOutsideClick: false,
       onBeforeOpen: () => {
@@ -41,8 +40,7 @@ export class LoginComponent implements OnInit {
         let user = response;
 
         localStorage.setItem('currentUser', JSON.stringify(user));
-        //this.userService.userSubject.next(user);
-      
+             
         Swal.close();
 
         this.router.navigateByUrl('Dashbord');

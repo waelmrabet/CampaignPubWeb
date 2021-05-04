@@ -16,6 +16,9 @@ export class EditCampaignProductsComponent implements OnInit {
   @Output() deleteProductEmmiter = new EventEmitter<number>();
   @Output() updateCampaignProductEmmiter = new EventEmitter<any>();
   @Output() addCampaignProductEmmiter = new EventEmitter<number>();
+
+
+  public currentUser: any;
   
   
   private showList:boolean = false;
@@ -27,6 +30,7 @@ export class EditCampaignProductsComponent implements OnInit {
   constructor(private productTypeService: ProductTypeService) { }
 
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.showList = this.campaignProducts != undefined;    
     this.getAllProductType();
   }

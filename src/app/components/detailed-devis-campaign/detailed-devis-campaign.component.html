@@ -172,29 +172,21 @@
                         </tr>
 
                         <tr style="background-color: #D3D3D3;">
-                            <th>Type de business</th>
-                            <th>Coût de business</th>
-                            <th>Nombre total des business</th>
+                            <th>Type de business</th>                           
+                            <th>Nombre des business</th>
                         </tr>
 
                     </thead>
 
-                    <tbody>
+                    <tbody> 
 
                         <tr *ngFor="let businessType of campaign.campaignBusinessTypes">
-                            <td>{{ businessType.code }}</td>
-                            <td>{{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr'}}</td>
-                            <td></td>
+                            <td>{{ businessType.code }}</td>                            
+                            <td>{{ countBusinessTypeInCampaign(businessType) }}</td>
                         </tr>
 
-                    </tbody>
+                    </tbody>                    
                     
-                    <tfoot>
-                        <tr >
-                            <td colspan="2"></td>
-                            <th> {{ campaign.campaignBusinesses.length }} </th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
@@ -202,13 +194,35 @@
         <div class="row">
             <div class="col-md-6 float-right">
 
-                <span class="detailsColLabel">
-                    Coût total:
-                </span>
+                <p>
+                    <span class="detailsColLabel">
+                        Nbr business:
+                    </span>
+    
+                    <span class="detailsColValue">
+                        {{ campaign.campaignBusinesses.length }} 
+                    </span>
+                </p>
 
-                <span class="detailsColValue">
-                    {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}
-                </span>
+                <p>
+                    <span class="detailsColLabel">
+                        Coût de business:
+                    </span>
+    
+                    <span class="detailsColValue">
+                        {{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr' }}
+                    </span>
+                </p>
+
+                <p>
+                    <span class="detailsColLabel">
+                        Coût total:
+                    </span>
+    
+                    <span class="detailsColValue">
+                        {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}
+                    </span>
+                </p>
 
             </div>
         </div>
@@ -220,7 +234,7 @@
             <div class="col-md-3 float-right">
 
                 <button type="button" class="btn btn-primary btn-sm btn-block" (click)="ValiderDevis()">
-                    <i class="fas fa-check" style="text-align: left;"></i> Valider Devis
+                  Valider
                 </button>
 
             </div>

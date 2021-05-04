@@ -10,6 +10,7 @@ import { ProductTypeService } from 'src/app/services/product-type.service';
 import { RegionService } from 'src/app/services/region.service';
 import { TownService } from 'src/app/services/town.service';
 import Swal from 'sweetalert2';
+import { CampaignTownDetailsComponent } from '../campaign-town-details/campaign-town-details.component';
 
 @Component({
   selector: 'app-nouveau-compagn',
@@ -39,6 +40,9 @@ export class NouveauCompagnComponent implements OnInit {
   public businessTypeList: any;
   public selectedBusnissTypes: any;
 
+  public currentUser:any;
+  public userClientName: any;
+
   constructor(
     private datePipe: DatePipe,
     private clientService: ClientService,
@@ -50,14 +54,20 @@ export class NouveauCompagnComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    //this.setCurrentLocation();    
-    this.dateExecution = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
+           
+    this.dateExecution = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.setCurrentUser();
+    
     this.getAllClient();
     this.getAllProductType();
     this.getAllRegions();
     this.getAllBusinessTypes();
 
+  }
+
+  setCurrentUser(){
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
   }
 
   getAllBusinessTypes() {
@@ -76,12 +86,26 @@ export class NouveauCompagnComponent implements OnInit {
 
     if (!isNaN(regionId) && regionId > 0) {
 
+      Swal.fire({
+        title: 'Recherche des ville',
+        html: 'Chargement en cours!',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+          Swal.showLoading()
+        },
+      });
+
       this.townService.getTownsByRegion(regionId, fullEntity)
         .subscribe(response => {
           this.townsList = response;
+          Swal.close();
         }, error => {
           console.log(error);
         });
+    }else{
+      this.townsList = [];
+      this.selectedTownsIds = [];
     }
   }
 
@@ -114,6 +138,8 @@ export class NouveauCompagnComponent implements OnInit {
 
     compaignDto.executionDate = value.dateExecution;    
     compaignDto.description = value.description;
+
+    compaignDto.userId = this.currentUser.id; 
 
     return compaignDto;
 
@@ -185,6 +211,9 @@ export class NouveauCompagnComponent implements OnInit {
 
   public submit(f: NgForm) {
 
+    if(this.currentUser.roleId == 2)
+      this.selectedClientId = this.currentUser.clientId;
+
     let valid = this.verifForm(f);
 
     if (valid) {
@@ -212,7 +241,8 @@ export class NouveauCompagnComponent implements OnInit {
                 'Le nouveau compagne a été crée avec succès.',
                 'success'
               ).then(() => {
-                this.router.navigateByUrl('');
+                let campId = response;
+                this.router.navigateByUrl('Edit_Compagne/'+ campId);
               });
 
             }, error => {
@@ -242,16 +272,23 @@ export class NouveauCompagnComponent implements OnInit {
     }
   }
 
-
-
-
   public getAllClient() {
+
+
+    let roleId = this.currentUser.roleId;
+    let clientId = roleId ===2 ? this.currentUser.clientId : -1;
+
     this.clientService.getAllClient()
       .subscribe(data => {
-        this.clientList = data
+        this.clientList = data;
+
+        if(roleId === 2){
+          this.selectedClientId = clientId;
+          this.userClientName = this.clientList.find(x=> x.id == clientId).name;
+        }
+          
       }, error => {
         console.log(error);
-
       });
   };
 

@@ -1,23 +1,22 @@
-<p>list-devis works!</p>
 
-<div class="row" *ngIf="false">
+<div class="row" *ngIf="true">
     <div class="col">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bgBreadCrumb">
           <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
-          <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Client']">Client</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Clients</li>
+          <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Compagne']">Compagne</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Devis</li>
         </ol>
       </nav>
     </div>
 </div>
   
   <!-- List Devis -->
-  <div class="card mb-4 CompagneCard" *ngIf="false">
+  <div class="card mb-4 CompagneCard" *ngIf="true">
   
     <div class="card-header">
       <i class="fas fa-table mr-1"></i>
-      Clients
+      Devis
     </div>
   
     <div class="card-body">
@@ -27,19 +26,22 @@
   
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Taxe Id Number</th>
-              <th>Email</th>
-              <th>Téléphone</th>
-              <th>Adresse</th>
+              <th>Client</th>
+              <th>Region compagne</th>
+              <th>Nombre des villes</th>
+
+              <th>Nombre des business</th>
+              <th>Coût de business</th>
+              <th>Coût Total</th>
+
               <th></th>           
             </tr>
           </thead>
   
           <tbody>
             
-            <tr *ngIf="!showCustomersList">
-              <td colspan="6" style="text-align: center;">
+            <tr *ngIf="!showList">
+              <td colspan="7" style="text-align: center;">
                 <div class="spinner-grow" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
@@ -49,25 +51,19 @@
               </td>
             </tr>
   
-            <tr *ngFor="let customer of customersList">
-              <td>{{ customer.name }}</td>
-              <td>{{ customer.taxIdNumber }}</td>
-              <td>{{ customer.mail }}</td>
-              <td>{{ customer.telNumber }}</td>
+            <tr *ngFor="let devis of listDevis">
+              <td>{{ devis.customerName }}</td>
+              <td>{{ devis.regionName }}</td>
+              <td>{{ devis.townsNumber }}</td>              
+              <td>{{ devis.nbrBusinesses }}</td>     
+                         
+              <td> {{ devis.businessCost | currency:'EUR':'symbol':'3.2-2':'fr' }} </td>
+              <td> {{ devis.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }} </td>
   
-              <td>
-                {{ customer.address.street }}
-                {{ customer.address.townName }}
-                {{ customer.address.countryName }}
+              <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(devis.id)'>
+                <i class="fas fa-share"></i>             
               </td>
-  
-              <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(customer)'>
-                <i class="fas fa-share"></i>
-                <!--<i class="fas fa-info-circle "></i>-->
-              </td>
-  
-             
-              
+                
             </tr>
   
           </tbody>       
