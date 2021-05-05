@@ -41,7 +41,7 @@ export class ListDevisComponent implements OnInit {
   }
 
   goToDetails(devisId){        
-    this.router.navigateByUrl('DetailedDevisCampaign/'+ devisId);
+    this.router.navigateByUrl('Frm_devis_details/'+ devisId);
   }
 
 }

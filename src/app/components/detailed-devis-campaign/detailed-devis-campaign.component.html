@@ -54,7 +54,7 @@
                                 </span>
                             </td>
                             <td style="width: 60%;">
-                                <span class="detailsColValue float-left">
+                                <span class="detailsColValue float-left badge">
                                     {{ campaign.customer.name}}
                                 </span>
                             </td>
@@ -67,7 +67,7 @@
                                 </span>
                             </td>
                             <td style="width: 60%;">
-                                <span class="detailsColValue float-left">
+                                <span class="detailsColValue float-left badge">
                                     Brouillon
                                 </span>
                             </td>
@@ -80,7 +80,7 @@
                                 </span>
                             </td>
                             <td style="width: 60%;">
-                                <span class="detailsColValue float-left">
+                                <span class="detailsColValue float-left badge">
                                     {{ campaign.region.name}}
                                 </span>
                             </td>
@@ -93,7 +93,7 @@
                                 </span>
                             </td>
                             <td style="width: 60%;">
-                                <span class="detailsColValue float-left">
+                                <span class="detailsColValue float-left badge">
                                     {{ detailedTowns.length }}
                                 </span>
                             </td>
@@ -110,7 +110,7 @@
                     Tunis le,
                 </span>
 
-                <span class="detailsColValue">
+                <span class="detailsColValue badge">
                     {{ getCurrentDate()| date:'dd/MM/yyy' }}
                 </span>
 
@@ -125,11 +125,10 @@
                 <table class="table table-bordered" width="100%" cellspacing="0">
 
                     <thead>
-
                         <tr style="border-style:hidden;">
-                            <th colspan="4" style="text-align: left;">
-                                <h5>List des produits</h5>
-                            </th>
+                            <span style="font-size: 25px; color: #707070;">
+                                List des produits
+                            </span>                           
                         </tr>
 
                         <tr style="background-color: #D3D3D3;">
@@ -167,26 +166,28 @@
 
                         <tr style="border-style:hidden;">
                             <th colspan="4" style="text-align: left;">
-                                <h5>List des types de business</h5>
+                                <span style="font-size: 25px; color: #707070;">
+                                    List des types de business
+                                </span>                               
                             </th>
                         </tr>
 
                         <tr style="background-color: #D3D3D3;">
-                            <th>Type de business</th>                           
+                            <th>Type de business</th>
                             <th>Nombre des business</th>
                         </tr>
 
                     </thead>
 
-                    <tbody> 
+                    <tbody>
 
                         <tr *ngFor="let businessType of campaign.campaignBusinessTypes">
-                            <td>{{ businessType.code }}</td>                            
+                            <td>{{ businessType.code }}</td>
                             <td>{{ countBusinessTypeInCampaign(businessType) }}</td>
                         </tr>
 
-                    </tbody>                    
-                    
+                    </tbody>
+
                 </table>
             </div>
         </div>
@@ -198,9 +199,9 @@
                     <span class="detailsColLabel">
                         Nbr business:
                     </span>
-    
-                    <span class="detailsColValue">
-                        {{ campaign.campaignBusinesses.length }} 
+
+                    <span class="detailsColValue badge">
+                        {{ campaign.campaignBusinesses.length }}
                     </span>
                 </p>
 
@@ -208,8 +209,8 @@
                     <span class="detailsColLabel">
                         Coût de business:
                     </span>
-    
-                    <span class="detailsColValue">
+
+                    <span class="detailsColValue badge">
                         {{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr' }}
                     </span>
                 </p>
@@ -218,8 +219,8 @@
                     <span class="detailsColLabel">
                         Coût total:
                     </span>
-    
-                    <span class="detailsColValue">
+
+                    <span class="detailsColValue badge">
                         {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}
                     </span>
                 </p>
@@ -234,7 +235,7 @@
             <div class="col-md-3 float-right">
 
                 <button type="button" class="btn btn-primary btn-sm btn-block" (click)="ValiderDevis()">
-                  Valider
+                    Valider
                 </button>
 
             </div>
@@ -245,12 +246,9 @@
                     Annuler
                 </button>
 
-            </div> 
+            </div>
         </div>
 
-
     </div>
-
-
 
 </div>

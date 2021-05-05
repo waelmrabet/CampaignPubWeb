@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class DevisDetailsComponent implements OnInit {
 
-  public showDetails: any;
+  public displayDetails: any;
   public details:any;
 
   constructor(private activatedRoute: ActivatedRoute, private devisService: DevisService) { }
@@ -21,7 +21,7 @@ export class DevisDetailsComponent implements OnInit {
 
   getDevisDetails(){
     let devisId = this.activatedRoute.snapshot.params.DevisId;
-    this.showDetails = false;
+    this.displayDetails = false;
 
 
     Swal.fire({
@@ -37,7 +37,7 @@ export class DevisDetailsComponent implements OnInit {
     this.devisService.getDetailsDevisById(devisId)
     .subscribe(response=>{
         this.details = response;
-        this.showDetails = true;
+        this.displayDetails = true;
         Swal.close();
     },error=>{
       console.log(error);
