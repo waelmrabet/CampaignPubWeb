@@ -13,6 +13,7 @@ export class EditCampaignComponent implements OnInit {
 
   public campaign: any;
   public displayData: any = false;
+  public isEditAutorized: any;
 
   public detailedCampaignTownsList: any;
 
@@ -29,14 +30,13 @@ export class EditCampaignComponent implements OnInit {
   constructor(private campaignService: CampaignService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private router: Router) { }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.getCampaignById();
   }
 
   getCampaignById() {
 
     this.displayData = false;
-
     let campaignId = +this.activatedRoute.snapshot.paramMap.get("CampaignId");
 
     this.campaignService.getCampaignById(campaignId)
@@ -48,6 +48,7 @@ export class EditCampaignComponent implements OnInit {
         this.campaignState = this.campaignStates[index];
         this.displayData = true;
 
+        this.isEditAutorized = this.campaign.campaignState == 1 ? true : false;        
 
         // get campaignTown Map
         this.getDetailedTownsList();

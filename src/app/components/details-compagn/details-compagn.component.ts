@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CampaignService } from 'src/app/services/campaign.service';
 import { DevisService } from 'src/app/services/devis.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details-compagn',
@@ -10,11 +11,15 @@ import { DevisService } from 'src/app/services/devis.service';
 })
 export class DetailsCompagnComponent implements OnInit {
 
+
+  public currentUser:any;
+
   public campaign: any;
   public detailedTowns: any;
 
   public displayDetails:any = false;
   public campaignState: any;
+
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
@@ -23,10 +28,71 @@ export class DetailsCompagnComponent implements OnInit {
     { stateId: 4, stateDescription: 'Annulée' }
   ];
 
-  constructor(private campaignService: CampaignService, private devisService: DevisService, private activatedRoute: ActivatedRoute) { }
+  constructor(private campaignService: CampaignService, private devisService: DevisService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getFileCampaign();
+    this.initCurrentUser();
+  }
+
+  initCurrentUser(){
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    this.currentUser = user;
+  }
+
+
+  dupliquerCompagne(){
+    // activer duplication d'un ancien campagne
+    if(this.campaignState.stateId > 3){
+      console.log("le traiatement se fait quand le compagne est déja fini");      
+    }
+
+    
+
+    Swal.fire({
+      icon: "warning",
+      title: 'La compagne sera dupliquée!',
+      text: 'Êtes-vous sûre de vouloir continuer?',
+      showCancelButton: true,
+      confirmButtonText: `Continuer`,
+      confirmButtonColor: '#d9534f',
+      cancelButtonText: 'Annuler'
+
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        let campaignId = this.campaign.id;
+        let userId = this.currentUser.id;
+
+        this.campaignService.duplicateCampaign(campaignId, userId)
+          .subscribe(response => {            
+
+            Swal.fire({
+              icon: 'success',
+              title: 'succes',
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            this.router.navigateByUrl('Edit_Compagne/'+response);
+
+          }, error => {
+            Swal.fire({
+
+              icon: 'error',
+              title: 'Problème de duplication compagne',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          });
+      }
+
+    });
+
+
+
+
   }
 
   getFileCampaign(){
@@ -68,5 +134,6 @@ export class DetailsCompagnComponent implements OnInit {
 
     return businessCost;
   }
+
 
 }

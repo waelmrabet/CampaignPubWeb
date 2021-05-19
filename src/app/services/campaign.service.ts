@@ -11,6 +11,14 @@ export class CampaignService {
 
   constructor(private httpClient: HttpClient) { }
 
+
+  //#region General campaign services
+  
+  SearchCampaignsByCreteria(searchcriteria){
+    let url = this.apiUrl + '/Campaign/SearchCampaign/';
+    return this.httpClient.post(url, searchcriteria);
+  }
+
   addCompaign(compagnDto: any) {
     let url = this.apiUrl + '/Campaign/';
     return this.httpClient.post(url, compagnDto);
@@ -22,42 +30,64 @@ export class CampaignService {
     url += id;
     return this.httpClient.get(url);
   }
+  
+  updateCampignGlobalParams(campaignId, campaignGlobalParmsUpdateDto) {
 
-  /* ---------- Towns Management*/
+    let url = this.apiUrl + '/Campaign/updateCampaignGlobalParams/';
+    url += campaignId + '/';
 
-  getDetailedCampaignTownsList(campaignId){
-    
+    return this.httpClient.put(url, campaignGlobalParmsUpdateDto);
+  }
+
+  duplicateCampaign(campaignId, userId) {
+
+    let url = this.apiUrl;
+    url += '/Campaign/DuplicateCampagn/'+campaignId;
+    url += '/'+ userId;
+
+    return this.httpClient.get(url);
+
+  }
+
+  //#endregion
+
+
+  //#region Towns Services
+
+  getDetailedCampaignTownsList(campaignId) {
+
     let url = this.apiUrl + '/Campaign/getCampaignTownMap/';
     url += campaignId;
     return this.httpClient.get(url);
 
   }
 
-  deleteCampaignTown(campaignId, townId){
-    
+  deleteCampaignTown(campaignId, townId) {
+
     let url = this.apiUrl + '/Campaign/deleteCampaignTown/';
     url += campaignId;
-    url += "/"+ townId;
+    url += "/" + townId;
 
     return this.httpClient.delete(url);
   }
 
-  addCampaignTown(campaignId, townId){
-    
+  addCampaignTown(campaignId, townId) {
+
     let url = this.apiUrl + '/Campaign/addCampaignTown/';
     url += campaignId;
-    url += "/"+ townId;
+    url += "/" + townId;
 
     return this.httpClient.get(url);
   }
 
-  getAllCampaignsList(){
-    let url = this.apiUrl + '/Campaign/GetAllCampaigns';   
+  getAllCampaignsList() {
+    let url = this.apiUrl + '/Campaign/GetAllCampaigns';
     return this.httpClient.get(url);
   }
 
+  //#endregion
 
-  /*------------------------------------------- Begin Campaign Products Services -------------------------------------------------*/
+  //#region  Campaign Products Services
 
   deleteCampaignProduct(campaignId, productTypeId) {
 
@@ -86,12 +116,11 @@ export class CampaignService {
     return this.httpClient.get(url);
   }
 
-  /*------------------------------------------- End Campaign Products Services -------------------------------------------------*/
+  //#endregion
 
+  //#region Campaign Business types Services
 
-  /*------------------------------------------- Begin Campaign Business types Services -------------------------------------------*/
-
-  addCampaignBusinessType(campaignId, businessTypeMapCode){
+  addCampaignBusinessType(campaignId, businessTypeMapCode) {
     let url = this.apiUrl + '/Campaign/addCampaignBusinessType/';
 
     url += campaignId + '/';
@@ -110,16 +139,11 @@ export class CampaignService {
     return this.httpClient.delete(url);
   }
 
-  /*------------------------------------------- END Campaign Business types Services -------------------------------------------*/
 
 
-  updateCampignGlobalParams(campaignId, campaignGlobalParmsUpdateDto){
-    
-    let url = this.apiUrl + '/Campaign/updateCampaignGlobalParams/';
-    url += campaignId + '/';    
+  //#endregion
 
-    return this.httpClient.put(url, campaignGlobalParmsUpdateDto);
-  }
+
 
 
 }

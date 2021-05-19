@@ -59,216 +59,154 @@
 
     <div class="card-body" *ngIf="displayDetails">
 
-        <!-- Line 1 -->
+        <!-- Line 1-->
         <div class="row">
 
-            <div class="col-md-3 float-left">
-                <label>
-                    Titre
-                </label>
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Titre</span>
+                    <span class="float-right detailsColValue">{{ campaign.title }}</span>
+                </div>
             </div>
 
-            <div class="col-md-3 float-right">
-                <p style="font-size: 15;">{{ campaign.title }}</p>
-            </div>
-
-            <div class="col-md float-left">
-                <label>
-                    Date d'execution
-                </label>
-            </div>
-
-            <div class="col-md float-right">
-                <p style="font-size: 15;">{{ campaign.executionDate | date: 'dd/MM/yyyy'}}</p>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Date d'execution</span>
+                    <span class="float-right detailsColValue">{{ campaign.executionDate | date: 'dd/MM/yyyy'}}</span>
+                </div>
             </div>
 
         </div>
 
-        <!-- Line 2 -->
-        <div class="row" style="margin-top: 10px;">
-
-            <div class="col-md-3 float-left">
-                <label>
-                    Region
-                </label>
+        <!--Line 2-->
+        <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Region</span>
+                    <span class="float-right detailsColValue">{{ campaign.region.name }}</span>
+                </div>
             </div>
 
-            <div class="col-md-3 float-right">
-                <p style="font-size: 15;">{{ campaign.region.name }}</p>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Taux de pénétration</span>
+                    <span class="float-right detailsColValue">{{ campaign.penetraionRate }}%</span>
+                </div>
             </div>
-
-            <div class="col-md-3 float-left">
-                <label>
-                    Taux de pénétration
-                </label>
-            </div>
-
-            <div class="col-md-3 float-right">
-                <p style="font-size: 15;">{{ campaign.penetraionRate }}%</p>
-            </div>
-
         </div>
 
-        <!-- Line 3 -->
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 float-left">
-                <label>
-                    Ville:
-                </label>
+        <!--Line 3-->
+        <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Villes</span>  
+                    <span class="float-right detailsColValue" style="font-size: 14px;"
+                        *ngFor="let detailedTown of detailedTowns | slice:0:3; let i=index">
+                        {{ detailedTown.town.city }}
+                    </span>
+                </div>
             </div>
 
-            <div class="col-md-3 float-left">
-                <span class="badge badge-light" style="font-size: 14px;"
-                    *ngFor="let detailedTown of detailedTowns | slice:0:3; let i=index">
-                    {{ detailedTown.town.city }}
-                </span>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Nombre de ville</span>
+                    <span class="float-right detailsColValue">{{ detailedTowns.length }}</span>
+                </div>
             </div>
+        </div>      
 
+         <!--Line 4-->
+         <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Type de business:</span>  
 
-            <div class="col-md-3 float-left">
-                <label>
-                    Nombre Villes:
-                </label>
-            </div>
-
-            <div class="col-md-3 float-left">
-                <p style="font-size: 15;"> {{ detailedTowns.length }} </p>
-            </div>
-
-        </div>
-
-        <!-- Line 4 -->
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 float-left">
-                <label>
-                    Type de business:
-                </label>
-            </div>
-
-            <div class="col-md-3 float-left">
-                <span class="badge badge-light" style="font-size: 14px;"
+                    <span class="float-right detailsColValue" style="font-size: 14px;"
                     *ngFor="let business of campaign.campaignBusinessTypes | slice:0:3; let i=index">
                     {{ business.code }}
                 </span>
+                    
+                </div>
             </div>
 
-
-            <div class="col-md-3 float-left">
-                <label>
-                    Nombre Type de business:
-                </label>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Nombre Type de business</span>
+                    <span class="float-right detailsColValue">{{ campaign.campaignBusinessTypes.length }}</span>
+                </div>
             </div>
-
-            <div class="col-md-3 float-left">
-                <p style="font-size: 15;"> {{ campaign.campaignBusinessTypes.length }} </p>
-            </div>
-
         </div>
 
-        <!-- Line 5 -->
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 float-left">
-                <label>
-                    Type de produit:
-                </label>
+        <!--Line 5 -->
+        <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Coût total</span>  
+                    <span class="float-right detailsColValue" style="font-size: 14px;">
+                        {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}
+                    </span>
+                </div>
             </div>
 
-            <div class="col-md-3 float-left">
-                <span class="badge badge-light" style="font-size: 14px;"
-                    *ngFor="let produit of campaign.campaignProducts | slice:0:3; let i=index">
-                    {{ produit.productType.name }}
-                </span>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Coût de business:</span>
+                    <span class="float-right detailsColValue">{{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
+                </div>
             </div>
-
-            <div class="col-md-3 float-left">
-                <label>
-                    Nombre de produit:
-                </label>
-            </div>
-
-            <div class="col-md-3 float-left">
-                <p style="font-size: 15;"> {{ campaign.campaignProducts.length }} </p>
-            </div>
-
         </div>
 
-        <!-- Line 6 -->
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 float-left">
-                <label>
-                    Coût total:
-                </label>
+         <!--Line 6 -->
+         <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Mon Budget</span>  
+                    <span class="float-right detailsColValue" style="font-size: 14px;">
+                        {{ campaign.forecastBudget | currency:'EUR':'symbol':'3.2-2':'fr' }}
+                    </span>
+                </div>
             </div>
 
-            <div class="col-md-3 float-left">
-                <span class="badge badge-light" style="font-size: 14px;">
-                    <td>{{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
-                </span>
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Etat de la compagne</span>
+                    <span class="float-right detailsColValue">{{ campaignState.stateDescription }}</span>
+                </div>
             </div>
-
-            <div class="col-md-3 float-left">
-                <label>
-                    Coût de business:
-                </label>
-            </div>
-
-            <div class="col-md-3 float-left">  
-                <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">
-                    {{ countBusinessCost() | currency:'EUR':'symbol':'3.2-2':'fr'}}
-                </span>              
-                
-            </div>
-
         </div>
 
-        <!-- Line 7 -->
-        <div class="row" style="margin-top: 15px;">
-            <div class="col-md-6 float-left">
-                <label>Objectif</label>
+         <!--Line 7 -->
+         <div class="row" style="margin-top: 1%;">
+            <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Objectif</span>  
+                    <span class="float-right detailsColValue" style="font-size: 14px;">
+                        {{ campaign.goal }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md align-items ">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Description</span>
+                    <span class="float-right detailsColValue">{{ campaign.description }}</span>
+                </div>
+            </div>
+        </div>  
+        
+         <!--Line 8 -->
+         <div class="row" style="text-align: right; margin-top: 3%;">
+
+            <div class="col-md"></div>
+
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success btn-sm btn-block" (click)="dupliquerCompagne()">
+                    Dupliquer compagne
+                </button>
             </div>            
-            <div class="col-md-6 float-left">
-                <label>Description</label>                
-            </div>           
-        </div>
-
-        <!-- Line 8 -->
-        <div class="row">
-            <div class="col-md-6 float-left">
-                <textarea class="form-control" style="background-color: #FFFF !important;" readonly [ngModel]="campaign.goal" rows="4"> </textarea>
-            </div>
-
-            <div class="col-md-6 float-left">
-                <textarea class="form-control" style="background-color: #FFFF !important;" readonly [ngModel]="campaign.description" rows="4"> </textarea>
-            </div>
-
-        </div>
-
-        <!--Line 9 -->
-        <div class="row" style="text-align: right; margin-top: 10px;">
-
-            <div class="col-md-8"></div>
-
-            <div class="col-md-2">
-                <button type="button" class="btn btn-primary btn-sm btn-block" (click)="ValiderDevis()">                   
-                    <i class="fas fa-check" style="text-align: left;"></i> Valider
-                </button>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-sm resetBtn btn-block">                    
-                    Annuler
-                </button>
-            </div>
-
-
-            <div class="col-md-12" style="text-align: right; margin-top: 10px;" *ngIf="false">
-
-                
-
-                 
-
-            </div>
         </div>
 
     </div>
 
 </div>
+

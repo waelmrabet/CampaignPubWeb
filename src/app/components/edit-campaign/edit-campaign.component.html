@@ -19,7 +19,7 @@
                 <i class="fas fa-table mr-1"></i>Edit Compagne
             </div>   
 
-            <div class="col-md-3" >
+            <div class="col-md-3 && isEditAutorized ">
                 Etat: 
                 <span *ngIf="displayData"
                 style="margin-left: 2px; font-size: 15px;"                
@@ -33,12 +33,12 @@
             </div>
 
 
-            <div class="col-md-3" *ngIf="campaign != undefined">
+            <div class="col-md-3" *ngIf="campaign != undefined  && isEditAutorized">
                 Mon Budget: 
                 <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{ campaign.forecastBudget | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
             </div>
 
-            <div class="col-md-3" *ngIf="campaign != undefined">
+            <div class="col-md-3" *ngIf="campaign != undefined && isEditAutorized">
                 Coût total: 
                 <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
             </div>            
@@ -59,6 +59,15 @@
                 </div>        
             </div>
         </div>
+
+        <div class="row" *ngIf="!isEditAutorized">
+            <div class="col" style="text-align: center;">
+                
+                <div style="color: gray;">
+                    Modification de compagne n'est pas autorisée !!!
+                </div>
+            </div>
+        </div>
         
         <div class="row" *ngIf="!displayData">
             <div class="col" style="text-align: center;">
@@ -71,7 +80,7 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="displayData">
+        <div class="row" *ngIf="displayData && isEditAutorized">
             <div class="col-md">
 
                 <!-- Nav Tabs Begins Here -->
@@ -154,8 +163,6 @@
                 </div>
 
                 <!-- Nav Tabs Ends here-->
-
-
             </div>
         </div>
 

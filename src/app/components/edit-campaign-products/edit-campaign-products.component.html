@@ -43,6 +43,12 @@
       </thead>
 
       <tbody>
+
+        <tr *ngIf="campaignProducts.length == 0">
+          <td colspan="5" style="text-align: center;">Aucun élément à afficher</td>
+        </tr>
+
+
         <tr *ngFor="let product of campaignProducts ">
           <td>{{ product.productType.name }}</td>
           <td style="width: 30%;">{{ product.productType.description }}</td>

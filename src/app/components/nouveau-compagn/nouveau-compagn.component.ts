@@ -152,6 +152,9 @@ export class NouveauCompagnComponent implements OnInit {
     let valid = f.valid;
     let errorMsg = "Les champs suivants sont obligatoires:";
 
+    var user = JSON.parse(localStorage.getItem("currentUser"));   
+    
+
     if (f.value.title == "") {
       valid = false;
       errorMsg += "<br> Titre";
@@ -200,6 +203,11 @@ export class NouveauCompagnComponent implements OnInit {
     if (f.value.description == "") {
       valid = false;
       errorMsg += "<br> Description";
+    }
+
+    if(user == undefined){
+      valid = false;
+      errorMsg = "<br> Veuillez se connecter d'abord";
     }
 
     if (!valid) {

@@ -10,7 +10,8 @@
       </div>
 
       <div class="form-group col-md">
-        <button type="button" class="btn btn-primary submitBtn" style="margin-top: 30px;" (click)="addCampaignTowns()" [disabled]="selectedTownId == undefined">
+        <button type="button" class="btn btn-primary submitBtn" style="margin-top: 30px;" (click)="addCampaignTowns()"
+          [disabled]="selectedTownId == undefined">
           <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
         </button>
       </div>
@@ -38,6 +39,12 @@
       </thead>
 
       <tbody>
+
+        <tr *ngIf="detailedCampaignTownsList.length == 0">
+          <td colspan="6" style="text-align: center;">Aucun élément à afficher</td>
+        </tr>
+
+
         <tr *ngFor="let detailedTown of detailedCampaignTownsList">
 
           <td>{{ detailedTown.town.city }}</td>
