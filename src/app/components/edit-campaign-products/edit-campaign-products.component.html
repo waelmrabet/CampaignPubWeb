@@ -44,8 +44,8 @@
 
       <tbody>
 
-        <tr *ngIf="campaignProducts.length == 0">
-          <td colspan="5" style="text-align: center;">Aucun élément à afficher</td>
+        <tr *ngIf="campaignProducts != undefined && campaignProducts.length == 0">
+          <td colspan="7" style="text-align: center;">Aucun élément à afficher</td>
         </tr>
 
 

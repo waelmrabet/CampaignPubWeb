@@ -21,21 +21,25 @@
             </div>
 
             <div class="col-md-3">Etat:
-                <span *ngIf="displayDetails" style="margin-left: 2px; font-size: 15px;" [ngClass]="{ 'badge': true, 'badge-pill': true,
-            'badge-secondary': campaignState.stateId ===1,
-            'badge-warning': campaignState.stateId === 2,
-            'badge-success': campaignState.stateId === 3,
-            'badge-danger': campaignState.stateId === 4 }">{{ campaignState.stateDescription }} </span>
+                <span *ngIf="displayDetails" style="margin-left: 2px; font-size: 15px;"
+                [ngClass]="{ 'badge': true, 'badge-pill': true,
+                      'badge-secondary': campaignState.stateId ===1,
+                      'badge-info': campaignState.stateId === 2,
+                      'badge-warning': campaignState.stateId === 3,
+                      'badge-success': campaignState.stateId === 4,
+                      'badge-danger': campaignState.stateId === 5 }"               
+                
+                >{{ campaignState.stateDescription }} </span>
             </div>
 
 
-            <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
+            <div class="col-md-3" *ngIf="campaign != undefined">
                 Mon Budget:
                 <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{
                     campaign.forecastBudget | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
             </div>
 
-            <div class="col-md-3" style="text-align: right;" *ngIf="campaign != undefined">
+            <div class="col-md-3" *ngIf="campaign != undefined">
                 Coût total:
                 <span class="badge badge-pill badge-light" style="margin-left: 2px; font-size: 15px;">{{
                     campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</span>
@@ -177,6 +181,7 @@
 
          <!--Line 7 -->
          <div class="row" style="margin-top: 1%;">
+
             <div class="col-md align-items">
                 <div class="BgColDetails">
                     <span class="detailsColLabel">Objectif</span>  
@@ -192,12 +197,28 @@
                     <span class="float-right detailsColValue">{{ campaign.description }}</span>
                 </div>
             </div>
+
         </div>  
+
+
+      
         
          <!--Line 8 -->
          <div class="row" style="text-align: right; margin-top: 3%;">
 
             <div class="col-md"></div>
+
+            <div class="col-md-2" *ngIf="campaign.campaignState === 3">
+                <button type="button" class="btn btn-success btn-sm btn-block" (click)="closeCampaign()">
+                    Clôturer compagne
+                </button>
+            </div>
+
+            <div class="col-md-2" *ngIf="campaign.campaignState === 2">
+                <button type="button" class="btn btn-success btn-sm btn-block" (click)="launchRealization()">
+                    Lancer réalisation
+                </button>
+            </div> 
 
             <div class="col-md-2">
                 <button type="button" class="btn btn-success btn-sm btn-block" (click)="dupliquerCompagne()">

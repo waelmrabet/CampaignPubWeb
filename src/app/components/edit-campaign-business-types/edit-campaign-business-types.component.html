@@ -42,7 +42,7 @@
             </thead>
 
             <tbody>
-                <tr *ngIf="campaignBusinessTypes.length == 0">
+                <tr *ngIf="campaignBusinessTypes != undefined && campaignBusinessTypes.length == 0">
                     <td colspan="3" style="text-align: center;">Aucun élément à afficher</td>
                 </tr>
                 <tr *ngFor="let businessType of campaignBusinessTypes">

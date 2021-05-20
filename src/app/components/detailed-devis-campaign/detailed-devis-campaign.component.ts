@@ -20,7 +20,7 @@ export class DetailedDevisCampaignComponent implements OnInit {
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
     { stateId: 2, stateDescription: 'En Cours' },
-    { stateId: 3, stateDescription: 'Fini' },
+    { stateId: 3, stateDescription: 'Clôturée' },
     { stateId: 4, stateDescription: 'Annulée' }
   ];
 

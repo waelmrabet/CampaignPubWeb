@@ -21,7 +21,7 @@ export class EditCampaignComponent implements OnInit {
     { stateId: 1, stateDescription: 'Brouillon' },
     { stateId: 2, stateDescription: 'Validé' },
     { stateId: 3, stateDescription: 'En Cours' },
-    { stateId: 4, stateDescription: 'Fini' },
+    { stateId: 4, stateDescription: 'Clôturée' },
     { stateId: 5, stateDescription: 'Annulée' }   
   ];
 
@@ -69,7 +69,7 @@ export class EditCampaignComponent implements OnInit {
 
     Swal.fire({
       icon: "warning",
-      title: 'La ville sera supprimé difinitivement!!',
+      title: 'La ville sera supprimé définitivement!!',
       text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
@@ -181,7 +181,7 @@ export class EditCampaignComponent implements OnInit {
 
     Swal.fire({
       icon: "warning",
-      title: 'Le produit sera supprimé difinitivement!!',
+      title: 'Le produit sera supprimé définitivement!!',
       text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,
@@ -354,7 +354,7 @@ export class EditCampaignComponent implements OnInit {
 
     Swal.fire({
       icon: "warning",
-      title: 'Le Type de business sera supprimé difinitivement!!',
+      title: 'Le Type de business sera supprimé définitivement!!',
       text: 'Êtes-vous sûre de vouloir continuer?',
       showCancelButton: true,
       confirmButtonText: `Continuer`,

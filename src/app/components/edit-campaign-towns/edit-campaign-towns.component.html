@@ -40,7 +40,7 @@
 
       <tbody>
 
-        <tr *ngIf="detailedCampaignTownsList.length == 0">
+        <tr *ngIf="detailedCampaignTownsList != undefined && detailedCampaignTownsList.length == 0">
           <td colspan="6" style="text-align: center;">Aucun élément à afficher</td>
         </tr>
 

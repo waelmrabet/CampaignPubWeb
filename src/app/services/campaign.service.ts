@@ -13,8 +13,28 @@ export class CampaignService {
 
 
   //#region General campaign services
+
+
+  closeCampaign(campaignId, userId){
+    let url = this.apiUrl + '/Campaign/CloseCampaign/';
+
+    url += campaignId+'/';
+    url += userId;
+
+    return this.httpClient.get(url);
+  }
+
+  launchRealization(campaignId, userId){
+    let url = this.apiUrl + '/Campaign/LaunchRealization/';
+
+    url += campaignId+'/';
+    url += userId;
+
+    return this.httpClient.get(url);
+  }
+
   
-  SearchCampaignsByCreteria(searchcriteria){
+  searchCampaignsByCreteria(searchcriteria){
     let url = this.apiUrl + '/Campaign/SearchCampaign/';
     return this.httpClient.post(url, searchcriteria);
   }

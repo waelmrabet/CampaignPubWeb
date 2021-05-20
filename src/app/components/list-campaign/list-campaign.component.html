@@ -124,21 +124,21 @@
           <table class="table table-bordered" width="100%" cellspacing="0">
 
             <thead>
-              <tr>
+              <tr style="text-align: center;">
                 <th>Titre</th>
-                <th>Client</th>
-                <th>Objectif</th>
+                <th>Client</th>                
                 <th>Région</th>
+                <th>Villes</th>
                 <th>Coût total</th>
                 <th>Etat</th>
-                <th>détails</th>
+                <th>Détails</th>
                 <th>Devis</th>
               </tr>
             </thead>
 
             <tbody *ngIf="true">
 
-              <tr *ngIf="campaignsList.length == 0">
+              <tr *ngIf="showList && campaignsList.length == 0">
                 <td colspan="8" style="text-align: center;">Aucun élément à afficher</td>
               </tr>
 
@@ -155,14 +155,18 @@
 
               <tr *ngFor="let campaign of campaignsList">
                 <td>{{ campaign.title }}</td>
-                <td>{{ campaign.customer.name }}</td>
-                <td>{{ campaign.goal }}</td>
+                <td>{{ campaign.customer.name }}</td>                
                 <td>{{ campaign.region.name }}</td>
-                <td> {{ campaign.totalCost }}</td>
                 <td>
+                  <span class="badge badge-light" style="margin-right: 3%" *ngFor="let campaignTown of campaign.campaignTowns | slice:0:4;">
+                    {{ campaignTown.city }}
+                  </span>                  
+                </td>
+                <td> {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
+                <td style="text-align: center;">
 
                   <small>
-                    <span style="text-align: center; " [ngClass]="{ 'badge': true, 'badge-pill': true,
+                    <span style="font-size: 12px;" [ngClass]="{ 'badge': true, 'badge-pill': true,
                       'badge-secondary': campaign.campaignState ===1,
                       'badge-info': campaign.campaignState === 2,
                       'badge-warning': campaign.campaignState === 3,
@@ -174,11 +178,11 @@
 
                 </td>
 
-                <td class="linkBtn" style="cursor: pointer;" (click)='goTo(campaign, true)'>
+                <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goTo(campaign, true)'>
                   <i class="fas fa-info-circle"></i>
                 </td>
 
-                <td class="linkBtn" style="cursor: pointer;" (click)='goTo(campaign, false)'>
+                <td class="linkBtn" style="text-align: center; cursor: pointer;" (click)='goTo(campaign, false)'>
                   <i class="fas fa-receipt"></i>
                 </td>
 

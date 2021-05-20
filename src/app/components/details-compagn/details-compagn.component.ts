@@ -23,9 +23,10 @@ export class DetailsCompagnComponent implements OnInit {
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },
-    { stateId: 2, stateDescription: 'En Cours' },
-    { stateId: 3, stateDescription: 'Fini' },
-    { stateId: 4, stateDescription: 'Annulée' }
+    { stateId: 2, stateDescription: 'Validé' },
+    { stateId: 3, stateDescription: 'En Cours' },
+    { stateId: 4, stateDescription: 'Clôturée' },
+    { stateId: 5, stateDescription: 'Annulée' }
   ];
 
   constructor(private campaignService: CampaignService, private devisService: DevisService, private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -40,14 +41,112 @@ export class DetailsCompagnComponent implements OnInit {
     this.currentUser = user;
   }
 
+  closeCampaign(){
+    if(this.currentUser.roleId === 1){
+      Swal.fire({
+        icon: "warning",
+        title: 'La comapgne sera clôturer définitivement!',
+        text: 'Êtes-vous sûre de vouloir continuer?',
+        showCancelButton: true,
+        confirmButtonText: `Continuer`,
+        confirmButtonColor: '#d9534f',
+        cancelButtonText: 'Annuler'
+  
+      }).then((result) => {
+  
+        if (result.isConfirmed) {
+  
+          let campaignId = this.campaign.id;
+          let userId = this.currentUser.id;
+  
+          this.campaignService.closeCampaign(campaignId, userId)
+            .subscribe(response => {            
+  
+              Swal.fire({
+                icon: 'success',
+                title: 'succes',
+                showConfirmButton: false, 
+                timer: 4000               
+              });
+              
+              this.router.navigateByUrl('Lst_Compagne');            
+  
+            }, error => {
+              Swal.fire({  
+                icon: 'error',
+                title: 'Problème de lancement de la compagne',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            });
+        }
+  
+      });
+
+    }else{
+      Swal.fire("Erreur", "Vous n'aves pas les droit de lancer la réalisation!", "error");
+    }   
+  }
+
+  launchRealization(){
+
+    if(this.currentUser.roleId === 1){
+      Swal.fire({
+        icon: "warning",
+        title: 'La Réalisation da la comapgne sera lancée !',
+        text: 'Êtes-vous sûre de vouloir continuer?',
+        showCancelButton: true,
+        confirmButtonText: `Continuer`,
+        confirmButtonColor: '#d9534f',
+        cancelButtonText: 'Annuler'
+  
+      }).then((result) => {
+  
+        if (result.isConfirmed) {
+  
+          let campaignId = this.campaign.id;
+          let userId = this.currentUser.id;
+  
+          this.campaignService.launchRealization(campaignId, userId)
+            .subscribe(response => {            
+  
+              Swal.fire({
+                icon: 'success',
+                title: 'succes',
+                showConfirmButton: false, 
+                timer: 4000               
+              });
+
+              this.router.navigateByUrl('Lst_Compagne');            
+  
+            }, error => {
+              Swal.fire({  
+                icon: 'error',
+                title: 'Problème de lancement de la compagne',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            });
+        }
+  
+      });
+
+    }else{
+      Swal.fire("Erreur", "Vous n'aves pas les droit de lancer la réalisation!", "error");
+    }   
+  }
+
 
   dupliquerCompagne(){
+   
     // activer duplication d'un ancien campagne
     if(this.campaignState.stateId > 3){
-      console.log("le traiatement se fait quand le compagne est déja fini");      
+      console.log("le traiatement se fait quand le compagne est déja clôturée");      
     }
 
-    
+    if(this.campaignState.stateId < 3){
+      Swal.fire("Erreur", "Impossible de dupliquer une compagne non réalisée!", "error");
+    }    
 
     Swal.fire({
       icon: "warning",
@@ -59,7 +158,6 @@ export class DetailsCompagnComponent implements OnInit {
       cancelButtonText: 'Annuler'
 
     }).then((result) => {
-
       if (result.isConfirmed) {
 
         let campaignId = this.campaign.id;
@@ -87,12 +185,12 @@ export class DetailsCompagnComponent implements OnInit {
             })
           });
       }
-
     });
+  }
 
-
-
-
+  setCampaignState(stateId){
+    let index = this.campaignStates.findIndex(x => x.stateId === stateId);
+    this.campaignState = this.campaignStates[index];
   }
 
   getFileCampaign(){
@@ -101,9 +199,9 @@ export class DetailsCompagnComponent implements OnInit {
     let campaignId = +this.activatedRoute.snapshot.paramMap.get("CampaignId");
     this.campaignService.getCampaignById(campaignId)
     .subscribe(response=>{
-      this.campaign = response;      
-      let index = this.campaignStates.findIndex(x => x.stateId === this.campaign.campaignState);
-      this.campaignState = this.campaignStates[index];
+
+      this.campaign = response;        
+      this.setCampaignState(this.campaign.campaignState); 
       this.getDetailedCampaignTowns();
     }, error=>{
       console.log(error);

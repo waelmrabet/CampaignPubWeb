@@ -48,7 +48,7 @@ export class ListCampaignComponent implements OnInit {
     { stateId: 1, stateDescription: 'Brouillon' },
     { stateId: 2, stateDescription: 'Validé' },
     { stateId: 3, stateDescription: 'En Cours' },
-    { stateId: 4, stateDescription: 'Fini' },
+    { stateId: 4, stateDescription: 'Clôturée' },
     { stateId: 5, stateDescription: 'Annulée' }
   ];
 
@@ -181,10 +181,9 @@ export class ListCampaignComponent implements OnInit {
         onBeforeOpen: () => {
           Swal.showLoading()
         },
-      });
-      
+      });      
 
-      this.campaignService.SearchCampaignsByCreteria(this.searchcriteria)
+      this.campaignService.searchCampaignsByCreteria(this.searchcriteria)
       .subscribe(response=>{
         this.campaignsList = response;
         Swal.close();
