@@ -187,9 +187,10 @@ export class ListCampaignBusinessesComponent implements OnInit {
     let tempBusiness= [];
 
     this.campaignBusinesses.forEach(item=>{
-      item.townName = this.getTownName(item.BusinessTownId);
+      item.townName = this.getTownName(item.businessTownId);
       item.stateName= this.getBusinessState(item.state);
       item.busninessTypeName = this.getBusinessTypeName(item.businessTypeId);
+      item.businessName = item.place.name;
 
       tempBusiness.push(item);
     });

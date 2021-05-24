@@ -24,14 +24,15 @@
         <div class="row" style="margin-bottom: 2%;">
           <div class="col-md">
             <fieldset class="border p-2">
-              <legend class="w-auto" style="color: gray; font-size: 15px;">&nbsp; Recherche &nbsp;</legend>              
-              <div class="row" style="margin-bottom: 1%;">                
+              <legend class="w-auto" style="color: gray; font-size: 15px;">&nbsp; Recherche &nbsp;</legend>
+              <div class="row" style="margin-bottom: 1%;">
                 <div class="col-md-4" style="margin-bottom: 1%;">
-                  <input type="text" [(ngModel)]="searchCreteria" id="searchCreteria" name="searchCreteria" class="form-control" placeholder="Recherche par mot clé">
+                  <input type="text" [(ngModel)]="searchCreteria" id="searchCreteria" name="searchCreteria"
+                    class="form-control" placeholder="Recherche par mot clé">
                 </div>
 
                 <div class="col-md-3">
-                  <button class="btn btn-secondary float-left" (click)="searchCreteria = ''" >Initialser</button>
+                  <button class="btn btn-secondary float-left" (click)="searchCreteria = ''">Initialser</button>
                 </div>
               </div>
             </fieldset>
@@ -39,7 +40,7 @@
         </div>
 
         <div class="row">
-          
+
           <div class="col-md table-responsive">
             <table class="table table-bordered " width="100%" cellspacing="0">
               <thead>
@@ -73,9 +74,10 @@
 
                 <tr
                   *ngFor="let business of campaignBusinesses | filter:searchCreteria  | paginate: { itemsPerPage: nbrItemPerPage, currentPage: page }">
-                  <td> {{ getTownName(business.businessTownId) }} </td>
-                  <td style="width: 15%;"> {{ getBusinessTypeName(business.businessTypeId) }}</td>
-                  <td style="width: 30%;">{{ business.place.name }}</td>
+
+                  <td> {{ business.townName }}</td>
+                  <td style="width: 15%;"> {{ business.busninessTypeName }} </td>
+                  <td style="width: 30%;">{{ business.businessName }}</td>
                   <td>{{ business.place.lat }}</td>
                   <td>{{ business.place.lng }}</td>
 
@@ -87,9 +89,9 @@
                           'badge-warning': business.state === 2,
                           'badge-success': business.state === 3,
                           'badge-danger': business.state === 4 }">
-                        {{ getBusinessState(business.state) }}
+                        {{ business.stateName }}
                       </span>
-                    </small>
+                    </small>                   
 
                   </td>
 
@@ -103,7 +105,7 @@
               </tbody>
 
             </table>
-          </div>  
+          </div>
 
         </div>
 
