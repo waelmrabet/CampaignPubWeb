@@ -31,8 +31,8 @@
 
                   <div class="form-group col-md">
                     <label class="control-label" for="name">Période du</label>
-                    <input type="date" class="form-control username" [(ngModel)]="searchStartDate"
-                      id="searchStartDate" placeholder="date début" name="searchStartDate">
+                    <input type="date" class="form-control username" [(ngModel)]="searchStartDate" id="searchStartDate"
+                      placeholder="date début" name="searchStartDate">
                   </div>
 
                   <div class="form-group col-md">
@@ -120,83 +120,97 @@
 
       <div class="card-body">
 
-        <div class="table-responsive">
-          <table class="table table-bordered" width="100%" cellspacing="0">
+        <div class="row">
+          <div class="col-md table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
 
-            <thead>
-              <tr style="text-align: center;">
-                <th>Titre</th>
-                <th>Client</th>                
-                <th>Région</th>
-                <th>Villes</th>
-                <th>Coût total</th>
-                <th>Etat</th>
-                <th>Places</th>
-                <th>Détails</th>
-                <th>Devis</th>
-                
-              </tr>
-            </thead>
+              <thead>
+                <tr style="text-align: center;">
+                  <th>Titre</th>
+                  <th>Client</th>
+                  <th>Région</th>
+                  <th>Villes</th>
+                  <th>Coût total</th>
+                  <th>Etat</th>
+                  <th>Places</th>
+                  <th>Détails</th>
+                  <th>Devis</th>
 
-            <tbody>
+                </tr>
+              </thead>
 
-              <tr *ngIf="showList && campaignsList.length == 0">
-                <td colspan="8" style="text-align: center;">Aucun élément à afficher</td>
-              </tr>
+              <tbody>
 
-              <tr *ngIf="!showList">
-                <td colspan="8" style="text-align: center;">
-                  <div class="spinner-grow" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                  <div>
-                    <p>Loading...</p>
-                  </div>
-                </td>
-              </tr>
+                <tr *ngIf="showList && campaignsList.length == 0">
+                  <td colspan="8" style="text-align: center;">Aucun élément à afficher</td>
+                </tr>
 
-              <tr *ngFor="let campaign of campaignsList">
-                <td>{{ campaign.title }}</td>
-                <td>{{ campaign.customer.name }}</td>                
-                <td>{{ campaign.region.name }}</td>
-                <td>
-                  <span class="badge badge-light" style="margin-right: 3%" *ngFor="let campaignTown of campaign.campaignTowns | slice:0:4;">
-                    {{ campaignTown.city }}
-                  </span>                  
-                </td>
-                <td> {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
-                <td style="text-align: center;">
+                <tr *ngIf="!showList">
+                  <td colspan="8" style="text-align: center;">
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div>
+                      <p>Loading...</p>
+                    </div>
+                  </td>
+                </tr>
 
-                  <small>
-                    <span style="font-size: 12px;" [ngClass]="{ 'badge': true, 'badge-pill': true,
-                      'badge-secondary': campaign.campaignState ===1,
-                      'badge-info': campaign.campaignState === 2,
-                      'badge-warning': campaign.campaignState === 3,
-                      'badge-success': campaign.campaignState === 4,
-                      'badge-danger': campaign.campaignState === 5 }">
-                      {{ getCampaignStateDescription(campaign.campaignState) }}
+                <tr
+                  *ngFor="let campaign of campaignsList | paginate: { itemsPerPage: nbrItemPerPage, currentPage: page }">
+                  <td>{{ campaign.title }}</td>
+                  <td>{{ campaign.customer.name }}</td>
+                  <td>{{ campaign.region.name }}</td>
+                  <td>
+                    <span class="badge badge-light" style="margin-right: 3%"
+                      *ngFor="let campaignTown of campaign.campaignTowns | slice:0:4;">
+                      {{ campaignTown.city }}
                     </span>
-                  </small>
+                  </td>
+                  <td> {{ campaign.totalCost | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
+                  <td style="text-align: center;">
 
-                </td>
+                    <small>
+                      <span style="font-size: 12px;" [ngClass]="{ 'badge': true, 'badge-pill': true,
+                        'badge-secondary': campaign.campaignState ===1,
+                        'badge-info': campaign.campaignState === 2,
+                        'badge-warning': campaign.campaignState === 3,
+                        'badge-success': campaign.campaignState === 4,
+                        'badge-danger': campaign.campaignState === 5 }">
+                        {{ getCampaignStateDescription(campaign.campaignState) }}
+                      </span>
+                    </small>
 
-                <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goToCampaignBusinessList(campaign)'>
-                  <i class="fas fa-pencil-alt" [hidden]="campaign.campaignState !== 3"></i>
-                </td>
+                  </td>
 
-                <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goTo(campaign, true)'>
-                  <i class="fas fa-info-circle"></i>
-                </td>
+                  <td class="linkBtn" style="text-align: center; cursor: pointer; "
+                    (click)='goToCampaignBusinessList(campaign)'>
+                    <i class="fas fa-pencil-alt" [hidden]="campaign.campaignState !== 3"></i>
+                  </td>
 
-                <td class="linkBtn" style="text-align: center; cursor: pointer;" (click)='goTo(campaign, false)'>
-                  <i class="fas fa-receipt"></i>
-                </td>
+                  <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goTo(campaign, true)'>
+                    <i class="fas fa-info-circle"></i>
+                  </td>
 
-              </tr>
+                  <td class="linkBtn" style="text-align: center; cursor: pointer;" (click)='goTo(campaign, false)'>
+                    <i class="fas fa-receipt"></i>
+                  </td>
 
-            </tbody>
+                </tr>
 
-          </table>
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-md">
+            <pagination-controls (pageChange)="page = $event" class="float-right"></pagination-controls>
+          </div>
         </div>
 
       </div>

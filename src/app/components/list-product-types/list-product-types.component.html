@@ -20,73 +20,86 @@
 
     <div class="card-body">
 
-        <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
+        <div class="row">
+            <div class="col-md table-responsive">
 
-                <thead>
-                    <tr>
-                        <th>Nom Type de produit</th>
-                        <th>Prix</th>
-                        <th>Couleur</th>
-                        <th>Hauteur</th>
+                <table class="table table-bordered" width="100%" cellspacing="0">
 
-                        <th>Largeur</th>
-                        <th>Unité</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                </thead>
+                    <thead>
+                        <tr>
+                            <th>Nom Type de produit</th>
+                            <th>Prix</th>
+                            <th>Couleur</th>
+                            <th>Hauteur</th>
 
-                <tbody>
+                            <th>Largeur</th>
+                            <th>Unité</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                    </thead>
 
-                    <tr *ngIf="!showList">
-                        <td colspan="7" style="text-align: center;">
-                            <div class="spinner-grow" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <div>
-                                <p>Chargement en cours...</p>
-                            </div>
-                        </td>
-                    </tr>
+                    <tbody>
 
-                    <tr *ngFor="let productType of productTypesList">
-                        <td>{{ productType.name }}</td>
-                        <td>{{ productType.price | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
+                        <tr *ngIf="!showList">
+                            <td colspan="7" style="text-align: center;">
+                                <div class="spinner-grow" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div>
+                                    <p>Chargement en cours...</p>
+                                </div>
+                            </td>
+                        </tr>
 
-                        <td style="text-align: center;">
-                            <input type="color" [value]="productType.color" disabled>
-                        </td>
+                        <tr
+                            *ngFor="let productType of productTypesList | paginate: { itemsPerPage: nbrItemPerPage, currentPage: page }">
+                            <td>{{ productType.name }}</td>
+                            <td>{{ productType.price | currency:'EUR':'symbol':'3.2-2':'fr' }}</td>
 
-                        <td>
-                            <span class="badge badge-light" *ngIf="productType.size != null">
-                                {{ productType.size != null ? productType.size.height +' '+  getDimensionUnit(productType.size.unit) : ''}}
-                            </span>
-                        </td>
+                            <td style="text-align: center;">
+                                <input type="color" [value]="productType.color" disabled>
+                            </td>
 
-                        <td>
-                            <span class="badge badge-light" *ngIf="productType.size != null">
-                                {{ productType.size != null ? productType.size.width +' '+ getDimensionUnit(productType.size.unit) : ''}}
-                            </span>                           
-                        </td>
+                            <td>
+                                <span class="badge badge-light" *ngIf="productType.size != null">
+                                    {{ productType.size != null ? productType.size.height +' '+
+                                    getDimensionUnit(productType.size.unit) : ''}}
+                                </span>
+                            </td>
 
-                        <td>
-                            <span class="badge badge-light" *ngIf="productType.size != null">
-                                {{ productType.size != null ? getDimensionUnit(productType.size.unit) : ''}}
-                            </span>                             
-                        </td>
+                            <td>
+                                <span class="badge badge-light" *ngIf="productType.size != null">
+                                    {{ productType.size != null ? productType.size.width +' '+
+                                    getDimensionUnit(productType.size.unit) : ''}}
+                                </span>
+                            </td>
 
-                        <td>{{ productType.description}}</td>
+                            <td>
+                                <span class="badge badge-light" *ngIf="productType.size != null">
+                                    {{ productType.size != null ? getDimensionUnit(productType.size.unit) : ''}}
+                                </span>
+                            </td>
 
-                        <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(productType)'>
-                            <i class="fas fa-info-circle"></i>                           
-                          </td>
+                            <td>{{ productType.description}}</td>
 
-                    </tr>
+                            <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(productType)'>
+                                <i class="fas fa-info-circle"></i>
+                            </td>
 
-                </tbody>
+                        </tr>
 
-            </table>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <pagination-controls (pageChange)="page = $event" class="float-right"></pagination-controls>
+            </div>
         </div>
 
     </div>

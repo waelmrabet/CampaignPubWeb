@@ -13,6 +13,9 @@ export class ListUserComponent implements OnInit {
   public usersList;
   public showusersList;
 
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,6 +31,7 @@ export class ListUserComponent implements OnInit {
         response => {
           this.usersList = response;
           this.showusersList = true;
+          this.page= 1;
         }, error => {
           Swal.fire({
             icon: 'error',

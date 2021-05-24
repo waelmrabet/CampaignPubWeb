@@ -17,6 +17,9 @@ export class ListProductTypesComponent implements OnInit {
 
   public dimensionUnits = [ {id: 1, unitDescription : 'mm'}, {id: 2, unitDescription : 'cm'}, {id: 3, unitDescription : 'mt'}];
 
+  public nbrItemPerPage: any = 5;
+  public page: any = 1;
+
   constructor(private productTypesService : ProductTypeService, private router: Router) { }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class ListProductTypesComponent implements OnInit {
       response=>{
         this.productTypesList = response;
         this.showList =true;
+        this.page = 1;
     }, error=>{
       Swal.fire({
         icon: 'error',

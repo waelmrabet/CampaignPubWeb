@@ -43,6 +43,9 @@ export class ListCampaignComponent implements OnInit {
 
   public userClientName: any;
 
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
+
 
   public campaignStates = [
     { stateId: 1, stateDescription: 'Brouillon' },

@@ -11,6 +11,9 @@ export class ListClientComponent implements OnInit {
 
   public customersList : any;
   public showCustomersList : boolean = false;
+
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
   
   constructor(private clientService: ClientService, private router : Router) { }
 
@@ -25,6 +28,7 @@ export class ListClientComponent implements OnInit {
       .subscribe(response => {
         this.customersList = response;
         this.showCustomersList = true;
+        this.page = 1;
       });
   }
 

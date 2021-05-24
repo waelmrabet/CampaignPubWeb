@@ -12,6 +12,10 @@ export class ListDevisComponent implements OnInit {
   public currentUser: any;
   public listDevis: any;
   public showList:any;
+
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
+
   constructor(private devisService: DevisService,private router: Router) { }
 
   ngOnInit(): void {
@@ -35,6 +39,9 @@ export class ListDevisComponent implements OnInit {
     .subscribe(response=>{
       this.listDevis = response;
       this.showList =true;
+
+      this.page = 1;
+      
     }, error=>{ 
       console.log(error);
     });
