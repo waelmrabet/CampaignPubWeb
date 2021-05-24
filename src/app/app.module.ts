@@ -46,6 +46,7 @@ import { DetailsProductTypeComponent } from './components/details-product-type/d
 import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
 import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -90,6 +91,7 @@ registerLocaleData(localeFr, 'fr');
     NgSelectModule,
     ColorPickerModule,
     NgxPaginationModule,
+    Ng2SearchPipeModule,
     NgxLocalStorageModule.forRoot()
      
     

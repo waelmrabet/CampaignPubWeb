@@ -24,6 +24,8 @@ export class ListCampaignBusinessesComponent implements OnInit {
   public selectedBusinessName: any;
   public businessStateId: any;
 
+  public searchCreteria:any ='';
+
   public businessStateList: any =
     [
       { stateId: 1, description: 'A faire' },
@@ -175,10 +177,25 @@ export class ListCampaignBusinessesComponent implements OnInit {
         this.businessTypesList = this.campaignDetails.campaignBusinessTypes;
         this.townsList = this.campaignDetails.campaignTowns;
         this.campaignBusinesses = this.campaignDetails.campaignBusinesses;
+        this.setBusinessAdditionalData();
         this.showList = true;
-
         this.page = 1;
       });
+  }
+
+  setBusinessAdditionalData(){
+    let tempBusiness= [];
+
+    this.campaignBusinesses.forEach(item=>{
+      item.townName = this.getTownName(item.BusinessTownId);
+      item.stateName= this.getBusinessState(item.state);
+      item.busninessTypeName = this.getBusinessTypeName(item.businessTypeId);
+
+      tempBusiness.push(item);
+    });
+
+    this.campaignBusinesses = tempBusiness;
+
   }
 
 
