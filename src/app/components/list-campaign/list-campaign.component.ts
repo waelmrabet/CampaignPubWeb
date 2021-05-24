@@ -269,6 +269,16 @@ export class ListCampaignComponent implements OnInit {
 
   }
 
+  goToCampaignBusinessList(campaign){
+
+    let campaignId = campaign.id;
+
+    if(campaign.campaignState == 3){
+      this.router.navigateByUrl("LstCampaign_Businesses"+"/"+campaignId);
+    }
+
+  }
+
   goTo(campaign, isDetails){
 
     let pageUrl = '';

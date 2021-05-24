@@ -131,12 +131,14 @@
                 <th>Villes</th>
                 <th>Coût total</th>
                 <th>Etat</th>
+                <th>Places</th>
                 <th>Détails</th>
                 <th>Devis</th>
+                
               </tr>
             </thead>
 
-            <tbody *ngIf="true">
+            <tbody>
 
               <tr *ngIf="showList && campaignsList.length == 0">
                 <td colspan="8" style="text-align: center;">Aucun élément à afficher</td>
@@ -176,6 +178,10 @@
                     </span>
                   </small>
 
+                </td>
+
+                <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goToCampaignBusinessList(campaign)'>
+                  <i class="fas fa-pencil-alt" [hidden]="campaign.campaignState !== 3"></i>
                 </td>
 
                 <td class="linkBtn" style="text-align: center; cursor: pointer; " (click)='goTo(campaign, true)'>

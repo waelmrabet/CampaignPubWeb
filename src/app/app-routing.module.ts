@@ -22,6 +22,7 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { DetailedDevisCampaignComponent } from './components/detailed-devis-campaign/detailed-devis-campaign.component';
 import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
 import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
+import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,8 @@ const routes: Routes = [
   { path: 'Nve_Type_Produit', component : NouveauProductTypeComponent},
   { path: 'Lst_Types_Produits', component : ListProductTypesComponent},
   {path: 'Details_ProductType/:ProductTypeId', component: DetailsProductTypeComponent},
+  
+  {path: 'LstCampaign_Businesses/:CampaignId', component: ListCampaignBusinessesComponent},
 
 
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },

@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CampaignBusinessUpdateDto } from '../models/CampaignBusinessUpdateDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
+ 
 
   private apiUrl: any = environment.apiUrl;
 
@@ -13,6 +15,16 @@ export class CampaignService {
 
 
   //#region General campaign services
+
+
+  // à compléter
+  updateCampaignBusiness(businessUpdateDto: CampaignBusinessUpdateDto) {
+
+    let url = this.apiUrl + '/Campaign/UpdateCampaignBusinessState/';
+    url += businessUpdateDto.campaignId;
+
+    return this.httpClient.put(url, businessUpdateDto);
+  }
 
 
   closeCampaign(campaignId, userId){

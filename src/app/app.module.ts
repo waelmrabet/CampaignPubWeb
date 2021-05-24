@@ -44,6 +44,8 @@ import { DetailedDevisCampaignComponent } from './components/detailed-devis-camp
 import { SelectComposExampleComponent } from './components/select-compos-example/select-compos-example.component';
 import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
 import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
+import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -76,7 +78,8 @@ registerLocaleData(localeFr, 'fr');
     DetailedDevisCampaignComponent,
     SelectComposExampleComponent,
     DetailsProductTypeComponent,
-    DevisDetailsComponent
+    DevisDetailsComponent,
+    ListCampaignBusinessesComponent
   ],
 
   imports: [
@@ -86,6 +89,7 @@ registerLocaleData(localeFr, 'fr');
     HttpClientModule,
     NgSelectModule,
     ColorPickerModule,
+    NgxPaginationModule,
     NgxLocalStorageModule.forRoot()
      
     
