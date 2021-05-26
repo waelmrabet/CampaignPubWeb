@@ -47,6 +47,7 @@ import { DevisDetailsComponent } from './components/devis-details/devis-details.
 import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ListFactureComponent } from './components/list-facture/list-facture.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -80,7 +81,8 @@ registerLocaleData(localeFr, 'fr');
     SelectComposExampleComponent,
     DetailsProductTypeComponent,
     DevisDetailsComponent,
-    ListCampaignBusinessesComponent
+    ListCampaignBusinessesComponent,
+    ListFactureComponent
   ],
 
   imports: [

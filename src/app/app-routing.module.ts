@@ -23,6 +23,7 @@ import { DetailedDevisCampaignComponent } from './components/detailed-devis-camp
 import { DetailsProductTypeComponent } from './components/details-product-type/details-product-type.component';
 import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
 import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
+import { ListFactureComponent } from './components/list-facture/list-facture.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,9 @@ const routes: Routes = [
   
   {path: 'LstCampaign_Businesses/:CampaignId', component: ListCampaignBusinessesComponent},
 
-
+  {path: 'Lst_Factures_Compagnes', component: ListFactureComponent},
+  {path: 'Frm_Facture_details/:CampaignId', component: ListCampaignBusinessesComponent},
+  
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 
