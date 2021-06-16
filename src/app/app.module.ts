@@ -48,6 +48,8 @@ import { ListCampaignBusinessesComponent } from './components/list-campaign-busi
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListFactureComponent } from './components/list-facture/list-facture.component';
+import { DetailsFactureComponent } from './components/details-facture/details-facture.component';
+
 
 
 registerLocaleData(localeFr, 'fr');
@@ -82,7 +84,8 @@ registerLocaleData(localeFr, 'fr');
     DetailsProductTypeComponent,
     DevisDetailsComponent,
     ListCampaignBusinessesComponent,
-    ListFactureComponent
+    ListFactureComponent,
+    DetailsFactureComponent    
   ],
 
   imports: [

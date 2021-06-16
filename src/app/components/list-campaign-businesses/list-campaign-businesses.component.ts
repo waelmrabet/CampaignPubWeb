@@ -24,7 +24,7 @@ export class ListCampaignBusinessesComponent implements OnInit {
   public selectedBusinessName: any;
   public businessStateId: any;
 
-  public searchCreteria:any ='';
+  public searchCreteria: any = '';
 
   public businessStateList: any =
     [
@@ -39,8 +39,11 @@ export class ListCampaignBusinessesComponent implements OnInit {
   public modalBusiness: any;
   public currentUser: any;
 
-  public page:any = 1;
-  public nbrItemPerPage: any= 5;
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
+
+  public selectedPhotos: any[];
+  
 
   constructor(private campaignService: CampaignService, private activatedRoute: ActivatedRoute) { }
 
@@ -52,16 +55,21 @@ export class ListCampaignBusinessesComponent implements OnInit {
   initCurrentUser() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     this.currentUser = user;
-  }
+  } 
 
+  setListPhotos(event ){
+    const filesList = event.target.files;
+    this.selectedPhotos = filesList;   
+  }
+  
   setModalBusiness(business) {
-    if (this.showList) {
+    if (this.showList) {      
       this.modalBusiness = business;
       this.modalBusiness.cityName = this.getTownName(business.businessTownId)
       this.modalBusiness.businessTypeName = this.getBusinessTypeName(business.businessTypeId);
       this.modalBusiness.currentStateDescription = this.getBusinessState(business.state);
-
-      this.selectedStateId = business.state;
+      
+      this.selectedStateId = business.state;      
     }
   }
 
@@ -88,9 +96,9 @@ export class ListCampaignBusinessesComponent implements OnInit {
 
   }
 
-  updateBusinessState(business) {    
+  updateBusinessState(business) {
 
-    let valid = this.verifUpdateValid(this.modalBusiness.state, this.selectedStateId);
+    let valid = this.verifUpdateValid(this.modalBusiness.state, this.selectedStateId);    
 
     if (valid) {
 
@@ -109,22 +117,25 @@ export class ListCampaignBusinessesComponent implements OnInit {
 
           let businessUpdateDto: CampaignBusinessUpdateDto = {
             campaignId: this.campaignDetails.id,
-            businessCampaignId : this.modalBusiness.campaignBusinessId,
-            newStateId : this.selectedStateId,
-            oldStateId : this.modalBusiness.state,
-            userModifId : this.currentUser.id
-          };          
- 
-          this.campaignService.updateCampaignBusiness(businessUpdateDto)
-            .subscribe(response => {
+            businessCampaignId: this.modalBusiness.campaignBusinessId,
+            newStateId: this.selectedStateId,
+            oldStateId: this.modalBusiness.state,
+            userModifId: this.currentUser.id
+          };    
+          
+          var listPhoto = this.selectedPhotos;
+
+          this.campaignService.updateCampaignBusiness(businessUpdateDto, listPhoto)
+            .subscribe(response => {                              
+            
               Swal.fire({
                 icon: 'success',
                 title: 'succes',
                 showConfirmButton: false,
                 timer: 2000
               });
-              
-              this.getCampaignFullData();
+
+              this.getCampaignFullData();              
 
             }, error => {
               Swal.fire({
@@ -135,7 +146,7 @@ export class ListCampaignBusinessesComponent implements OnInit {
               })
             });
 
-            
+
         }
 
       });
@@ -183,12 +194,12 @@ export class ListCampaignBusinessesComponent implements OnInit {
       });
   }
 
-  setBusinessAdditionalData(){
-    let tempBusiness= [];
+  setBusinessAdditionalData() {
+    let tempBusiness = [];
 
-    this.campaignBusinesses.forEach(item=>{
+    this.campaignBusinesses.forEach(item => {
       item.townName = this.getTownName(item.businessTownId);
-      item.stateName= this.getBusinessState(item.state);
+      item.stateName = this.getBusinessState(item.state);
       item.busninessTypeName = this.getBusinessTypeName(item.businessTypeId);
       item.businessName = item.place.name;
 

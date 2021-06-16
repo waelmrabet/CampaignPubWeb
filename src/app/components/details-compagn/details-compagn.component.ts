@@ -66,10 +66,10 @@ export class DetailsCompagnComponent implements OnInit {
                 icon: 'success',
                 title: 'succes',
                 showConfirmButton: false, 
-                timer: 4000               
-              });
+                timer: 1500               
+              });              
               
-              this.router.navigateByUrl('Lst_Compagne');            
+              this.router.navigateByUrl('Frm_Facture_details/'+ campaignId );            
   
             }, error => {
               Swal.fire({  
@@ -114,7 +114,7 @@ export class DetailsCompagnComponent implements OnInit {
                 icon: 'success',
                 title: 'succes',
                 showConfirmButton: false, 
-                timer: 4000               
+                timer: 1500               
               });
 
               this.router.navigateByUrl('Lst_Compagne');            

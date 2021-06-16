@@ -18,12 +18,30 @@ export class CampaignService {
 
 
   // à compléter
-  updateCampaignBusiness(businessUpdateDto: CampaignBusinessUpdateDto) {
+  updateCampaignBusiness(businessUpdateDto: CampaignBusinessUpdateDto, listPhoto) {   
+ 
+    let url = this.apiUrl + '/Campaign/UpdateCampaignBusinessState';
+    url += '?campaignId='+ businessUpdateDto.campaignId;
+    url += '&businessCampaignId='+ businessUpdateDto.businessCampaignId;
+    url += '&oldStateId='+ businessUpdateDto.oldStateId;
+    url += '&newStateId='+ businessUpdateDto.newStateId;
+    url += '&userModifId='+ businessUpdateDto.userModifId;
 
-    let url = this.apiUrl + '/Campaign/UpdateCampaignBusinessState/';
+    let formData = new FormData();
+
+    for(const file of listPhoto){
+      formData.append(file.name, file);
+    };   
+
+    return this.httpClient.post(url, formData, )
+
+    // old code
+    /*let url = this.apiUrl + '/Campaign/UpdateCampaignBusinessState/';
     url += businessUpdateDto.campaignId;
 
     return this.httpClient.put(url, businessUpdateDto);
+    */
+   
   }
 
 

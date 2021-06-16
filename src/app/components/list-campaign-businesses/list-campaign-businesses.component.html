@@ -50,8 +50,9 @@
                   <th style="width: 30%;">Nom de Business</th>
                   <th>Latitude</th>
                   <th>longitude</th>
-                  <th>Etat</th>
-                  <th>Modifier Etat</th>
+                  <th>Etat</th>                  
+                  <th>Photos</th>  
+                  <th></th>               
                 </tr>
               </thead>
 
@@ -91,8 +92,19 @@
                           'badge-danger': business.state === 4 }">
                         {{ business.stateName }}
                       </span>
-                    </small>                   
 
+                    </small>
+
+                    <!--<span class="linkBtn" style="margin-left:10%; cursor: pointer;" data-toggle="modal"
+                      data-target="#modalCartBusiness" (click)="setModalBusiness(business)">
+                      <i class="fas fa-pencil-alt" [hidden]="business.state > 2"></i>
+                    </span>-->
+
+                  </td>                 
+
+                  <td class="linkBtn" style="cursor: pointer;">
+                    <i class="fas fa-eye"></i>
+                    <!--<i class="fas fa-plus"></i>-->
                   </td>
 
                   <td class="linkBtn" style="text-align: center; cursor: pointer; " data-toggle="modal"
@@ -195,6 +207,13 @@
                         [multiple]="false" placeholder="Select etat de business" [(ngModel)]="selectedStateId"
                         name="selectedStateId" id="selectedStateId">
                       </ng-select>
+
+                    </div>
+
+                    <div class="form-group col-md">
+
+                      <label class="control-label required" for="selectedPhotos">Photos</label>
+                      <input type="file" id="selectedPhotos" name="selectedPhotos" class="form-control-file" (change)="setListPhotos($event)" multiple>
 
                     </div>
 

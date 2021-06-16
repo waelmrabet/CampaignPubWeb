@@ -20,6 +20,16 @@ export class FactureService {
     return this.httpClient.get(url);
   }
 
+  getFactureByCampaignId(campaignId){
+   
+    let url = this.apiUrl+'/Bill/CampaignBill/';
+    url += campaignId;
+
+    return this.httpClient.get(url);
+  }
+
+  
+
 
 
 }
