@@ -50,7 +50,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListFactureComponent } from './components/list-facture/list-facture.component';
 import { DetailsFactureComponent } from './components/details-facture/details-facture.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
-//import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -101,8 +103,10 @@ registerLocaleData(localeFr, 'fr');
     ColorPickerModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    //MDBBootstrapModule.forRoot(),
-    NgxLocalStorageModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxLocalStorageModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule
      
     
     /*,
