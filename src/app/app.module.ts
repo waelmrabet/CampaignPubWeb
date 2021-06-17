@@ -49,6 +49,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListFactureComponent } from './components/list-facture/list-facture.component';
 import { DetailsFactureComponent } from './components/details-facture/details-facture.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+//import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 
 
@@ -85,7 +88,8 @@ registerLocaleData(localeFr, 'fr');
     DevisDetailsComponent,
     ListCampaignBusinessesComponent,
     ListFactureComponent,
-    DetailsFactureComponent    
+    DetailsFactureComponent,
+    GalleryComponent
   ],
 
   imports: [
@@ -97,6 +101,7 @@ registerLocaleData(localeFr, 'fr');
     ColorPickerModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    //MDBBootstrapModule.forRoot(),
     NgxLocalStorageModule.forRoot()
      
     

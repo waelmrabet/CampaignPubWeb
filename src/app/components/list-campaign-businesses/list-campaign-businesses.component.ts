@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CampaignBusinessUpdateDto } from 'src/app/models/CampaignBusinessUpdateDto';
 import { CampaignService } from 'src/app/services/campaign.service';
+import { PhotoService } from 'src/app/services/photo.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -38,12 +39,12 @@ export class ListCampaignBusinessesComponent implements OnInit {
 
   public modalBusiness: any;
   public currentUser: any;
-
   public page: any = 1;
   public nbrItemPerPage: any = 5;
-
   public selectedPhotos: any[];
-  
+
+  public galleryBusinessId: any;  
+  public selectedCampaignId: any;
 
   constructor(private campaignService: CampaignService, private activatedRoute: ActivatedRoute) { }
 
@@ -56,6 +57,11 @@ export class ListCampaignBusinessesComponent implements OnInit {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     this.currentUser = user;
   } 
+
+  setModalGalleryBusiness(business){
+    this.galleryBusinessId = business.campaignBusinessId;
+    this.selectedCampaignId = business.compagnId;
+  }
 
   setListPhotos(event ){
     const filesList = event.target.files;
