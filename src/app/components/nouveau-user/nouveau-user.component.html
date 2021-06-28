@@ -90,7 +90,7 @@
 
                                             <div class="form-group col-md">
                                                 <label class="control-label required">Role</label>
-                                                <ng-select [items]="roles" bindLabel="desc" bindValue="roleId" [multiple]="false" placeholder="Select role utilisateur" [(ngModel)]="selectedRoleId" name="roleUser"
+                                                <ng-select [items]="roles" bindLabel="roleName" bindValue="id" [multiple]="false" placeholder="Select role utilisateur" [(ngModel)]="selectedRoleId" name="roleUser"
                                                 id="roleUser"
                                                 required
                                                 [ngClass]="{
@@ -206,15 +206,12 @@
                         <td>{{ user.Email }}</td>
                         <td>{{ user.telNumber }}</td>
                         <td>
-                            {{ user.role == 1 ? 'admin' : 'client'}}                                                      
+                            {{ getUserRole(user.roleId) }}                                                                           
                         </td>
 
                         <td class="linkBtn" style="cursor: pointer;" (click)='goToDetails(user)'>
-                            <i class="fas fa-edit"></i>
-                            <!--<i class="fas fa-info-circle "></i>-->
+                            <i class="fas fa-edit"></i>                           
                         </td>
-
-
 
                     </tr>
 

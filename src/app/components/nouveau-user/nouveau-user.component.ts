@@ -1,7 +1,9 @@
+import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { ClientService } from 'src/app/services/client.service';
+import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -12,18 +14,20 @@ import Swal from 'sweetalert2';
 })
 export class NouveauUserComponent implements OnInit {
 
-  public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
+ // public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
+ public roles: any;
   public selectedRoleId: any;
   public customersList: any;
   public selectedCustomerId: any;
   public usersList;
   public showusersList;
 
-  constructor(private userService: UserService, private router: Router, private clientService: ClientService) { }
+  constructor(private roleService: RoleService, private userService: UserService, private router: Router, private clientService: ClientService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
     this.getAllClients();
+    this.getAllUserRoles();
   }
 
   getAllClients() {
@@ -33,6 +37,21 @@ export class NouveauUserComponent implements OnInit {
       }, error => {
         Swal.fire("Erreur", "Erreur de chargement list client", "error");
       });
+  }
+
+  getAllUserRoles(){
+    this.roleService.getAllUserRoles()
+    .subscribe(response=> {
+      this.roles = response;
+    });
+  }
+
+  getUserRole(roleId){
+    
+    if(roleId != undefined && this.roles != undefined)
+      return this.roles.find(x=> x.id == roleId).roleName;
+    
+    return "";
   }
 
   addCustomUser = (term) => ({ id: term, name: term });
@@ -197,6 +216,11 @@ export class NouveauUserComponent implements OnInit {
 
 
       )
+  }
+
+  goToDetails(user){
+    if(user != undefined)
+      this.router.navigateByUrl('editUser/'+user.id);
   }
 
 }
