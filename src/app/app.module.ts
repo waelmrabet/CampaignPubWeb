@@ -10,7 +10,7 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { NouveauUserComponent } from './components/nouveau-user/nouveau-user.component';
 import { ClientService } from './services/client.service';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NouveauClientComponent } from './components/nouveau-client/nouveau-client.component';
 import { ListClientComponent } from './components/list-client/list-client.component';
 import { DetailsClientComponent } from './components/details-client/details-client.component';
@@ -52,10 +52,8 @@ import { DetailsFactureComponent } from './components/details-facture/details-fa
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
-
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -123,11 +121,12 @@ registerLocaleData(localeFr, 'fr');
       provide: localeFr,
       useValue: 'fr'
     },
-    AuthGuard,
-    UpperCasePipe  
+    AuthGuard,    
+    UpperCasePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }

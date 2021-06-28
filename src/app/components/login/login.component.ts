@@ -16,38 +16,79 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  
+
   ngOnInit(): void {
+  }
+
+
+  verifAuthetificationIdentiy(userName, password) {
+    7
+
+    let valid = true;
+    let msg = "";
+
+    if (userName == undefined || userName == '')
+      valid = false;
+
+    if (password == undefined || password == '')
+      valid = false;
+
+    if (!valid) {
+      msg = "Veuillez saisir UserName et mot de passe !!";
+      Swal.fire({
+        title: "Erreur",
+        text: msg,
+        timer: 2000,
+        icon: "error"
+      });
+    }
+
+    return valid;
+
   }
 
   public login(loginForm) {
 
-    Swal.fire({
-      title: '  Connexion en cours!',
-      html: 'Attendez un peu',
-      showConfirmButton: false,
-      allowOutsideClick: false,
-      onBeforeOpen: () => {
-        Swal.showLoading()
-      },
-    });
-
     let userName = loginForm.value.userName;
     let password = loginForm.value.password;
 
-    this.userService.login(userName, password)
-      .subscribe(response => {
-        let user = response;
+    let valid = this.verifAuthetificationIdentiy(userName, password);
+    if (valid) {
 
-        localStorage.setItem('currentUser', JSON.stringify(user));
-             
-        Swal.close();
+      Swal.fire({
+        title: '  Connexion en cours!',
+        html: 'Attendez un peu',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+          Swal.showLoading()
+        },
+      });
 
-        this.router.navigateByUrl('Dashbord');
-      }, error => {
-        console.log(error);
-      });    
-    
-    
+      this.userService.login(userName, password)
+        .subscribe(response => {
+          let rep: any = response;
+          let user = rep.user;
+          let token = rep.token;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('jwtToken', token);
+          Swal.close();
+          this.router.navigateByUrl('Dashbord');
+        }, error => {
+          Swal.fire({
+            title: "Erreur",
+            text: error,
+            icon: "error",
+            timer: 1500,
+          });
+        });
+    }
+
+
+
+
+
+
+
   }
 }

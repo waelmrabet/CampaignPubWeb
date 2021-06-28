@@ -44,18 +44,15 @@ export class AppComponent implements OnInit {
     return espaceName;
   }
 
-  
-
   // Do not touch this code please
-  isHidden() {
-   
+  isHidden() {   
     let user = JSON.parse(localStorage.getItem("currentUser"));
 
     if(user == null || user == undefined){
       this.currentUser == undefined;
       return true;
-    }else{
-      
+    }else{   
+         
       if(this.currentUser == undefined || this.currentUser == null)
         this.currentUser = user;          
       
