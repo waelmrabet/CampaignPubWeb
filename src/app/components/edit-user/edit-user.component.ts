@@ -2,6 +2,7 @@ import { verifyHostBindings } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -15,32 +16,46 @@ export class EditUserComponent {
   public user;
   public modalUser;
   public displayDetails: boolean = false;
-
-  public userRoles = [{ id: 1, roleDescription: "Administrateur" }, { id: 2, roleDescription: "Client" }, { id: 3, roleDescription: "Agent" }]
+  public roles: any;
 
   constructor(
+   
     private userService: UserService,
     private clientService: ClientService,
     private activatedRoute: ActivatedRoute,
+    private roleServices: RoleService,
     private router: Router) { }
+  
 
-  public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
   public customersList: any;
 
   ngOnInit(): void {
     this.getUserById();
     this.getAllClients();
+    this.getAllRoles();   
+  }
+
+  getAllRoles() {
+   
+    this.roleServices.getAllUserRoles()
+    .subscribe(response=>{
+      this.roles = response;
+    }, error=> {
+      console.log(error);
+    }
+    )
+    
   }
 
   getRoleDescription(roleId) {
 
     let roleDesc = '';
 
-    if (roleId != undefined)
-      roleDesc = this.userRoles.find(x => x.id == roleId).roleDescription;
+    if (roleId != undefined && this.roles != undefined)
+        roleDesc =this.roles.find(x=> x.id == roleId).roleName;
 
     return roleDesc;
-  }
+  } 
 
   getAllClients() {
     this.clientService.getAllClient()

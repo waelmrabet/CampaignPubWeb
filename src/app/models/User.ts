@@ -5,7 +5,7 @@ export class User{
     Email : string ;
 
     telNumber : string;
-    role : number;
+    roleId : number;
     password : string;
     clientId? : number;
     createdAt?: Date  

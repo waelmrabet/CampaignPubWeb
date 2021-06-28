@@ -14,8 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class NouveauUserComponent implements OnInit {
 
- // public roles = [{ roleId: 1, desc: 'Admin' }, { roleId: 2, desc: 'Client' }, { roleId: 3, desc: 'Agent' }];
- public roles: any;
+  public roles: any;
   public selectedRoleId: any;
   public customersList: any;
   public selectedCustomerId: any;
@@ -66,9 +65,9 @@ export class NouveauUserComponent implements OnInit {
     userDto.Email = userFormValue.mail;
 
     userDto.telNumber = userFormValue.telNumber;
-    userDto.role = this.selectedRoleId;
+    userDto.roleId = this.selectedRoleId;
     userDto.password = userFormValue.password;
-    userDto.clientId = userDto.role == 2 ? this.selectedCustomerId : -1;
+    userDto.clientId = userDto.roleId == 2 ? this.selectedCustomerId : -1;
 
     return userDto;
 

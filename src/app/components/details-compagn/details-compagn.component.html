@@ -191,37 +191,36 @@
                 </div>
             </div>
 
-            <div class="col-md align-items ">
+            <div class="col-md align-items">
                 <div class="BgColDetails">
-                    <span class="detailsColLabel">Description</span>
-                    <span class="float-right detailsColValue">{{ campaign.description }}</span>
+                    <span class="detailsColLabel">Description</span>  
+                    <span class="detailsColValue" style="font-size: 14px; margin-left: 5%;">
+                        {{ campaign.description }}
+                    </span>
                 </div>
-            </div>
+            </div>            
 
         </div>  
 
-
-      
-        
          <!--Line 8 -->
          <div class="row" style="text-align: right; margin-top: 3%;">
 
             <div class="col-md"></div>
 
-            <div class="col-md-2" *ngIf="campaign.campaignState === 3">
+            <div class="col-md-2" *ngIf="campaign.campaignState === 3 && currentUser.roleId === 1">
                 <button type="button" class="btn btn-success btn-sm btn-block" (click)="closeCampaign()">
                     Clôturer compagne
                 </button>
             </div>
 
-            <div class="col-md-2" *ngIf="campaign.campaignState === 2">
+            <div class="col-md-2" *ngIf="campaign.campaignState === 2 && currentUser.roleId === 1">
                 <button type="button" class="btn btn-success btn-sm btn-block" (click)="launchRealization()">
                     Lancer réalisation
                 </button>
             </div> 
 
             <div class="col-md-2">
-                <button type="button" class="btn btn-success btn-sm btn-block" (click)="dupliquerCompagne()">
+                <button type="button" class="btn btn-success btn-sm btn-block" (click)="dupliquerCompagne()" *ngIf="campaign.campaignState === 4">
                     Dupliquer compagne
                 </button>
             </div>            

@@ -3,7 +3,7 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bgBreadCrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['/tableauDeBord']">Home</a></li>
-                <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Utilisateur']">Client</a></li>
+                <li class="breadcrumb-item"><a href="#" [routerLink]="['/Nve_Utilisateur']">Utilisateurs</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Détails Utilistateur</li>
             </ol>
         </nav>
@@ -83,31 +83,31 @@
             </div>
 
             <div class="col-md align-items">
+                <div class="BgColDetails">
+                    <span class="detailsColLabel">Est activé</span>
+                    <span class="float-right detailsColValue">{{ user.activated ? 'Oui' : 'Non' }}</span>
+                </div>
+            </div>
+
+            <!--<div class="col-md align-items">
 
                 <div class="BgColDetails">
                     <span class="detailsColLabel">Client</span>
                     <span class="float-right detailsColValue">{{ user.clientId }}</span>
                 </div>
 
-            </div>
+            </div>-->
 
         </div>
 
         <!-- Line 4 -->
-        <div class="row" style="margin-top: 1%;">
-            <div class="col-md align-items ">
+        <div class="row" style="margin-top: 1%;" *ngIf="user.clientId === 2">
+            <div class="col-md-6 align-items ">
                 <div class="BgColDetails">
-                    <span class="detailsColLabel">Mot de passe</span>
-                    <span class="float-right detailsColValue">{{ user.password }}</span>
+                    <span class="detailsColLabel">Client</span>
+                    <span class="float-right detailsColValue">{{ user.clientName }}</span>
                 </div>
-            </div>
-
-            <div class="col-md align-items">
-                <div class="BgColDetails">
-                    <span class="detailsColLabel">Est activé</span>
-                    <span class="float-right detailsColValue">{{ user.Activated ? 'Oui' : 'Non' }}</span>
-                </div>
-            </div>
+            </div>            
         </div>
 
         <div class="row" style="margin-top: 3%;">
@@ -130,7 +130,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Utilistateur</h4>
+                <h4 class="modal-title" id="myModalLabel">Utilisateur</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -189,7 +189,7 @@
 
                                 <div class="col">
                                     <label class="required">Role</label>
-                                    <ng-select [items]="roles" bindLabel="desc" bindValue="roleId" [multiple]="false"
+                                    <ng-select [items]="roles" bindLabel="roleName" bindValue="id" [multiple]="false"
                                         placeholder="Select role utilisateur" [(ngModel)]="modalUser.roleId"
                                         name="roleId" id="roleId" required>
                                     </ng-select>
