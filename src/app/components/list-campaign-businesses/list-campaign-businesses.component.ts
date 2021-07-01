@@ -43,7 +43,7 @@ export class ListCampaignBusinessesComponent implements OnInit {
   public nbrItemPerPage: any = 5;
   public selectedPhotos: any[];
 
-  public galleryBusinessId: any;  
+  public selectedBusiness: any;  
   public selectedCampaignId: any;
 
   constructor(private campaignService: CampaignService, private activatedRoute: ActivatedRoute) { }
@@ -59,7 +59,7 @@ export class ListCampaignBusinessesComponent implements OnInit {
   } 
 
   setModalGalleryBusiness(business){
-    this.galleryBusinessId = business.campaignBusinessId;
+    this.selectedBusiness = business;
     this.selectedCampaignId = business.compagnId;
   }
 

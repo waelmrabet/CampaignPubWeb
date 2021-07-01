@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GalleryComponent implements OnInit, OnChanges {
 
-  @Input() businessId: any;
+  @Input() business: any;
   @Input() campaignId: any;
   public showGallery = false;
   public gallery: any;
@@ -25,14 +25,14 @@ export class GalleryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if(this.businessId != undefined){
+    if(this.business != undefined){
       this.getBusinessGallery();      
     }      
   }
 
   getBusinessGallery(){
 
-    let businessId = this.businessId;
+    let businessId = this.business.campaignBusinessId;
     this.showGallery = false;
 
     this.photoService.getListPhotosByBusinessId(businessId)
@@ -40,6 +40,7 @@ export class GalleryComponent implements OnInit, OnChanges {
       this.gallery = response; 
       this.showGallery = true;     
     });
+    
   }
   
 }
