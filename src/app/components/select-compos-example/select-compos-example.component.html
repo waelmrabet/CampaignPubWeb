@@ -9,7 +9,7 @@
                 <h1>Angular ng-select <small class="text-muted"><a target="_blank"
                             href="https://github.com/ng-select/ng-select">Open in Github</a></small></h1>
                 <label>Your first ng-select</label>
-                <ng-select [items]="cities" bindLabel="name" placeholder="Select city" [(ngModel)]="selectedCity">
+                <ng-select [items]="cities" bindLabel="name" [(ngModel)]="selectedCity" placeholder="Select city *">
                 </ng-select>
                 <p>
                     Selected city: {{selectedCity | json}}
@@ -18,7 +18,8 @@
 
                 <label>Multiselect with custom bindings</label>
                 <ng-select [items]="cities2" bindLabel="name" bindValue="id" [multiple]="true"
-                    placeholder="Select cities" [(ngModel)]="selectedCityIds">
+                   [(ngModel)]="selectedCityIds"
+                   placeholder="Select city *">
                 </ng-select>
                 <p>
                     Selected cities: {{selectedCityIds}}
