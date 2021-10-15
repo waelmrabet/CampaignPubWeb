@@ -24,6 +24,9 @@ export class NouveauProductTypeComponent implements OnInit {
   public productTypesList : any;
   public showList = false;
 
+  public nbrItemPerPage: any = 5;
+  public page: any = 1;
+
   ngOnInit(): void {
     this.getAllProductTypes();
   }
@@ -37,6 +40,7 @@ export class NouveauProductTypeComponent implements OnInit {
       response=>{
         this.productTypesList = response;
         this.showList =true;
+        this.page = 1 ;
     }, error=>{
       Swal.fire({
         icon: 'error',

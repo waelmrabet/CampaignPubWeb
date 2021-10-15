@@ -177,7 +177,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let customer of customersList">
+              <tr *ngFor="let customer of customersList | paginate: { itemsPerPage: nbrItemPerPage, currentPage: page } ">
                 <td>{{ customer.name }}</td>
                 <td>{{ customer.taxIdNumber }}</td>
                 <td>{{ customer.mail }}</td>
@@ -202,6 +202,13 @@
             </tfoot>
           </table>
         </div>
+
+        <div class="row">
+          <div class="col-md">
+            <pagination-controls (pageChange)="page = $event" class="float-right"></pagination-controls>
+          </div>
+        </div>
+
       </div>
 
     </div>

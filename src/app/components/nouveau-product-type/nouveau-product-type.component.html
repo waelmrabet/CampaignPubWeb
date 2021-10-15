@@ -175,7 +175,7 @@
                                 </td>
                             </tr>
 
-                            <tr *ngFor="let productType of productTypesList">
+                            <tr *ngFor="let productType of productTypesList | paginate: { itemsPerPage: nbrItemPerPage, currentPage: page }">
                                 <td>{{ productType.name }}</td>
                                 <td>{{ productType.price }}</td>
                                 <td>{{ productType.color }}</td>
@@ -193,6 +193,12 @@
                         </tbody>
 
                     </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <pagination-controls (pageChange)="page = $event" class="float-right"></pagination-controls>
+                    </div>
                 </div>
 
             </div>

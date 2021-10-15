@@ -16,6 +16,8 @@ export class NouveauClientComponent implements OnInit {
   constructor(private clientService: ClientService, private router: Router) { }
 
   public customersList: any;
+  public page: any = 1;
+  public nbrItemPerPage: any = 5;
 
   ngOnInit(): void {
     this.getCustomersList();
@@ -25,6 +27,7 @@ export class NouveauClientComponent implements OnInit {
     this.clientService.getAllClient()
       .subscribe(response => {
         this.customersList = response;
+        this.page = 1;
       });
   }
 
