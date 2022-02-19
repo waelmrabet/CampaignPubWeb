@@ -131,6 +131,16 @@ export class ListCampaignBusinessesComponent implements OnInit {
           
           var listPhoto = this.selectedPhotos;
 
+          if(!listPhoto){
+            Swal.fire({
+              icon: 'error',
+              title: 'Veuillez verifier les champs obligatoires',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            return ;
+          }
+
           this.campaignService.updateCampaignBusiness(businessUpdateDto, listPhoto)
             .subscribe(response => {                              
             

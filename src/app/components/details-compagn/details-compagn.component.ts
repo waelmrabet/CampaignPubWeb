@@ -68,13 +68,14 @@ export class DetailsCompagnComponent implements OnInit {
                 showConfirmButton: false, 
                 timer: 1500               
               });              
-              
-              this.router.navigateByUrl('Frm_Facture_details/'+ campaignId );            
+             
+              this.router.navigateByUrl('Lst_Compagne' ); 
+              //this.router.navigateByUrl('Frm_Facture_details/'+ campaignId );            
   
             }, error => {
               Swal.fire({  
                 icon: 'error',
-                title: 'Problème de lancement de la compagne',
+                title: 'Problème de cloture de la compagne',
                 showConfirmButton: false,
                 timer: 1500
               })

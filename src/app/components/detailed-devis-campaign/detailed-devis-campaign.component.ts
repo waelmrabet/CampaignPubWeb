@@ -71,7 +71,8 @@ export class DetailedDevisCampaignComponent implements OnInit {
               timer: 2500,
               showConfirmButton: true
             }).then(() => {
-              this.router.navigateByUrl('Lst_Client');
+              this.router.navigateByUrl('Frm_Facture_details/'+ campaignId );   
+              //this.router.navigateByUrl('Lst_Client');
             });
 
           });
