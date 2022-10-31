@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DevisService } from 'src/app/services/devis.service';
 import { FactureService } from 'src/app/services/facture.service';
 import Swal from 'sweetalert2';
 

@@ -22,19 +22,16 @@ import { DetailsCompagnComponent } from './components/details-compagn/details-co
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NouveauProductTypeComponent } from './components/nouveau-product-type/nouveau-product-type.component';
 import { ListProductTypesComponent } from './components/list-product-types/list-product-types.component';
-import { DatePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe, registerLocaleData } from '@angular/common';
 import { EditCampaignComponent } from './components/edit-campaign/edit-campaign.component';
 import { EditCampaignProductsComponent } from './components/edit-campaign-products/edit-campaign-products.component';
 import { EditCampaignTownsComponent } from './components/edit-campaign-towns/edit-campaign-towns.component';
 import { EditCampaignBusinessTypesComponent } from './components/edit-campaign-business-types/edit-campaign-business-types.component';
 import { EditCampaignGlobalParamsComponent } from './components/edit-campaign-global-params/edit-campaign-global-params.component';
-
-import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { CampaignTownDetailsComponent } from './components/campaign-town-details/campaign-town-details.component';
 import { ListCampaignComponent } from './components/list-campaign/list-campaign.component';
 import { ListDevisComponent } from './components/list-devis/list-devis.component';
-import { from } from 'rxjs';
 import { NgxLocalStorageModule } from 'ngx-localstorage';
 import { AuthGuard } from './_helpers/auth.guard';
 import { MenusComponent } from './components/menus/menus.component';
@@ -48,7 +45,7 @@ import { ListCampaignBusinessesComponent } from './components/list-campaign-busi
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListFactureComponent } from './components/list-facture/list-facture.component';
-import { DetailsFactureComponent } from './components/details-facture/details-facture.component';
+import { DetailsFactureComponent } from './components/details-product-type/details-facture/details-facture.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

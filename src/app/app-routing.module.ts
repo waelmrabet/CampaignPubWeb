@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HomeComponent } from './components/home/home.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { LoginComponent } from './components/login/login.component';
 import { NouveauUserComponent } from './components/nouveau-user/nouveau-user.component';
@@ -24,7 +22,7 @@ import { DetailsProductTypeComponent } from './components/details-product-type/d
 import { DevisDetailsComponent } from './components/devis-details/devis-details.component';
 import { ListCampaignBusinessesComponent } from './components/list-campaign-businesses/list-campaign-businesses.component';
 import { ListFactureComponent } from './components/list-facture/list-facture.component';
-import { DetailsFactureComponent } from './components/details-facture/details-facture.component';
+import { DetailsFactureComponent } from './components/details-product-type/details-facture/details-facture.component';
 
 
 const routes: Routes = [
