@@ -8,5 +8,6 @@ export class User{
     roleId : number;
     password : string;
     clientId? : number;
-    createdAt?: Date  
+    createdAt?: Date
+    menus?: any;  
 }

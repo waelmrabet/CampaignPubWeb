@@ -1,6 +1,9 @@
 import { TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -8,14 +11,40 @@ import { UserService } from './services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  
   title = 'CompagnWebApp';
   public menusList: any;
   public currentUser: any;
 
-  constructor(private router: Router, private upperCasePipe: UpperCasePipe, private userService: UserService) {
-    //this.currentUser = this.userService.getCurrentConnectedUser();
-   }
+  private ngUnsubscribe = new Subject<void>();
+
+  constructor(private router: Router, private upperCasePipe: UpperCasePipe, private userService: UserService, private authService: AuthenticationService) {
+
+    this.setCurrentUser();
+    this.setCurrentMenues();
+
+  }
+  
+  setCurrentUser() {
+    this.authService.user.pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(x => {
+        this.currentUser = x;
+      });
+  }
+
+  setCurrentMenues() {
+    this.authService.menus
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(x => {
+        this.menusList = x;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   ngOnInit(): void { }
 
@@ -28,47 +57,24 @@ export class AppComponent implements OnInit {
 
   }
 
-  getEspaceName(){
+  getEspaceName() {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     let espaceName = '';
 
     if (currentUser) {
       if (currentUser.roleId == 1)
-      espaceName = "Admin"
-      else if(currentUser.roleId == 2)
-      espaceName = "Client";
+        espaceName = "Admin"
+      else if (currentUser.roleId == 2)
+        espaceName = "Client";
       else
-      espaceName = "Agent"
+        espaceName = "Agent"
     }
 
     return espaceName;
   }
 
-  // Do not touch this code please
-  isHidden() {   
-    let user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if(user == null || user == undefined){
-      this.currentUser == undefined;
-      return true;
-    }else{   
-         
-      if(this.currentUser == undefined || this.currentUser == null)
-        this.currentUser = user;          
-      
-      if(this.menusList == null || this.menusList == undefined)
-        this.menusList = user.menus;   
-
-      return false;
-    }    
-  }
-
   logout() {
-    this.userService.logout();
-    this.currentUser = null;
-    this.menusList = null;
-    this.router.navigateByUrl('login');    
-    
+    this.authService.logout();
   }
 
 }

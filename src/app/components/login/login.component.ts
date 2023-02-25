@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { title } from 'process';
 import { timer } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { User } from 'src/app/models/User';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -14,24 +16,30 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  loading = false; 
+  error = '';
+
+  constructor(private userService: UserService, private router: Router, private authService: AuthenticationService) {
+
+    // redirect to home if already logged in
+    if (this.authService.userValue)
+      this.router.navigate(['/']);
+
+  }
 
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log("to be implemented when it is necessairy");
   }
 
 
   verifAuthetificationIdentiy(userName, password) {
-    7
+
 
     let valid = true;
     let msg = "";
 
-    if (userName == undefined || userName == '')
-      valid = false;
-
-    if (password == undefined || password == '')
-      valid = false;
+    valid = userName && password;
 
     if (!valid) {
       msg = "Veuillez saisir UserName et mot de passe !!";
@@ -53,6 +61,7 @@ export class LoginComponent implements OnInit {
     let password = loginForm.value.password;
 
     let valid = this.verifAuthetificationIdentiy(userName, password);
+
     if (valid) {
 
       Swal.fire({
@@ -65,23 +74,22 @@ export class LoginComponent implements OnInit {
         },
       });
 
-      this.userService.login(userName, password)
-        .subscribe(response => {
-          let rep: any = response;
-          let user = rep.user;
-          let token = rep.token;
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          localStorage.setItem('jwtToken', token);
-          Swal.close();
-          this.router.navigateByUrl('Dashbord');
-        }, error => {
-          Swal.fire({
-            title: "Erreur",
-            text: error,
-            icon: "error",
-            timer: 1500,
+      this.authService.login(userName, password)
+        .pipe(
+          first())
+        .subscribe(
+          data => {
+            Swal.close();
+            this.router.navigate(['/']);            
+          },
+          error => {
+            Swal.fire({
+              title: "Erreur",
+              text: error,
+              icon: "error",
+              timer: 1500,
+            });
           });
-        });
     }
 
 

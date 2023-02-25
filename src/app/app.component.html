@@ -1,6 +1,5 @@
 
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
- [hidden]="isHidden()" 
+<nav *ngIf="currentUser" class="sb-topnav navbar navbar-expand navbar-dark bg-dark"  
  style="background-color: #244777 !important;" 
  aria-label="">
     <a class="navbar-brand" href="">PubCampaign</a>
@@ -59,7 +58,7 @@
 <div id="layoutSidenav">
     
     
-    <div id="layoutSidenav_nav" [hidden]="isHidden()" >
+    <div id="layoutSidenav_nav" *ngIf="currentUser" >
        
         <!--sb-sidenav accordion sb-sidenav-dark-->
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion" aria-label="">
@@ -218,7 +217,7 @@
             </div>
         </main>
 
-        <footer class="py-4 bg-light mt-auto" *ngIf="false" [hidden]="isHidden()">
+        <footer class="py-4 bg-light mt-auto" *ngIf="false" > <!--*ngIf="currentUser"-->
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Your Website 2020</div>
