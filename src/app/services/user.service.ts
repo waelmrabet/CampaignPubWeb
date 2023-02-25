@@ -19,24 +19,7 @@ export class UserService {
     url += userId+'/';
     url += activer;
     return this.httpClient.delete(url);
-  }
- 
-  login(userName, password) {
-    
-    let url = this.apiUrl + '/Authentication/authenticate';
-    let authenticateRequest: any = {
-      userName: userName,
-      password: password
-    };
-
-    return this.httpClient.post(url, authenticateRequest);
-    
-  }
-
-  logout(){
-    localStorage.removeItem("currentUser"); 
-    localStorage.removeItem("jwtToken");   
-  }
+  } 
 
   addUser(user: User): Observable<any> {
     let url = this.apiUrl + '/User';

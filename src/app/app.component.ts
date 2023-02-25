@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject<void>();
 
-  constructor(private router: Router, private upperCasePipe: UpperCasePipe, private userService: UserService, private authService: AuthenticationService) {
+  constructor(private upperCasePipe: UpperCasePipe, private authService: AuthenticationService) {
 
     this.setCurrentUser();
     this.setCurrentMenues();

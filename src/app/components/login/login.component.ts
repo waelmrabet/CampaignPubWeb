@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   loading = false; 
   error = '';
 
-  constructor(private userService: UserService, private router: Router, private authService: AuthenticationService) {
+  constructor(private router: Router, private authService: AuthenticationService) {
 
     // redirect to home if already logged in
     if (this.authService.userValue)
@@ -28,9 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    console.log("to be implemented when it is necessairy");
-  }
+  ngOnInit() {}
 
 
   verifAuthetificationIdentiy(userName, password) {
