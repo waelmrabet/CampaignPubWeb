@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject<void>();
 
-  constructor(private upperCasePipe: UpperCasePipe, private authService: AuthenticationService) {
+  constructor(private upperCasePipe: UpperCasePipe, private authService: AuthenticationService, private router: Router) {
 
     this.setCurrentUser();
     this.setCurrentMenues();
@@ -30,6 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.user.pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(x => {
         this.currentUser = x;
+        if(!this.currentUser)
+          this.router.navigate(['login']);
       });
   }
 
@@ -58,7 +60,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getEspaceName() {
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    
+    let currentUser = this.authService.userValue;    
     let espaceName = '';
 
     if (currentUser) {
