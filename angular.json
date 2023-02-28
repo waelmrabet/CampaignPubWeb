@@ -148,7 +148,6 @@
       }
     }
   },
-  "defaultProject": "CompagnWebApp",
   "cli": {
     "analytics": false
   }
