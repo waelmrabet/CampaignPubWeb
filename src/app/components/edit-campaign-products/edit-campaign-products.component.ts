@@ -1,6 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { BusinessTypeService } from 'src/app/services/business-type.service';
 import { ProductTypeService } from 'src/app/services/product-type.service';
 import Swal from 'sweetalert2';
 

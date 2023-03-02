@@ -1,7 +1,7 @@
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+//import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { until } from 'selenium-webdriver';
+//import { until } from 'selenium-webdriver';
 import { ProductTypeService } from 'src/app/services/product-type.service';
 import Swal from 'sweetalert2';
 
