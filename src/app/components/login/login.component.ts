@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
       Swal.fire({
         title: '  Connexion en cours!',
-        html: 'Attendez un peu',
+        html: 'Veuillez patienter SVP',
         showConfirmButton: false,
         allowOutsideClick: false,
         onBeforeOpen: () => {

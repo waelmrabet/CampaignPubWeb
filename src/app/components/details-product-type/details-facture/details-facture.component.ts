@@ -25,7 +25,7 @@ export class DetailsFactureComponent implements OnInit {
 
     Swal.fire({
       title: 'Chargement en cours!',
-      html: 'Attendez un peu',
+      html: 'Veuillez patienter SVP',
       showConfirmButton: false,
       allowOutsideClick: false,
       onBeforeOpen: () => {
